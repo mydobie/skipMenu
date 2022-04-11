@@ -1,0 +1,4 @@
+/node_modules
+.DS_Store
+# NOTE this is added by the build script
+/dist 

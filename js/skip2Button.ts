@@ -1,17 +1,20 @@
 import { Skip2Config } from "./skip2";
 
 export const toggleMenu = (
-  menuId: string,
-  buttonId: string,
-  forceClose: boolean = false
+  config: Skip2Config,
+  forceClose: boolean = false,
+  keepVisibleOnClose: boolean = false
 ) => {
-  const menu = document.getElementById(menuId);
-  const button = document.getElementById(buttonId);
+  const menu = document.getElementById(config.menuId);
+  const button = document.getElementById(config.buttonId);
   const isCurrentlyExpanded = button.getAttribute("aria-expanded");
   if (forceClose || isCurrentlyExpanded === "true") {
     // hide menu
     button.setAttribute("aria-expanded", "false");
     menu.style.display = "none";
+    if (!keepVisibleOnClose && !config.showOnLoad) {
+      document.getElementById(config.id).classList.add("skip2Hidden");
+    }
   } else {
     // show menu
     menu.querySelectorAll("[role=menuitem");
@@ -22,26 +25,26 @@ export const toggleMenu = (
   }
 };
 
-export const createSkip2Button = (menuId: string, config: Skip2Config) => {
+export const createSkip2Button = (config: Skip2Config) => {
   const skip2Button = document.createElement("button");
   skip2Button.setAttribute("aria-haspopup", "true");
   skip2Button.setAttribute("aria-expanded", "false");
-  skip2Button.setAttribute("aria-controls", menuId);
+  skip2Button.setAttribute("aria-controls", config.menuId);
   skip2Button.setAttribute("accesskey", "0");
-  skip2Button.id = `${menuId}_button`;
+  skip2Button.id = config.buttonId;
   skip2Button.innerText = "Skip To Content";
 
   skip2Button.addEventListener("click", () => {
-    toggleMenu(`${menuId}_menu`, `${menuId}_button`);
+    toggleMenu(config, false, true);
   });
   if (!config.showOnLoad) {
     skip2Button.addEventListener("focus", () => {
-      document.getElementById(menuId).classList.remove("skip2Hidden");
+      document.getElementById(config.id).classList.remove("skip2Hidden");
     });
 
     skip2Button.addEventListener("blur", () => {
       if (skip2Button.getAttribute("aria-expanded") === "false") {
-        document.getElementById(menuId).classList.add("skip2Hidden");
+        document.getElementById(config.id).classList.add("skip2Hidden");
       }
     });
   }

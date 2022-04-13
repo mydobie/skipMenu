@@ -10,12 +10,12 @@ export const isVisible = (el: HTMLElement): boolean => {
   return isVisible(el.parentNode as HTMLElement);
 };
 
-export const isInMenu = (el: HTMLElement, menuID = "skip2"): boolean => {
-  if (el.nodeType === 9) return false; // is at document level
-  if (el.parentElement === null) return false;
-  if (el.parentElement.id === menuID) return true;
-  return isInMenu(el.parentElement as HTMLElement);
-};
+// export const isInMenu = (el: HTMLElement, menuID = "skip2"): boolean => {
+//   if (el.nodeType === 9) return false; // is at document level
+//   if (el.parentElement === null) return false;
+//   if (el.parentElement.id === menuID) return true;
+//   return isInMenu(el.parentElement as HTMLElement);
+// };
 
 export const headers = document.querySelectorAll(
   "h1, h2, h3, h4, h5, h6, [role=heading]"

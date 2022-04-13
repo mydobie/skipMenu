@@ -7,14 +7,15 @@ import { Skip2Config } from "./skip2";
 const addMenuItemEvents = (
   listItem: HTMLDivElement,
   targetElement: HTMLElement,
-  menuId: string,
   config: Skip2Config
 ) => {
+  const menuId = config.menuId;
+  const buttonId = config.buttonId;
   listItem.addEventListener("click", (event) => {
     event.stopPropagation();
     event.preventDefault();
     (targetElement as HTMLElement).focus();
-    toggleMenu(`${menuId}_menu`, `${menuId}_button`, true);
+    toggleMenu(config, true);
   });
   // TODO - move logic to add listeners to a new method
   listItem.addEventListener("keydown", (e) => {
@@ -22,17 +23,14 @@ const addMenuItemEvents = (
     e.preventDefault();
     if (e.key === "Enter" || e.key === " ") {
       (targetElement as HTMLElement).focus();
-      toggleMenu(`${menuId}_menu`, `${menuId}_button`, true);
+      toggleMenu(config, true);
     }
     if (e.key === "Tab") {
-      toggleMenu(`${menuId}_menu`, `${menuId}_button`, true);
+      toggleMenu(config, true);
       if (e.shiftKey) {
-        document.getElementById(`${menuId}_button`).focus();
+        document.getElementById(buttonId).focus();
       } else {
-        focusNextElement(`${menuId}_button`);
-        if (!config.showOnLoad) {
-          document.getElementById(menuId).classList.add("skip2Hidden");
-        }
+        focusNextElement(buttonId);
       }
     }
   });
@@ -43,7 +41,7 @@ const addMenuItemEvents = (
 
 const buildMenuItem = (
   element: HTMLElement,
-  menuId: string,
+  // menuId: string,
   depth: number,
   config: Skip2Config
 ) => {
@@ -51,7 +49,7 @@ const buildMenuItem = (
   let listItemText = (element as HTMLElement).innerText;
 
   if (depth) {
-    listItem.className = `${menuId}_header-level-${depth}`;
+    listItem.className = `${config.id}_menu_header-level-${depth}`;
     listItemText = `${depth}) ${listItemText}`;
   }
 
@@ -61,14 +59,13 @@ const buildMenuItem = (
   listItem.classList.add("dropdown-item");
   listItem.setAttribute("tabindex", "-1");
 
-  listItem = addMenuItemEvents(listItem, element, menuId, config);
+  listItem = addMenuItemEvents(listItem, element, config);
   return listItem;
 };
 
 /* ********************************** */
 
 export const buildMenuSection = (
-  menuId: string,
   elements: NodeListOf<Element>,
   sectionTitle: string,
   hasLevels: boolean = false,
@@ -91,7 +88,7 @@ export const buildMenuSection = (
       // KKD need to check and see if tabindex is already set
       (element as HTMLElement).tabIndex = -1;
       container.appendChild(
-        buildMenuItem(element as HTMLElement, menuId, depth, config)
+        buildMenuItem(element as HTMLElement, depth, config)
       );
     }
   });

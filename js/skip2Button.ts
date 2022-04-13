@@ -1,3 +1,5 @@
+import { Skip2Config } from "./skip2";
+
 export const toggleMenu = (
   menuId: string,
   buttonId: string,
@@ -20,7 +22,7 @@ export const toggleMenu = (
   }
 };
 
-export const createSkip2Button = (menuId: string) => {
+export const createSkip2Button = (menuId: string, config: Skip2Config) => {
   const skip2Button = document.createElement("button");
   skip2Button.setAttribute("aria-haspopup", "true");
   skip2Button.setAttribute("aria-expanded", "false");
@@ -32,5 +34,17 @@ export const createSkip2Button = (menuId: string) => {
   skip2Button.addEventListener("click", () => {
     toggleMenu(`${menuId}_menu`, `${menuId}_button`);
   });
+  if (!config.showOnLoad) {
+    skip2Button.addEventListener("focus", () => {
+      document.getElementById(menuId).classList.remove("skip2Hidden");
+    });
+
+    skip2Button.addEventListener("blur", () => {
+      if (skip2Button.getAttribute("aria-expanded") === "false") {
+        document.getElementById(menuId).classList.add("skip2Hidden");
+      }
+    });
+  }
+
   return skip2Button;
 };

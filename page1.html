@@ -44,10 +44,10 @@
     </div>
     <script src="dist/js/skip2.js"></script>
     <script>
-      const skip2 = new Skip2();
-      skip2.add();
+      const skip2 = new Skip2({ showOnLoad: false });
+
       document.addEventListener("DOMContentLoaded", function (event) {
-        //do work
+        skip2.add();
       });
     </script>
   </body>

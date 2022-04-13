@@ -1,4 +1,17 @@
 #skip2 {
+  position:absolute;
+  left:100px;
+
+  &.skip2Hidden {
+   top: -1000px;
+   width: 1px;
+   height:1px;
+   overflow: hidden;
+  }
+
+
+
+  
   [role="menu"] {
     /* The following are the same as Bootstrap's default  comment out if using Bootstrap*/
     display: none;

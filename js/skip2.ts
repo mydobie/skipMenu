@@ -2,15 +2,22 @@ import { buildMenuSection } from "./menuSection";
 import { createSkip2Button, toggleMenu } from "./skip2Button";
 import { isVisible, isInMenu, headers, focusNextElement } from "./utilities";
 
+export type Skip2Config = {
+  id: string;
+  attachTo: HTMLElement;
+  showOnLoad: boolean;
+};
 class Skip2 {
   config: any;
-  constructor(config: any) {
-    const defaultConfig = {
+  constructor(config: Skip2Config) {
+    const defaultConfig: Skip2Config = {
       id: "skip2",
       attachTo: document.getElementsByTagName("body")[0],
+      showOnLoad: true,
     };
     this.config = { ...defaultConfig, ...config };
   }
+  static version = "VERSION CANNOT BE DETERMINED";
 
   _buildMenu() {
     //document.getElementById(`${this.config.id}_menu`).innerHTML = "";
@@ -18,7 +25,8 @@ class Skip2 {
       this.config.id,
       headers,
       "Headers",
-      true
+      true,
+      this.config
     );
     document
       .getElementById(`${this.config.id}_menu`)
@@ -27,6 +35,7 @@ class Skip2 {
     this._attachMenuItemEvent();
   }
 
+  // KKD move add event listener to a new file
   _attachMenuItemEvent() {
     var menuitemNodes = document
       .getElementById(`${this.config.id}_menu`)
@@ -44,10 +53,8 @@ class Skip2 {
             });
             if (e.key === "ArrowDown") {
               if (index === menuitemNodes.length - 1) {
-                //  menuitemNodes[0].tabIndex = 0;
                 (menuitemNodes[0] as HTMLElement).focus();
               } else {
-                // menuitemNodes[index + 1].tabIndex = 0;
                 (menuitemNodes[index + 1] as HTMLElement).focus();
               }
             }
@@ -66,18 +73,19 @@ class Skip2 {
   add() {
     // builds the skip2 container
     const skip2 = document.createElement("div");
-    // skip2.classList.add("skip2"); // TODO is this really needed
     skip2.id = `${this.config.id}`;
+    if (!this.config.showOnLoad) {
+      skip2.classList.add("skip2Hidden");
+    }
 
     // builds the initial menu
     const menu = document.createElement("div");
     menu.setAttribute("role", "menu");
-    // menu.classList.add(`${this.config.id}_menu`); // TODO is this really needed
     menu.classList.add("dropdown-menu");
     menu.id = `${this.config.id}_menu`;
 
     // builds the button
-    const skip2Button = createSkip2Button(`${this.config.id}`);
+    const skip2Button = createSkip2Button(`${this.config.id}`, this.config);
 
     // Attach all the things:
     skip2.appendChild(skip2Button);

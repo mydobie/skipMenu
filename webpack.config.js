@@ -1,14 +1,11 @@
 const path = require("path");
 const fs = require("fs");
+const git = require("git-last-commit");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const EventHooksPlugin = require("event-hooks-webpack-plugin");
 const RemoveEmptyScriptsPlugin = require("webpack-remove-empty-scripts");
-
-// const gitCommit = require('child_process')
-//   .execSync('git rev-parse HEAD')
-//   .toString()
-//   .trim()
-//   .slice(0, 7);
+var dayjs = require("dayjs");
+const packageJSON = require("./package.json");
 
 let entry = {};
 let htmlFiles = [];
@@ -80,7 +77,6 @@ module.exports = {
       // both options are optional
       // filename: `css/[name].${gitCommit}.css`,
       // chunkFilename: `css/[id].${gitCommit}.css`,
-      /// filename: `css/[name].css`,
       filename: `css/skip2.css`,
       chunkFilename: `css/[id].css`,
     }),
@@ -96,6 +92,29 @@ module.exports = {
         //   const newFile = file.replace(pattern, `$1${gitCommit}$4`);
         //   fs.writeFileSync(filePath, newFile);
         // });
+
+        git.getLastCommit(function (err, commit) {
+          const hash = commit.shortHash;
+          const date = dayjs.unix(commit.committedOn).format("YYYY-MM-DD");
+          const version = packageJSON.version;
+          const repo = packageJSON.repository;
+          let header = fs.readFileSync("./headerContent/header.txt", "utf8");
+          header = header
+            .replace("<VERSION>", version)
+            .replace("<DATE>", date)
+            .replace("<COMMIT>", hash)
+            .replace("<REPO>", repo);
+
+          let javascript = fs.readFileSync("./dist/js/skip2.js", "utf8");
+          javascript = javascript.replace(
+            "VERSION CANNOT BE DETERMINED",
+            "v" + version
+          );
+
+          const css = fs.readFileSync("./dist/css/skip2.css", "utf8");
+          fs.writeFileSync("./dist/js/skip2.js", header + javascript);
+          fs.writeFileSync("./dist/css/skip2.css", header + css);
+        });
       },
     }),
     new RemoveEmptyScriptsPlugin(),

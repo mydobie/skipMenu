@@ -17,10 +17,6 @@ export const isVisible = (el: HTMLElement): boolean => {
 //   return isInMenu(el.parentElement as HTMLElement);
 // };
 
-export const headers = document.querySelectorAll(
-  "h1, h2, h3, h4, h5, h6, [role=heading]"
-);
-
 export const focusNextElement = (
   menuButtonId: string = "skip2_button"
 ): void => {

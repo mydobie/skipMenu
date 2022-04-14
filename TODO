@@ -1,0 +1,9 @@
+- Set so button can be hidden when click outside
+- Rebuild automatically on file change
+- Get landmarks
+- Get "other" elements (should be passed as elements then use text and/or aria-label, aria-labled-by)
+- Clear menu when \_buildMenu is called
+
+- Figure out why it is slow slow to add proper events to the correct elements - when the page loads you cannot use the menu to go to the headings right away
+
+- Break down methods into more sub methods

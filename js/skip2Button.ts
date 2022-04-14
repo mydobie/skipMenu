@@ -31,8 +31,10 @@ export const createSkip2Button = (config: Skip2Config) => {
   skip2Button.setAttribute("aria-expanded", "false");
   skip2Button.setAttribute("aria-controls", config.menuId);
   skip2Button.setAttribute("accesskey", "0");
+  skip2Button.classList.add("btn", "btn-secondary");
   skip2Button.id = config.buttonId;
-  skip2Button.innerText = "Skip To Content";
+  skip2Button.innerHTML = "Skip To Content";
+  //btn btn-secondary
 
   skip2Button.addEventListener("click", () => {
     toggleMenu(config, false, true);

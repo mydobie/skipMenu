@@ -1,6 +1,5 @@
 import { buildMenuSection } from "./menuSection";
 import { createSkip2Button, toggleMenu } from "./skip2Button";
-import { isVisible, headers, focusNextElement } from "./utilities";
 
 export type Skip2Config = {
   id: string;
@@ -8,9 +7,10 @@ export type Skip2Config = {
   showOnLoad: boolean;
   buttonId?: string;
   menuId?: string;
+  headers?: NodeListOf<Element>;
+  landmarks?: NodeListOf<Element>;
+  buttonContent?: string | HTMLElement;
 };
-// skip2_button
-//skip2_menu
 class Skip2 {
   config: any;
   constructor(config: Skip2Config) {
@@ -18,6 +18,12 @@ class Skip2 {
       id: "skip2",
       attachTo: document.getElementsByTagName("body")[0],
       showOnLoad: true,
+      headers: document.querySelectorAll(
+        "h1, h2, h3, h4, h5, h6, [role=heading]"
+      ),
+      landmarks: document.querySelectorAll(
+        "main, [role=main], [role=search], nav, [role=navigation], section, [role=region],  form, aside, [role=complementary], body > header, [role=banner], body > footer, [role=contentinfo]"
+      ),
     };
     this.config = { ...defaultConfig, ...config };
     this.config.menuId = this.config.id + "_menu";
@@ -28,17 +34,23 @@ class Skip2 {
   _buildMenu() {
     //document.getElementById(`${this.config.id}_menu`).innerHTML = "";
     const headerSection = buildMenuSection(
-      headers,
-      "Headers",
+      this.config.headers,
+      "Headings",
       true,
       this.config
     );
+    const landmarkSection = buildMenuSection(
+      this.config.landmarks,
+      "Landmarks",
+      false,
+      this.config
+    );
+    document.getElementById(this.config.menuId).appendChild(landmarkSection);
     document.getElementById(this.config.menuId).appendChild(headerSection);
 
     this._attachMenuItemEvent();
   }
 
-  // KKD move add event listener to a new file
   _attachMenuItemEvent() {
     var menuitemNodes = document
       .getElementById(this.config.menuId)

@@ -39,14 +39,75 @@ const addMenuItemEvents = (
 
 /* ********************************** */
 
+const landMarkType = (element: HTMLElement) => {
+  const tag = element.tagName;
+  const role = element.getAttribute("role");
+
+  switch (role) {
+    case "main":
+      return "Main";
+    case "search":
+      return "Search";
+    case "navigation":
+      return "Navigation";
+    case "region":
+      return "Region";
+    case "complementary":
+      return "Complementary";
+    case "banner":
+      return "Banner";
+    case "contentinfo":
+      return "Footer";
+  }
+  switch (tag.toLowerCase()) {
+    case "main":
+      return "Main";
+    case "nav":
+      return "Navigation";
+    case "section":
+      return "Section";
+    case "form":
+      return "Form";
+    case "aside":
+      return "Complementary";
+    case "banner":
+      return "Banner";
+    case "footer":
+      return "Footer";
+  }
+  return null;
+};
+
+const getMenuItemText = (element: HTMLElement) => {
+  const landmark = landMarkType(element);
+  let text = "";
+  if (element.hasAttribute("aria-label")) {
+    text = element.getAttribute("aria-label");
+  } else if (element.hasAttribute("aria-labelledby")) {
+    text = document.getElementById(
+      element.getAttribute("aria-labelledby")
+    ).innerText;
+  } else if (element.hasAttribute("title")) {
+    text = element.getAttribute("title");
+  }
+
+  let landmarkText = "";
+  if (landmark) {
+    return text ? `${landmark}: ${text}` : landmark;
+  } else {
+    return text ? text : element.innerText;
+  }
+};
+
+/* ********************************** */
+
 const buildMenuItem = (
   element: HTMLElement,
-  // menuId: string,
   depth: number,
   config: Skip2Config
 ) => {
   let listItem = document.createElement("div");
-  let listItemText = (element as HTMLElement).innerText;
+  let listItemText = getMenuItemText(element);
 
   if (depth) {
     listItem.className = `${config.id}_menu_header-level-${depth}`;

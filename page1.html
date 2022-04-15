@@ -12,48 +12,58 @@
       crossorigin="anonymous"
     />
     <title>Document</title>
+    <script>
+      const addHeader = () => {
+        document.getElementById("futureHeader").innerHTML =
+          "<h1>Future Header</h1>";
+      };
+    </script>
   </head>
   <body>
     <nav aria-labelledby="myNav">My nav<span id="myNav">Super nav!</span></nav>
     <main>
+      <div style="display: none"><a href="https://google.com">Google</a></div>
+      <div><a href="https://cnn.com">CNN</a></div>
       <h1>Hello world - welcome to page 1</h1>
       <div id="bar" style="height: 15px"></div>
       <h1>Heading 1</h1>
       <h2>Heading 2</h2>
       <div role="heading" aria-level="5">Heading 5</div>
-      <div style="height: 500px"></div>
+
       <h1>Heading 1</h1>
       <h2>Heading 2</h2>
       <h3>Heading 3</h3>
+      <div id="futureHeader"></div>
       <h4 style="display: none">Heading 4 - display none</h4>
       <div style="visibility: hidden"><h4>Heading 4 - parent</h4></div>
 
-      <div class="dropdown">
-        <button
-          class="btn btn-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Dropdown button
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton1"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Button
+      </button>
     </main>
     <div role="search">My search!</div>
     <footer aria-label="DaFooter">My footer</footer>
     <script src="dist/js/skip2.js"></script>
     <script>
-      const skip2 = new Skip2({});
+      const skip2 = new Skip2({ showOnLoad: true });
 
       document.addEventListener("DOMContentLoaded", function (event) {
         skip2.add();
       });
+
+      document
+        .getElementById("dropdownMenuButton1")
+        .addEventListener("click", function (event) {
+          console.log("button pressed");
+          addHeader();
+          skip2.update();
+        });
     </script>
   </body>
 </html>

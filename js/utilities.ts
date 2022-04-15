@@ -20,7 +20,6 @@ export const isVisible = (el: HTMLElement): boolean => {
 export const focusNextElement = (
   menuButtonId: string = "skip2_button"
 ): void => {
-  // TODO Need to filter out any thing that is not visible
   const canHaveFocus =
     'a:not([disabled]), button:not([disabled]), input[type=text]:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])';
 
@@ -28,7 +27,15 @@ export const focusNextElement = (
   const index = Array.from(focusableElements).findIndex((el) => {
     return el.isEqualNode(document.getElementById(menuButtonId));
   });
-  if (focusableElements[index + 1])
-    (focusableElements[index + 1] as HTMLElement).focus();
+
+  let next = index + 1;
+  while (
+    next < focusableElements.length &&
+    !isVisible(focusableElements[next] as HTMLElement)
+  ) {
+    next = next + 1;
+  }
+
+  if (focusableElements[next]) (focusableElements[next] as HTMLElement).focus();
   else document.getElementById(menuButtonId).focus();
 };

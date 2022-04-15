@@ -7,8 +7,8 @@ export type Skip2Config = {
   showOnLoad: boolean;
   buttonId?: string;
   menuId?: string;
-  headers?: NodeListOf<Element>;
-  landmarks?: NodeListOf<Element>;
+  headers?: string;
+  landmarks?: string;
   buttonContent?: string | HTMLElement;
 };
 class Skip2 {
@@ -18,12 +18,9 @@ class Skip2 {
       id: "skip2",
       attachTo: document.getElementsByTagName("body")[0],
       showOnLoad: true,
-      headers: document.querySelectorAll(
-        "h1, h2, h3, h4, h5, h6, [role=heading]"
-      ),
-      landmarks: document.querySelectorAll(
-        "main, [role=main], [role=search], nav, [role=navigation], section, [role=region],  form, aside, [role=complementary], body > header, [role=banner], body > footer, [role=contentinfo]"
-      ),
+      headers: "h1, h2, h3, h4, h5, h6, [role=heading]",
+      landmarks:
+        "main, [role=main], [role=search], nav, [role=navigation], section, [role=region],  form, aside, [role=complementary], body > header, [role=banner], body > footer, [role=contentinfo]",
     };
     this.config = { ...defaultConfig, ...config };
     this.config.menuId = this.config.id + "_menu";
@@ -32,21 +29,32 @@ class Skip2 {
   static version = "VERSION CANNOT BE DETERMINED";
 
   _buildMenu() {
-    //document.getElementById(`${this.config.id}_menu`).innerHTML = "";
+    if (document.getElementById(`${this.config.id}_menu`).innerHTML) {
+      document.getElementById(`${this.config.id}_menu`).innerHTML = "";
+    }
     const headerSection = buildMenuSection(
-      this.config.headers,
+      document.querySelectorAll(this.config.headers),
       "Headings",
       true,
       this.config
     );
     const landmarkSection = buildMenuSection(
-      this.config.landmarks,
+      document.querySelectorAll(this.config.landmarks),
       "Landmarks",
       false,
       this.config
     );
     document.getElementById(this.config.menuId).appendChild(landmarkSection);
     document.getElementById(this.config.menuId).appendChild(headerSection);
+    /*
+
+steps
+
+// two ways to do this - first is to save the sections and then compare after re-render
+// second is to build the menu each time and compare before attaching
+
+
+    */
 
     this._attachMenuItemEvent();
   }
@@ -117,6 +125,7 @@ class Skip2 {
   update() {
     // empties the content of the main menu and rebuilds it
     // only update the menu IF the html has changed
+    this._buildMenu();
   }
 }
 

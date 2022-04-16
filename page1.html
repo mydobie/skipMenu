@@ -17,6 +17,10 @@
         document.getElementById("futureHeader").innerHTML =
           "<h1>Future Header</h1>";
       };
+      const addHeader2 = () => {
+        document.getElementById("futureHeader2").innerHTML =
+          "<h1>ANOTHER Future Header</h1>";
+      };
     </script>
   </head>
   <body>
@@ -34,34 +38,36 @@
       <h2>Heading 2</h2>
       <h3>Heading 3</h3>
       <div id="futureHeader"></div>
+      <div id="futureHeader2"></div>
       <h4 style="display: none">Heading 4 - display none</h4>
       <div style="visibility: hidden"><h4>Heading 4 - parent</h4></div>
 
-      <button
-        class="btn btn-secondary dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton1"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        Button
+      <button class="btn btn-secondary" type="button" id="updateMenuManual">
+        Manually call skip2.add()
+      </button>
+      |
+      <button class="btn btn-secondary" type="button" id="updateMenuAuto">
+        Update auto
       </button>
     </main>
     <div role="search">My search!</div>
     <footer aria-label="DaFooter">My footer</footer>
     <script src="dist/js/skip2.js"></script>
     <script>
-      const skip2 = new Skip2({ showOnLoad: false });
-
-      document.addEventListener("DOMContentLoaded", function (event) {
-        skip2.add();
-      });
+      const skip2 = new Skip2({ showOnLoad: true, reloadOnChange: false });
+      skip2.add();
 
       document
-        .getElementById("dropdownMenuButton1")
+        .getElementById("updateMenuManual")
         .addEventListener("click", function (event) {
           addHeader();
           skip2.update();
+        });
+
+      document
+        .getElementById("updateMenuAuto")
+        .addEventListener("click", function (event) {
+          addHeader2();
         });
     </script>
   </body>

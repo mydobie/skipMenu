@@ -11,6 +11,7 @@ export type Skip2Config = {
   headers?: string;
   landmarks?: string;
   buttonContent?: string | HTMLElement;
+  reloadOnChange: boolean;
 };
 class Skip2 {
   config: any;
@@ -22,77 +23,21 @@ class Skip2 {
       headers: "h1, h2, h3, h4, h5, h6, [role=heading]",
       landmarks:
         "main, [role=main], [role=search], nav, [role=navigation], section, [role=region],  form, aside, [role=complementary], body > header, [role=banner], body > footer, [role=contentinfo]",
+      reloadOnChange: false,
     };
     this.config = { ...defaultConfig, ...config };
     this.config.menuId = this.config.id + "_menu";
     this.config.buttonId = this.config.id + "_button";
+
+    this.update = this.update.bind(this);
+    this.getId = this.getId.bind(this);
   }
-  static version = "VERSION CANNOT BE DETERMINED";
 
-  // _buildMenu() {
-  // if (document.getElementById(`${this.config.id}_menu`).innerHTML) {
-  //   document.getElementById(`${this.config.id}_menu`).innerHTML = "";
-  // }
-  // const headerSection = buildMenuSection(
-  //   document.querySelectorAll(this.config.headers),
-  //   "Headings",
-  //   true,
-  //   this.config
-  // );
-  // const landmarkSection = buildMenuSection(
-  //   document.querySelectorAll(this.config.landmarks),
-  //   "Landmarks",
-  //   false,
-  //   this.config
-  // );
-  // document.getElementById(this.config.menuId).appendChild(landmarkSection);
-  // document.getElementById(this.config.menuId).appendChild(headerSection);
-  /*
+  static version = "VERSION CANNOT BE DETERMINED"; // Note - this is replace on build
 
-steps
-
-// two ways to do this - first is to save the sections and then compare after re-render
-// second is to build the menu each time and compare before attaching
-
-
-    */
-
-  //  this._attachMenuItemEvent();
-  // }
-
-  // _attachMenuItemEvent() {
-  //   var menuitemNodes = document
-  //     .getElementById(this.config.menuId)
-  //     .querySelectorAll("[role=menuitem");
-
-  //   menuitemNodes.forEach((item, index) => {
-  //     item.addEventListener(
-  //       "keydown",
-  //       (e: KeyboardEvent) => {
-  //         if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-  //           e.stopPropagation();
-  //           e.preventDefault();
-  //           menuitemNodes.forEach((item) => {
-  //             (item as HTMLElement).tabIndex = -1;
-  //           });
-  //           if (e.key === "ArrowDown") {
-  //             if (index === menuitemNodes.length - 1) {
-  //               (menuitemNodes[0] as HTMLElement).focus();
-  //             } else {
-  //               (menuitemNodes[index + 1] as HTMLElement).focus();
-  //             }
-  //           }
-  //           if (e.key === "ArrowUp") {
-  //             const menuIndex =
-  //               index === 0 ? menuitemNodes.length - 1 : index - 1;
-  //             (menuitemNodes[menuIndex] as HTMLElement).focus();
-  //           }
-  //         }
-  //       },
-  //       false
-  //     );
-  //   });
-  // }
+  getId() {
+    return this.config.id;
+  }
 
   add() {
     // builds the skip2 container
@@ -112,10 +57,6 @@ steps
     // builds the initial menu
     const menuWrapper = document.createElement("div");
     menuWrapper.id = "menuWrapper";
-    // const menu = document.createElement("div");
-    // menu.setAttribute("role", "menu");
-    // menu.classList.add("dropdown-menu");
-    // menu.id = this.config.menuId;
 
     const menu = buildMenu(this.config);
 
@@ -124,18 +65,32 @@ steps
     skip2Wrapper.append(menuWrapper);
     this.config.attachTo.prepend(skip2Wrapper);
 
-    //  this._buildMenu(); // wondering if we can do this later - can the events be added while building the menu?
-  }
-
-  remove() {
-    // removes the menu entirely
+    // Load DOM change listener
+    if (this.config.reloadOnChange) {
+      const obv = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (
+            //@ts-ignore
+            !mutation.target.closest(`#${this.getId()}`) &&
+            mutation.attributeName !== "tabindex"
+          ) {
+            this.update();
+          }
+        });
+      });
+      obv.observe(document, {
+        attributes: true,
+        subtree: true,
+        childList: true,
+      });
+    }
   }
 
   update() {
     // do logic to see if the menu needs to be rebuilt
-    // const updatedMenu = this._buildMenu();
-    // const currentMenu = document.getElementById(this.config.menuId);
-    // currentMenu.parentNode.replaceChild(updatedMenu, currentMenu);
+    const updatedMenu = buildMenu(this.config);
+    const currentMenu = document.getElementById(this.config.menuId);
+    currentMenu.parentNode.replaceChild(updatedMenu, currentMenu);
   }
 }
 

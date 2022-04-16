@@ -68,8 +68,7 @@ module.exports = {
   resolve: {
     extensions: [".js", ".json", ".jsx", ".ts"],
   },
-  // devtool: "#source-map",
-  // performance: { hints: false },
+  devtool: "source-map",
 
   plugins: [
     new MiniCssExtractPlugin({

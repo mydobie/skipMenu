@@ -33,6 +33,7 @@
     "clean": "rm -f package-lock.json && rm -rf node_modules && rm -rf build && npm run build",
     "npmAudit": "npm audit --audit-level moderate",
     "npmAuditJson": "npm run npmAudit -- --json --audit-level moderate > npmAuditReport.json",
-    "build": " rm -rf dist && webpack --mode production "
+    "build": " rm -rf dist && webpack --mode production ",
+    "build:watch": "rm -rf dist && webpack --mode development --watch"
   }
 }

@@ -91,7 +91,6 @@ const getMenuItemText = (element: HTMLElement) => {
     text = element.getAttribute("title");
   }
 
-  let landmarkText = "";
   if (landmark) {
     return text ? `${landmark}: ${text}` : landmark;
   } else {
@@ -129,7 +128,6 @@ const buildMenuItem = (
 export const buildMenuSection = (
   elements: NodeListOf<Element>,
   sectionTitle: string,
-  hasLevels: boolean = false,
   config: Skip2Config
 ) => {
   const container = document.createElement("div");

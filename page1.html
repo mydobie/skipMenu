@@ -51,7 +51,7 @@
     <footer aria-label="DaFooter">My footer</footer>
     <script src="dist/js/skip2.js"></script>
     <script>
-      const skip2 = new Skip2({ showOnLoad: true });
+      const skip2 = new Skip2({ showOnLoad: false });
 
       document.addEventListener("DOMContentLoaded", function (event) {
         skip2.add();
@@ -60,19 +60,9 @@
       document
         .getElementById("dropdownMenuButton1")
         .addEventListener("click", function (event) {
-          console.log("button pressed");
           addHeader();
           skip2.update();
         });
     </script>
   </body>
 </html>
-
-<!--
-
-  showAllLandmarksSelector: 'main, [role=main], [role=search], nav, [role=navigation], section[aria-label], section[aria-labelledby], section[title], [role=region][aria-label], [role=region][aria-labelledby], [role=region][title], form[aria-label], form[aria-labelledby], aside, [role=complementary], body > header, [role=banner], body > footer, [role=contentinfo]',
-    showAllHeadingsSelector: 'h1, h2, h3, h4, h5, h6',
-
-    landmarks: 'main, [role="main"], [role="search"], nav, [role="navigation"], aside, [role="complementary"]',
-      headings: 'main h1, [role="main"] h1, main h2, [role="main"] h2',
--->

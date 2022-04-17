@@ -1,0 +1,7 @@
+/dist/**
+/coverage/**
+/node_modules/**
+package-lock.json
+npm-cache/
+lint-staged.config.js
+.nyc_output/out.json

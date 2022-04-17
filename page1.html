@@ -12,16 +12,6 @@
       crossorigin="anonymous"
     />
     <title>Document</title>
-    <script>
-      const addHeader = () => {
-        document.getElementById("futureHeader").innerHTML =
-          "<h1>Future Header</h1>";
-      };
-      const addHeader2 = () => {
-        document.getElementById("futureHeader2").innerHTML =
-          "<h1>ANOTHER Future Header</h1>";
-      };
-    </script>
   </head>
   <body>
     <nav aria-labelledby="myNav">My nav<span id="myNav">Super nav!</span></nav>
@@ -37,37 +27,74 @@
       <h1>Heading 1</h1>
       <h2>Heading 2</h2>
       <h3>Heading 3</h3>
-      <div id="futureHeader"></div>
-      <div id="futureHeader2"></div>
-      <h4 style="display: none">Heading 4 - display none</h4>
-      <div style="visibility: hidden"><h4>Heading 4 - parent</h4></div>
-
-      <button class="btn btn-secondary" type="button" id="updateMenuManual">
-        Manually call skip2.add()
-      </button>
-      |
-      <button class="btn btn-secondary" type="button" id="updateMenuAuto">
-        Update auto
-      </button>
+      <h4 id="editHeader">Change my text</h4>
+      <div role="heading" aria-level="2" id="editAriaHeader">Change level</div>
+      <h4 id="deleteHeader">Remove me</h4>
+      <div role="heading" aria-level="2" id="removeAriaHeader">
+        Remove aria header
+      </div>
+      <div id="playground"></div>
+      <ul>
+        <li id="newHeaderBtn"><button>Add new header</button></li>
+        <li id="newHeaderAriaBtn"><button>Add new ARIA header</button></li>
+        <li id="newtextBtn"><button>Add non-header text</button></li>
+        <li id="editHeaderTextBtn"><button>Edit header text</button></li>
+        <li id="editHeaderAttrBtn"><button>Edit header attribute</button></li>
+        <li id="removeHeaderBtn"><button>Remove header</button></li>
+        <li id="removeAriaHeaderBtn"><button>Remove ARIA header</button></li>
+      </ul>
     </main>
     <div role="search">My search!</div>
     <footer aria-label="DaFooter">My footer</footer>
     <script src="dist/js/skip2.js"></script>
     <script>
-      const skip2 = new Skip2({ showOnLoad: true, reloadOnChange: false });
+      const skip2 = new Skip2({ showOnLoad: true, reloadOnChange: true });
       skip2.add();
 
+      document.getElementById('newHeaderBtn').addEventListener('click', () => {
+        document.getElementById(
+          'playground'
+        ).innerHTML += `<h1>New header</h1>`;
+      });
+
       document
-        .getElementById("updateMenuManual")
-        .addEventListener("click", function (event) {
-          addHeader();
-          skip2.update();
+        .getElementById('newHeaderAriaBtn')
+        .addEventListener('click', () => {
+          document.getElementById(
+            'playground'
+          ).innerHTML += `<div role="heading" aria-level="1">New ARIA header</div>`;
+        });
+
+      document.getElementById('newtextBtn').addEventListener('click', () => {
+        document.getElementById(
+          'playground'
+        ).innerHTML += `<p>I be new text</p>`;
+      });
+
+      document
+        .getElementById('editHeaderTextBtn')
+        .addEventListener('click', () => {
+          document.getElementById('editHeader').innerText = 'I be changed!!';
         });
 
       document
-        .getElementById("updateMenuAuto")
-        .addEventListener("click", function (event) {
-          addHeader2();
+        .getElementById('editHeaderAttrBtn')
+        .addEventListener('click', () => {
+          document
+            .getElementById('editAriaHeader')
+            .setAttribute('aria-level', '3');
+        });
+
+      document
+        .getElementById('removeHeaderBtn')
+        .addEventListener('click', () => {
+          document.getElementById('deleteHeader').remove();
+        });
+
+      document
+        .getElementById('removeAriaHeaderBtn')
+        .addEventListener('click', () => {
+          document.getElementById('removeAriaHeader').remove();
         });
     </script>
   </body>

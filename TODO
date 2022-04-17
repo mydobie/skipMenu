@@ -1,9 +1,21 @@
-- Set so button can be hidden when click outside
-
 - Get "other" elements (should be passed as elements then use text and/or aria-label, aria-labled-by)
 
-- Figure out why it is slow slow to add proper events to the correct elements - when the page loads you cannot use the menu to go to the headings right away
-
-  - Do calculations to determine if menu should be updated
+- Do calculations to determine if menu should be updated
 
 - Remove menu entirely (not sure why this is needed)
+
+- Create readme
+
+- Add accesskey => OR write a function to put focus on menu and open
+
+- rename menuSection
+
+- create file headers
+
+- Check to see that an element isn't already tabable or already has tabindex set (see menuSection)
+
+- Add linting!
+
+- Add action files
+
+- Add npm audit check

@@ -4,7 +4,6 @@
   "description": "",
   "repository": "",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@babel/plugin-transform-runtime": "^7.17.0",
@@ -12,12 +11,20 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/runtime": "^7.17.8",
     "@types/mini-css-extract-plugin": "^1.2.1",
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
     "babel-loader": "^8.2.4",
     "css-loader": "^6.7.1",
-    "event-hooks-webpack-plugin": "^2.2.0",
-    "glob": "^7.2.0",
+    "dayjs": "^1.11.0",
+    "eslint": "^8.13.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "git-last-commit": "^1.0.1",
     "mini-css-extract-plugin": "^2.6.0",
-    "node-sass": "^7.0.1",
+    "prettier": "^2.6.2",
     "sass": "^1.49.10",
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",
@@ -26,14 +33,79 @@
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2",
     "webpack-remove-empty-scripts": "^0.8.0",
-    "dayjs": "^1.11.0",
-    "git-last-commit": "^1.0.1"
+    "stylelint": "^14.7.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard-scss": "^3.0.0"
   },
   "scripts": {
-    "clean": "rm -f package-lock.json && rm -rf node_modules && rm -rf build && npm run build",
+    "clean": "rm -f package-lock.json && rm -rf node_modules && rm -rf build && npm install",
     "npmAudit": "npm audit --audit-level moderate",
     "npmAuditJson": "npm run npmAudit -- --json --audit-level moderate > npmAuditReport.json",
     "build": " rm -rf dist && webpack --mode production ",
-    "build:watch": "rm -rf dist && webpack --mode development --watch"
+    "build:watch": "rm -rf dist && webpack --mode development --watch",
+    "// ------------------------------------------------------------1": "",
+    "lint:js": "eslint . --ext .ts",
+    "lint:js:fix": "npm run lint:js -- --fix",
+    "prettier": "prettier  --ignore-path ./.eslintignore --check",
+    "prettier:all": "npm run prettier '**/*.+(js|jsx|ts|tsx|css|scss|html|json|md)'",
+    "prettier:fix": "prettier  --ignore-path ./.eslintignore --write",
+    "prettier:fix:all": "npm run prettier:fix '**/*.+(js|jsx|ts|tsx|css|scss|html|json|md)'",
+    "lint:scss": "stylelint --ignore-path ./.eslintignore ",
+    "lint:scss:all": "npm run lint:scss './**/*.+(css|scss)'",
+    "lint:scss:fix:all": "npm run lint:scss -- --fix './**/*.+(css|scss)'",
+    "// ------------------------------------------------------------2": "",
+    "lint": "npm run lint:js && npm run prettier:all && npm run lint:scss:all",
+    "lint:fix": "npm run prettier:fix:all && npm run lint:js:fix &&  npm run lint:scss:fix:all",
+    "lint:watch": "onchange '**/*.*' -- npm run lint:fix"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "printWidth": 80
+  },
+  "eslintConfig": {
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint",
+      "prettier",
+      "import"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier",
+      "plugin:prettier/recommended"
+    ],
+    "env": {
+      "browser": true,
+      "jasmine": true,
+      "jest": true,
+      "node": true
+    },
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "rules": {
+      "prettier/prettier": "error",
+      "@typescript-eslint/no-unused-vars": [
+        "error"
+      ],
+      "no-var": "error",
+      "curly": "error",
+      "no-console": "error",
+      "no-unused-vars": "error",
+      "arrow-body-style": [
+        "error",
+        "as-needed"
+      ]
+    }
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard-scss",
+      "stylelint-config-prettier"
+    ]
   }
 }

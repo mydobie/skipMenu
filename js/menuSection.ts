@@ -9,7 +9,6 @@ const addMenuItemEvents = (
   targetElement: HTMLElement,
   config: Skip2Config
 ) => {
-  const menuId = config.menuId;
   const buttonId = config.buttonId;
   listItem.addEventListener('click', (event) => {
     event.stopPropagation();
@@ -37,7 +36,7 @@ const addMenuItemEvents = (
   return listItem;
 };
 
-/* ********************************** */
+// *****************************************************************************
 
 const landMarkType = (element: HTMLElement) => {
   const tag = element.tagName;
@@ -98,7 +97,7 @@ const getMenuItemText = (element: HTMLElement) => {
   }
 };
 
-/* ********************************** */
+// *****************************************************************************
 
 const buildMenuItem = (
   element: HTMLElement,
@@ -109,7 +108,7 @@ const buildMenuItem = (
   let listItemText = getMenuItemText(element);
 
   if (depth) {
-    listItem.className = `${config.id}_menu_header-level-${depth}`;
+    listItem.className = `${config.id}-menu-header-level-${depth}`;
     listItemText = `${depth}) ${listItemText}`;
   }
 

@@ -14,7 +14,7 @@ export const toggleMenu = (
     button.setAttribute('aria-expanded', 'false');
     menu.style.display = 'none';
     if (!keepVisibleOnClose && !config.showOnLoad) {
-      document.getElementById(config.id).classList.add('skip2Hidden');
+      document.getElementById(config.id).classList.add('skip2-hidden');
     }
   } else {
     // show menu
@@ -40,12 +40,12 @@ export const createSkip2Button = (config: Skip2Config) => {
   });
   if (!config.showOnLoad) {
     skip2Button.addEventListener('focus', () => {
-      document.getElementById(config.id).classList.remove('skip2Hidden');
+      document.getElementById(config.id).classList.remove('skip2-hidden');
     });
 
     skip2Button.addEventListener('blur', () => {
       if (skip2Button.getAttribute('aria-expanded') === 'false') {
-        document.getElementById(config.id).classList.add('skip2Hidden');
+        document.getElementById(config.id).classList.add('skip2-hidden');
       }
     });
   }

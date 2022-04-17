@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const fs = require('fs');
 const git = require('git-last-commit');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const EventHooksPlugin = require('event-hooks-webpack-plugin');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
-var dayjs = require('dayjs');
+const dayjs = require('dayjs');
 const packageJSON = require('./package.json');
 
 let entry = {};
-let htmlFiles = [];
+// let htmlFiles = [];
 
 /**************** OUTPUT (aka build) DIRECTORY ***************** */
 const outputDir = 'dist';
@@ -18,7 +19,7 @@ const outputDir = 'dist';
 entry = {
   // List all js/css/scss you want compressed
   skip2: './js/skip2.ts',
-  skip2Styles: ['./scss/skip2.scss']
+  skip2Styles: ['./scss/skip2.scss'],
 };
 
 // COMPRESS ALL FILES IN A DIRECTORY
@@ -62,11 +63,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, outputDir),
     //filename: `js/[name].${gitCommit}.js`,
-    filename: `js/[name].js`
+    filename: `js/[name].js`,
   },
 
   resolve: {
-    extensions: ['.js', '.json', '.jsx', '.ts']
+    extensions: ['.js', '.json', '.jsx', '.ts'],
   },
   devtool: 'source-map',
 
@@ -77,7 +78,7 @@ module.exports = {
       // filename: `css/[name].${gitCommit}.css`,
       // chunkFilename: `css/[id].${gitCommit}.css`,
       filename: `css/skip2.css`,
-      chunkFilename: `css/[id].css`
+      chunkFilename: `css/[id].css`,
     }),
     new EventHooksPlugin({
       done: () => {
@@ -92,7 +93,7 @@ module.exports = {
         //   fs.writeFileSync(filePath, newFile);
         // });
 
-        git.getLastCommit(function(err, commit) {
+        git.getLastCommit(function (err, commit) {
           const hash = commit.shortHash;
           const date = dayjs.unix(commit.committedOn).format('YYYY-MM-DD');
           const version = packageJSON.version;
@@ -114,9 +115,9 @@ module.exports = {
           fs.writeFileSync('./dist/js/skip2.js', header + javascript);
           fs.writeFileSync('./dist/css/skip2.css', header + css);
         });
-      }
+      },
     }),
-    new RemoveEmptyScriptsPlugin()
+    new RemoveEmptyScriptsPlugin(),
   ],
   module: {
     rules: [
@@ -124,13 +125,13 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.tsx?$/,
         use: { loader: 'ts-loader', options: { transpileOnly: true } },
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.(scss|css)$/,
@@ -140,17 +141,17 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true
-            }
+              sourceMap: true,
+            },
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true
-            }
-          }
-        ]
-      }
-    ]
-  }
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+    ],
+  },
 };

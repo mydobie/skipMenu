@@ -1,4 +1,3 @@
-import { buildMenuSection } from './menuSection';
 import { createSkip2Button, toggleMenu } from './skip2Button';
 import { buildMenu } from './skip2Menu';
 
@@ -14,7 +13,7 @@ export type Skip2Config = {
   reloadOnChange: boolean;
 };
 class Skip2 {
-  config: any;
+  config: Skip2Config;
   constructor(config: Skip2Config) {
     const defaultConfig: Skip2Config = {
       id: 'skip2',
@@ -47,7 +46,7 @@ class Skip2 {
 
     skip2Wrapper.id = this.config.id;
     if (!this.config.showOnLoad) {
-      skip2Wrapper.classList.add('skip2Hidden');
+      skip2Wrapper.classList.add('skip2-hidden');
     }
 
     // builds the button
@@ -66,8 +65,9 @@ class Skip2 {
       const obv = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
           if (
-            //@ts-ignore
-            !mutation.target.closest(`#${this.getConfig().id}`) &&
+            !(mutation.target as HTMLElement).closest(
+              `#${this.getConfig().id}`
+            ) &&
             mutation.attributeName !== 'tabindex'
           ) {
             // */
@@ -101,8 +101,7 @@ class Skip2 {
 
     // Add listener to close menu
     document.addEventListener('click', (e) => {
-      // @ts-ignore
-      if (!e.target.closest(`#${this.getConfig().id}`)) {
+      if (!(e.target as HTMLElement).closest(`#${this.getConfig().id}`)) {
         toggleMenu(this.getConfig(), true);
       }
     });
@@ -116,5 +115,6 @@ class Skip2 {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 window.Skip2 = Skip2;

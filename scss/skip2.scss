@@ -2,15 +2,11 @@
   position: absolute;
   left: 100px;
 
-  &.skip2Hidden {
+  &.skip2-hidden {
     top: -1000px;
     width: 1px;
     height: 1px;
     overflow: hidden;
-  }
-
-  [role='menuitem'] {
-    cursor: pointer;
   }
 
   [role='separator'] {
@@ -24,23 +20,25 @@
   }
 
   [role='menuitem'] {
-    &.skip2_menu_header-level-2 {
+    cursor: pointer;
+
+    &.skip2-menu-header-level-2 {
       padding-left: 2em;
     }
 
-    &.skip2_menu_header-level-3 {
+    &.skip2-menu-header-level-3 {
       padding-left: 3em;
     }
 
-    &.skip2_menu_header-level-4 {
+    &.skip2-menu-header-level-4 {
       padding-left: 4em;
     }
 
-    &.skip2_menu_header-level-5 {
+    &.skip2-menu-header-level-5 {
       padding-left: 5em;
     }
 
-    &.skip2_menu_header-level-6 {
+    &.skip2-menu-header-level-6 {
       padding-left: 6em;
     }
   }

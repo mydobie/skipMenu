@@ -36,16 +36,19 @@
     "stylelint": "^14.7.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard-scss": "^3.0.0",
-    "event-hooks-webpack-plugin": "^2.2.0"
+    "event-hooks-webpack-plugin": "^2.2.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.8"
   },
   "scripts": {
+    "prepare": "husky install",
     "clean": "rm -f package-lock.json && rm -rf node_modules && rm -rf build && npm install",
     "npmAudit": "npm audit --audit-level moderate",
     "npmAuditJson": "npm run npmAudit -- --json --audit-level moderate > npmAuditReport.json",
     "build": " rm -rf dist && webpack --mode production ",
     "build:watch": "rm -rf dist && webpack --mode development --watch",
     "// ------------------------------------------------------------1": "",
-    "lint:js": "eslint . --ext .ts",
+    "lint:js": "eslint  --ext .ts,.js ",
     "lint:js:fix": "npm run lint:js -- --fix",
     "prettier": "prettier  --ignore-path ./.eslintignore --check",
     "prettier:all": "npm run prettier '**/*.+(js|jsx|ts|tsx|css|scss|html|json|md)'",
@@ -55,7 +58,7 @@
     "lint:scss:all": "npm run lint:scss './**/*.+(css|scss)'",
     "lint:scss:fix:all": "npm run lint:scss -- --fix './**/*.+(css|scss)'",
     "// ------------------------------------------------------------2": "",
-    "lint": "npm run lint:js && npm run prettier:all && npm run lint:scss:all",
+    "lint": "npm run lint:js . && npm run prettier:all && npm run lint:scss:all",
     "lint:fix": "npm run prettier:fix:all && npm run lint:js:fix &&  npm run lint:scss:fix:all",
     "lint:watch": "onchange '**/*.*' -- npm run lint:fix"
   },

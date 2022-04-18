@@ -31,10 +31,11 @@ const menuItemsEvent = (menu: HTMLElement): HTMLElement => {
 
 export const buildMenu = (config: Skip2Config): DocumentFragment => {
   // build the actual menu
-  const menuWrapper = document.createDocumentFragment();
+  const menuWrapper = document.createDocumentFragment(); // This probably isn't needed
   const menu = document.createElement('div');
   menu.setAttribute('role', 'menu');
   menu.classList.add('dropdown-menu');
+  menu.style.display = 'none';
   menu.id = config.menuId;
 
   // attach the sections

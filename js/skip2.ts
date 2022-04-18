@@ -1,4 +1,4 @@
-import { createSkip2Button, toggleMenu } from './skip2Button';
+import { createSkip2Button, closeMenu, openMenu } from './skip2Button';
 import { buildMenu } from './skip2Menu';
 
 export type Skip2Config = {
@@ -11,6 +11,7 @@ export type Skip2Config = {
   landmarks?: string;
   buttonContent?: string | HTMLElement;
   reloadOnChange: boolean;
+  debug: boolean;
 };
 class Skip2 {
   config: Skip2Config;
@@ -23,6 +24,7 @@ class Skip2 {
       landmarks:
         'main, [role=main], [role=search], nav, [role=navigation], section, [role=region],  form, aside, [role=complementary], body > header, [role=banner], body > footer, [role=contentinfo]',
       reloadOnChange: false,
+      debug: false,
     };
     this.config = { ...defaultConfig, ...config };
     this.config.menuId = this.config.id + '_menu';
@@ -70,24 +72,6 @@ class Skip2 {
             ) &&
             mutation.attributeName !== 'tabindex'
           ) {
-            // */
-            // console.log("******************************");
-            // console.log("Mutation", mutation);
-            // console.log(
-            //   "Is header: ",
-            //   (mutation.target as HTMLElement).querySelector(
-            //     this.getConfig().headers
-            //   )
-            // );
-            // // console.log("PARENT", mutation.target.parentNode);
-            // console.log(
-            //   "tagName",
-            //   (mutation.target as HTMLHtmlElement).tagName
-            // );
-            // console.log(
-            //   "Aria header",
-            //   (mutation.target as HTMLElement).getAttribute("role")
-            // );
             this.update();
           }
         });
@@ -101,17 +85,29 @@ class Skip2 {
 
     // Add listener to close menu
     document.addEventListener('click', (e) => {
-      if (!(e.target as HTMLElement).closest(`#${this.getConfig().id}`)) {
-        toggleMenu(this.getConfig(), true);
+      const isMenuOpen =
+        document.getElementById(this.config.menuId).style.display !== 'none';
+      if (
+        isMenuOpen &&
+        !(e.target as HTMLElement).closest(`#${this.getConfig().id}`)
+      ) {
+        closeMenu(this.getConfig());
       }
     });
   }
 
   update() {
-    // do logic to see if the menu needs to be rebuilt
     const updatedMenu = buildMenu(this.config);
     const currentMenu = document.getElementById(this.config.menuId);
     currentMenu.parentNode.replaceChild(updatedMenu, currentMenu);
+  }
+
+  open() {
+    openMenu(this.getConfig());
+  }
+
+  close() {
+    closeMenu(this.getConfig());
   }
 }
 

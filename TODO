@@ -7,15 +7,15 @@
 - Create readme
 
 - Add accesskey => OR write a function to put focus on menu and open
+    - Then add code to attach to the menu
+    - Provide an example using Bootstrap
 
 - rename menuSection
 
-- create file headers
+- create compiled file headers
 
 - Check to see that an element isn't already tabable or already has tabindex set (see menuSection)
 
-- Add linting!
-
 - Add action files
 
-- Add npm audit check
+- Rename repo - something not too close to skip2

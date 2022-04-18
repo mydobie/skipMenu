@@ -35,20 +35,25 @@
       </div>
       <div id="playground"></div>
       <ul>
-        <li id="newHeaderBtn"><button>Add new header</button></li>
-        <li id="newHeaderAriaBtn"><button>Add new ARIA header</button></li>
-        <li id="newtextBtn"><button>Add non-header text</button></li>
-        <li id="editHeaderTextBtn"><button>Edit header text</button></li>
-        <li id="editHeaderAttrBtn"><button>Edit header attribute</button></li>
-        <li id="removeHeaderBtn"><button>Remove header</button></li>
-        <li id="removeAriaHeaderBtn"><button>Remove ARIA header</button></li>
+        <li><button id="newHeaderBtn">Add new header</button></li>
+        <li><button id="newHeaderAriaBtn">Add new ARIA header</button></li>
+        <li><button id="newtextBtn">Add non-header text</button></li>
+        <li><button id="editHeaderTextBtn">Edit header text</button></li>
+        <li><button id="editHeaderAttrBtn">Edit header attribute</button></li>
+        <li><button id="removeHeaderBtn">Remove header</button></li>
+        <li><button id="removeAriaHeaderBtn">Remove ARIA header</button></li>
+        <li><button id="openMenuBtn">Open Menu</button></li>
       </ul>
     </main>
     <div role="search">My search!</div>
     <footer aria-label="DaFooter">My footer</footer>
     <script src="dist/js/skip2.js"></script>
     <script>
-      const skip2 = new Skip2({ showOnLoad: true, reloadOnChange: true });
+      const skip2 = new Skip2({
+        showOnLoad: true,
+        reloadOnChange: false,
+        debug: true,
+      });
       skip2.add();
 
       document.getElementById('newHeaderBtn').addEventListener('click', () => {
@@ -96,6 +101,12 @@
         .addEventListener('click', () => {
           document.getElementById('removeAriaHeader').remove();
         });
+
+      document.getElementById('openMenuBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        skip2.open();
+      });
     </script>
   </body>
 </html>

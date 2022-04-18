@@ -1,5 +1,5 @@
 import { isVisible, focusNextElement } from './utilities';
-import { toggleMenu } from './skip2Button';
+import { closeMenu } from './skip2Button';
 import { Skip2Config } from './skip2';
 
 /* ********************************** */
@@ -11,10 +11,10 @@ const addMenuItemEvents = (
 ) => {
   const buttonId = config.buttonId;
   listItem.addEventListener('click', (event) => {
+    closeMenu(config);
+    (targetElement as HTMLElement).focus();
     event.stopPropagation();
     event.preventDefault();
-    (targetElement as HTMLElement).focus();
-    toggleMenu(config, true);
   });
   // TODO - move logic to add listeners to a new method
   listItem.addEventListener('keydown', (e) => {
@@ -22,10 +22,10 @@ const addMenuItemEvents = (
     e.preventDefault();
     if (e.key === 'Enter' || e.key === ' ') {
       (targetElement as HTMLElement).focus();
-      toggleMenu(config, true);
+      closeMenu(config);
     }
     if (e.key === 'Tab') {
-      toggleMenu(config, true);
+      closeMenu(config);
       if (e.shiftKey) {
         document.getElementById(buttonId).focus();
       } else {

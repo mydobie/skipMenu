@@ -1,4 +1,4 @@
-import { isVisible, focusNextElement } from './utilities';
+import { isVisible, focusNextElement, isFocusable } from './utilities';
 import { closeMenu } from './skip2Button';
 import { Skip2Config } from './skip2';
 
@@ -143,8 +143,9 @@ export const buildMenuSection = (
         depth = parseInt(element.getAttribute('aria-level'));
       }
 
-      // KKD need to check and see if tabindex is already set
-      (element as HTMLElement).tabIndex = -1;
+      if (!isFocusable(element as HTMLElement)) {
+        (element as HTMLElement).tabIndex = -1;
+      }
       container.appendChild(
         buildMenuItem(element as HTMLElement, depth, config)
       );

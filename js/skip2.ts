@@ -8,10 +8,12 @@ export type Skip2Config = {
   buttonId?: string;
   menuId?: string;
   headers?: string;
+  tooltipId?: string;
   landmarks?: string;
   buttonContent?: string | HTMLElement;
   reloadOnChange: boolean;
-  debug: boolean;
+  addAccessKey: boolean;
+  accessKey: string;
 };
 class Skip2 {
   config: Skip2Config;
@@ -24,11 +26,13 @@ class Skip2 {
       landmarks:
         'main, [role=main], [role=search], nav, [role=navigation], section, [role=region],  form, aside, [role=complementary], body > header, [role=banner], body > footer, [role=contentinfo]',
       reloadOnChange: false,
-      debug: false,
+      addAccessKey: false,
+      accessKey: '0',
     };
     this.config = { ...defaultConfig, ...config };
     this.config.menuId = this.config.id + '_menu';
     this.config.buttonId = this.config.id + '_button';
+    this.config.tooltipId = this.config.id + '_tooltip';
 
     this.update = this.update.bind(this);
     this.getConfig = this.getConfig.bind(this);

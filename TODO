@@ -6,9 +6,8 @@
 
 - Create readme
 
-- Add accesskey => OR write a function to put focus on menu and open
-    - Then add code to attach to the menu
-    - Provide an example using Bootstrap
+  - Then add code to attach to the menu
+  - Provide an example using Bootstrap
 
 - rename menuSection
 
@@ -19,3 +18,5 @@
 - Add action files
 
 - Rename repo - something not too close to skip2
+
+- Make a bootstrap and a non-bootstrap scss version

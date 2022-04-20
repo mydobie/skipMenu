@@ -13,13 +13,16 @@ let entry = {};
 
 /**************** OUTPUT (aka build) DIRECTORY ***************** */
 const outputDir = 'dist';
+const cssDir = 'css';
+const jsDir = 'js';
 
 /**************** FILES TO BE COMPRESSED ***************** */
 // COMPRESS A GIVEN LIST OF FILES
 entry = {
   // List all js/css/scss you want compressed
   skip2: './js/skip2.ts',
-  skip2Styles: ['./scss/skip2.scss'],
+  base: ['./scss/skip2.scss'],
+  bootstrap: ['./scss/skip2-bootstrap.scss'],
 };
 
 // COMPRESS ALL FILES IN A DIRECTORY
@@ -77,7 +80,7 @@ module.exports = {
       // both options are optional
       // filename: `css/[name].${gitCommit}.css`,
       // chunkFilename: `css/[id].${gitCommit}.css`,
-      filename: `css/skip2.css`,
+      filename: `css/skip2-[name].css`,
       chunkFilename: `css/[id].css`,
     }),
     new EventHooksPlugin({
@@ -105,15 +108,38 @@ module.exports = {
             .replace('<COMMIT>', hash)
             .replace('<REPO>', repo);
 
-          let javascript = fs.readFileSync('./dist/js/skip2.js', 'utf8');
-          javascript = javascript.replace(
-            'VERSION CANNOT BE DETERMINED',
-            'v' + version
-          );
+          const jsFiles = fs.readdirSync(`./${outputDir}/${jsDir}`);
+          jsFiles.forEach((filePath) => {
+            if (!/map$/.test(filePath)) {
+              let javascript = fs.readFileSync(
+                `./${outputDir}/${jsDir}/${filePath}`,
+                'utf8'
+              );
+              javascript = javascript.replace(
+                'VERSION CANNOT BE DETERMINED',
+                'v' + version
+              );
+              fs.writeFileSync(
+                `./${outputDir}/${jsDir}/${filePath}`,
+                header + javascript
+              );
+            }
+          });
 
-          const css = fs.readFileSync('./dist/css/skip2.css', 'utf8');
-          fs.writeFileSync('./dist/js/skip2.js', header + javascript);
-          fs.writeFileSync('./dist/css/skip2.css', header + css);
+          const cssFiles = fs.readdirSync(`./${outputDir}/${cssDir}/`);
+
+          cssFiles.forEach((filePath) => {
+            if (!/map$/.test(filePath)) {
+              const css = fs.readFileSync(
+                `./${outputDir}/${cssDir}/${filePath}`,
+                'utf8'
+              );
+              fs.writeFileSync(
+                `./${outputDir}/${cssDir}/${filePath}`,
+                header + css
+              );
+            }
+          });
         });
       },
     }),

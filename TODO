@@ -4,6 +4,8 @@
 
 - Remove menu entirely (not sure why this is needed)
 
+- Add code to see if refresh is needed based on content changes
+
 - Create readme
 
   - Then add code to attach to the menu
@@ -13,10 +15,24 @@
 
 - create compiled file headers
 
-- Check to see that an element isn't already tabable or already has tabindex set (see menuSection)
-
 - Add action files
 
-- Rename repo - something not too close to skip2
+- Rename repo - something not too close to skip2 - skipMenu
 
-- Make a bootstrap and a non-bootstrap scss version
+- Add option to change all labels
+
+- Change so main menu css doesn't depend on id
+
+- Add container role as option
+
+- What to do if no landmarks or no headers are found - also neither are found (add as option)
+
+- Landmark labels as config
+
+- close menu on escape
+
+- For headings, add aria-label
+
+- For menu group, add aria-labeledby
+
+- Add delay in showing tooltip

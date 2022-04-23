@@ -50,12 +50,20 @@ export const buildMenu = (config: Skip2Config): DocumentFragment => {
     config
   );
 
-  menu.appendChild(landmarkSection);
-  menu.appendChild(headerSection);
+  if (landmarkSection !== null) {
+    menu.appendChild(landmarkSection);
+  }
+
+  if (headerSection !== null) {
+    menu.appendChild(headerSection);
+  }
 
   menuWrapper.appendChild(menu);
-  // attach the events
-  menuItemsEvent(menu);
 
-  return menuWrapper;
+  // attach the events
+  if (headerSection !== null || landmarkSection !== null) {
+    menuItemsEvent(menu);
+    return menuWrapper;
+  }
+  return null;
 };

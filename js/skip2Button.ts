@@ -3,30 +3,36 @@ import { isTouchEnabled } from './utilities';
 
 export const toggleMenu = (config: Skip2Config, keepVisibleOnClose = false) => {
   const menu = document.getElementById(config.menuId);
-  const isCurrentlyExpanded = menu.style.display !== 'none';
-  if (isCurrentlyExpanded) {
-    closeMenu(config, keepVisibleOnClose);
-  } else {
-    openMenu(config);
+  if (menu) {
+    const isCurrentlyExpanded = menu.style.display !== 'none';
+    if (isCurrentlyExpanded) {
+      closeMenu(config, keepVisibleOnClose);
+    } else {
+      openMenu(config);
+    }
   }
 };
 
 export const openMenu = (config: Skip2Config) => {
   const menu = document.getElementById(config.menuId);
-  const button = document.getElementById(config.buttonId);
-  button.setAttribute('aria-expanded', 'true');
-  menu.style.display = 'block';
-  const firstItem = menu.querySelector('[role="menuitem"]');
-  (firstItem as HTMLElement).focus();
+  if (menu) {
+    const button = document.getElementById(config.buttonId);
+    button.setAttribute('aria-expanded', 'true');
+    menu.style.display = 'block';
+    const firstItem = menu.querySelector('[role="menuitem"]');
+    (firstItem as HTMLElement).focus();
+  }
 };
 
 export const closeMenu = (config: Skip2Config, keepVisibleOnClose = false) => {
   const menu = document.getElementById(config.menuId);
-  const button = document.getElementById(config.buttonId);
-  button.setAttribute('aria-expanded', 'false');
-  menu.style.display = 'none';
-  if (!keepVisibleOnClose && !config.showOnLoad) {
-    document.getElementById(config.id).classList.add('skip2-hidden');
+  if (menu) {
+    const button = document.getElementById(config.buttonId);
+    button.setAttribute('aria-expanded', 'false');
+    menu.style.display = 'none';
+    if (!keepVisibleOnClose && !config.showOnLoad) {
+      document.getElementById(config.id).classList.add('skip2-hidden');
+    }
   }
 };
 

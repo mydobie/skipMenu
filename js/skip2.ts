@@ -1,5 +1,6 @@
 import { createSkip2Button, closeMenu, openMenu } from './skip2Button';
 import { buildMenu } from './skip2Menu';
+import { addCloseMenuOnClick, addDomChangeListener } from './eventListeners';
 
 export type Skip2Config = {
   id: string;
@@ -44,7 +45,16 @@ class Skip2 {
     return this.config;
   }
 
-  add() {
+  init() {
+    // Load DOM change listener
+    addDomChangeListener(this.config, this.update);
+
+    // Add listener to close menu
+    addCloseMenuOnClick(this.config);
+    this._add();
+  }
+
+  _add() {
     // builds the skip2 container
     const skip2 = document.createDocumentFragment();
     const skip2Wrapper = document.createElement('div');
@@ -59,51 +69,34 @@ class Skip2 {
     const skip2Button = createSkip2Button(this.config);
     skip2Wrapper.appendChild(skip2Button);
 
-    // builds the initial menu
     const menu = buildMenu(this.config);
+
+    if (menu === null) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        'No landmarks or headers found  - skipmenu could not be built'
+      );
+      return;
+    }
 
     // Append menu items and attach event listeners
     skip2Wrapper.appendChild(menu);
     this.config.attachTo.prepend(skip2Wrapper);
-
-    // Load DOM change listener
-    if (this.config.reloadOnChange) {
-      const obv = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          if (
-            !(mutation.target as HTMLElement).closest(
-              `#${this.getConfig().id}`
-            ) &&
-            mutation.attributeName !== 'tabindex'
-          ) {
-            this.update();
-          }
-        });
-      });
-      obv.observe(document, {
-        attributes: true,
-        subtree: true,
-        childList: true,
-      });
-    }
-
-    // Add listener to close menu
-    document.addEventListener('click', (e) => {
-      const isMenuOpen =
-        document.getElementById(this.config.menuId).style.display !== 'none';
-      if (
-        isMenuOpen &&
-        !(e.target as HTMLElement).closest(`#${this.getConfig().id}`)
-      ) {
-        closeMenu(this.getConfig());
-      }
-    });
   }
 
   update() {
-    const updatedMenu = buildMenu(this.config);
     const currentMenu = document.getElementById(this.config.menuId);
-    currentMenu.parentNode.replaceChild(updatedMenu, currentMenu);
+    const updatedMenu = buildMenu(this.config);
+    if (currentMenu && updatedMenu) {
+      const currentMenu = document.getElementById(this.config.menuId);
+      currentMenu.parentNode.replaceChild(updatedMenu, currentMenu);
+    }
+    if (updatedMenu && !currentMenu) {
+      this._add();
+    }
+    if (!updatedMenu && currentMenu) {
+      this.remove();
+    }
   }
 
   open() {
@@ -112,6 +105,13 @@ class Skip2 {
 
   close() {
     closeMenu(this.getConfig());
+  }
+
+  remove() {
+    const skip2 = document.getElementById(this.config.id);
+    if (skip2) {
+      skip2.remove();
+    }
   }
 }
 

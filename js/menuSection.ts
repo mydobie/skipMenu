@@ -129,6 +129,13 @@ export const buildMenuSection = (
   sectionTitle: string,
   config: Skip2Config
 ) => {
+  if (elements.length === 0) {
+    return null;
+  }
+
+  // if (sectionTitle === 'Landmarks') {
+  //   return null;
+  // }
   const container = document.createElement('div');
   container.setAttribute('role', 'group');
   const containerTitle = document.createElement('div');

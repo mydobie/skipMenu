@@ -18,21 +18,7 @@
     <main>
       <div style="display: none"><a href="https://google.com">Google</a></div>
       <div><a href="https://cnn.com">CNN</a></div>
-      <h1>Hello world - welcome to page 1</h1>
-      <div id="bar" style="height: 15px"></div>
-      <h1>Heading 1</h1>
-      <h2>Heading 2</h2>
-      <div role="heading" aria-level="5">Heading 5</div>
 
-      <h1>Heading 1</h1>
-      <h2>Heading 2</h2>
-      <h3>Heading 3</h3>
-      <h4 id="editHeader">Change my text</h4>
-      <div role="heading" aria-level="2" id="editAriaHeader">Change level</div>
-      <h4 id="deleteHeader">Remove me</h4>
-      <div role="heading" aria-level="2" id="removeAriaHeader">
-        Remove aria header
-      </div>
       <div id="playground"></div>
       <ul>
         <li><button id="newHeaderBtn">Add new header</button></li>
@@ -43,6 +29,7 @@
         <li><button id="removeHeaderBtn">Remove header</button></li>
         <li><button id="removeAriaHeaderBtn">Remove ARIA header</button></li>
         <li><button id="openMenuBtn">Open Menu</button></li>
+        <li><button id="removeBtn">Remove Menu</button></li>
       </ul>
     </main>
     <div role="search">My search!</div>
@@ -51,10 +38,15 @@
     <script>
       const skip2 = new Skip2({
         showOnLoad: true,
-        reloadOnChange: false,
+        reloadOnChange: true,
         addAccessKey: true,
       });
-      skip2.add();
+      skip2.init();
+
+      document.getElementById('removeBtn').addEventListener('click', () => {
+        console.log('about to be removed');
+        skip2.remove();
+      });
 
       document.getElementById('newHeaderBtn').addEventListener('click', () => {
         document.getElementById(

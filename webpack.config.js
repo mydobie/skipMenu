@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs-extra');
 const git = require('git-last-commit');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const EventHooksPlugin = require('event-hooks-webpack-plugin');
@@ -60,7 +60,7 @@ entry = setEntry(files);
 
 module.exports = {
   //context: __dirname,
-
+  mode: 'development',
   entry: entry, //see  FILES TO BE COMPRESSED above.  Be sure to comment out the entry list above.
 
   output: {
@@ -73,6 +73,13 @@ module.exports = {
     extensions: ['.js', '.json', '.jsx', '.ts'],
   },
   devtool: 'source-map',
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'testPages'),
+    },
+    compress: true,
+    port: 9000,
+  },
 
   plugins: [
     new MiniCssExtractPlugin({
@@ -140,6 +147,8 @@ module.exports = {
               );
             }
           });
+          // copy files
+          fs.copySync(`./${outputDir}/`, `./testPages/${outputDir}/`);
         });
       },
     }),

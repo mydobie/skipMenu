@@ -67,7 +67,7 @@
     "lint:watch": "onchange '**/*.*' -- npm run lint:fix",
     "serve": "webpack serve",
     "cypress": "cypress open",
-    "cypres:run": "cypress run"
+    "cypress:run": "cypress run"
   },
   "prettier": {
     "singleQuote": true,

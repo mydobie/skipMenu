@@ -13,8 +13,8 @@
     <link href="dist/css/skip2-base.css" rel="stylesheet" />
     <title>Simple Menu test</title>
     <style>
-      *:focus{
-        border:1px solid #f0f
+      *:focus {
+        border: 1px solid #f0f;
       }
     </style>
   </head>
@@ -29,64 +29,67 @@
     </p>
   </body>
 
-<!-- HEADERS - The test depend on this order-->
+  <!-- HEADERS - The test depend on this order-->
 
-<h1 aria-label="Aria label heading 1">This title should not be shown in the menu - pull aria-label</h1>
+  <h1 aria-label="Aria label heading 1">
+    This title should not be shown in the menu - pull aria-label
+  </h1>
 
-<p id="heading2label">Aria label heading 2</div>
-<h2 aria-labelledby="heading2label">This title should not be shown in the menu - pull aria-labelledby</h2>
+  <p id="heading2label">Aria label heading 2</p>
+  <h2 aria-labelledby="heading2label">
+    This title should not be shown in the menu - pull aria-labelledby
+  </h2>
 
-<h3 title="Title heading 3">This title should not be shown in the menu - pull title</h3>
+  <h3 title="Title heading 3">
+    This title should not be shown in the menu - pull title
+  </h3>
 
-<h1>Heading 1 - tag</h1>
-<div role="heading" aria-level="1">Heading 1 - aria</div>
+  <h1>Heading 1 - tag</h1>
+  <div role="heading" aria-level="1">Heading 1 - aria</div>
 
-<h2>Heading 2 - tag</h2>
-<div role="heading" aria-level="2">Heading 2 - aria</div>
+  <h2>Heading 2 - tag</h2>
+  <div role="heading" aria-level="2">Heading 2 - aria</div>
 
-<h3>Heading 3 - tag</h3>
-<div role="heading" aria-level="3">Heading 3 - aria</div>
+  <h3>Heading 3 - tag</h3>
+  <div role="heading" aria-level="3">Heading 3 - aria</div>
 
-<h4>Heading 4 - tag</h4>
-<div role="heading" aria-level="4">Heading 4 - aria</div>
+  <h4>Heading 4 - tag</h4>
+  <div role="heading" aria-level="4">Heading 4 - aria</div>
 
-<h5>Heading 5 - tag</h5>
-<div role="heading" aria-level="5">Heading 5 - aria</div>
+  <h5>Heading 5 - tag</h5>
+  <div role="heading" aria-level="5">Heading 5 - aria</div>
 
+  <!-- LANDMARKS - tests depend on this order -->
+  <nav aria-label="Aria label">Nav 1 - Aria label</nav>
 
-<!-- LANDMARKS - tests depend on this order -->
-<nav aria-label="Aria label">Nav 1 - Aria label</nav>
+  <p id="navAriaLabel">Aria labeled by</p>
+  <nav aria-labelledby="navAriaLabel">Nav 2 - Aria label</nav>
 
-<p id="navAriaLabel">Aria labeled by</p>
-<nav aria-labelledby="navAriaLabel">Nav 2 - Aria label</nav>
+  <nav title="Aria title">Nav 3 - title</nav>
 
-<nav title="Aria title">Nav 3 - title</nav>
+  <nav>Simple nav</nav>
 
-<nav>Simple nav</nav>
+  <main>Main - tag</main>
+  <div role="main">Main - aria</div>
 
-<main>Main - tag</main>
-<div role="main">Main - aria</div>
+  <div role="search">Search</div>
 
-<div role="search">Search</div>
+  <div role="navigation">Nav - aria</div>
 
-<div role="navigation" >Nav - aria</div>
+  <section>Section</section>
 
-<section>Section</section>
+  <div role="region">Region - aria</div>
 
-<div role="region">Region - aria</div>
+  <form>Form</form>
 
-<form>Form</form>
+  <aside>Aside</aside>
+  <div role="complementary">Complementary - aria</div>
 
-<aside>Aside</aside>
-<div role="complementary">Complementary - aria</div>
+  <header>Banner</header>
+  <div role="banner">Banner - aria</div>
 
-<header>Banner</header>
-<div role="banner">Banner - aria</div>
-
-<footer>Footer</footer>
-<div role="contentinfo">Content info - aria</div>
-
-
+  <footer>Footer</footer>
+  <div role="contentinfo">Content info - aria</div>
 
   <script src="dist/js/skip2.js"></script>
   <script>

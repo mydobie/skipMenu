@@ -25,8 +25,6 @@
 
 - Add container role as option
 
-- What to do if no landmarks or no headers are found - also neither are found (add as option)
-
 - Landmark labels as config
 
 - close menu on escape
@@ -36,3 +34,50 @@
 - For menu group, add aria-labeledby
 
 - Add delay in showing tooltip
+
+- When completely removing the menu (via remove), remove listeners
+
+TESTS
+
+- X Menu changes when dom changes automatically
+
+- X Menu changes when update is called
+
+- X Menu open, menu close
+
+- X Menu remove
+
+- X Tooltips / access key
+
+- X Empty headers and landmarks
+
+// Files needed
+
+- not auto update
+
+  - add headers
+  - change headers
+  - add landmark
+  - change landmarks
+  - open
+  - close
+  - remove
+
+- auto update
+
+  - add headers
+  - change headers
+  - add landmark
+  - change landmarks
+  - remove (this will fail with next add)
+
+- tooltip (add too Navigation should work)
+
+  - Access key works
+  - Tooltip shows on focus but not on open menu
+
+- Empty
+
+  - remove headers
+  - remove landmarks (but add headers back)
+  - remove both

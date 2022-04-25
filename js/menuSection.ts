@@ -53,7 +53,7 @@ const landMarkType = (element: HTMLElement) => {
       return 'Region';
     case 'complementary':
       return 'Complementary';
-    case 'banner':
+    case 'header':
       return 'Banner';
     case 'contentinfo':
       return 'Footer';
@@ -127,6 +127,7 @@ const buildMenuItem = (
 export const buildMenuSection = (
   elements: NodeListOf<Element>,
   sectionTitle: string,
+  sectionId: string,
   config: Skip2Config
 ) => {
   if (elements.length === 0) {
@@ -138,6 +139,7 @@ export const buildMenuSection = (
   // }
   const container = document.createElement('div');
   container.setAttribute('role', 'group');
+  container.id = sectionId;
   const containerTitle = document.createElement('div');
   containerTitle.setAttribute('role', 'separator');
   containerTitle.appendChild(document.createTextNode(sectionTitle));

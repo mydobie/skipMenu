@@ -4,3 +4,6 @@
 # NOTE this is added by the build script
 /dist 
 /testPages/dist
+
+/cypress/videos
+/cypres/screenshots

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link href="dist/css/skip2-bootstrap.css" rel="stylesheet" />
+    <title>Simple Menu test</title>
+    <style>
+      *:focus {
+        border: 1px solid #f0f;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      This page is filled with landmarks and headers to verify the building of
+      the menu. Only default values are used.
+    </p>
+    <p>
+      Note that this page does not contain valid landmarks or heder positioning.
+      The ordering is purely for testing purposes.
+    </p>
+  </body>
+  <div id="headings">
+    <h1 id="changeHeaderTag">This is a tag header</h1>
+    <div
+      role="heading"
+      aria-level="1"
+      id="changeHeaderRole"
+      aria-label="This is a role header"
+    >
+      This is a role header (do not show - aria-label is set)
+    </div>
+  </div>
+  <div id="landmarks">
+    <nav aria-label="Arial label nav" id="changeLandmarkTag">
+      This is the tag navigation
+    </nav>
+    <div role="navigation" aria-label="Aria role nav" id="changeLandmarkRole">
+      This is the aria role navigation
+    </div>
+  </div>
+  <ul>
+    <li><button id="openMenu" class="skip2-do-not-close">Open Menu</button></li>
+    <li><button id="closeMenu">Close Menu</button></li>
+    <li><button id="removeMenu">Remove menu</button></li>
+  </ul>
+  <ul>
+    <li><button id="editHeaderTagText">Edit Header Tag Text</button></li>
+    <li><button id="editHeaderAriaText">Edit Header Aria Text</button></li>
+    <li><button id="editHeaderAriaLevel">Edit Header Aria Level</button></li>
+    <li><button id="addHeaderTag">Add Header Tag</button></li>
+    <li><button id="addHeaderAria">Add Header Aria</button></li>
+  </ul>
+  <ul>
+    <li><button id="editNavAriaText">Edit Nav Aria Text</button></li>
+    <li><button id="editLandmarkRole">Edit landmark role</button></li>
+    <li><button id="addLandmarkTag">Add Landmark Tag</button></li>
+    <li><button id="addLandmarkAria">Add Landmark Aria</button></li>
+  </ul>
+
+  <ul>
+    <li><button id="removeHeaders">Remove Headers</button></li>
+    <li><button id="removeLandmarks">Remove Landmarks</button></li>
+    <li><button id="removeBoth">Remove both</button></li>
+  </ul>
+
+  <script src="dist/js/skip2.js"></script>
+  <script>
+    const skip2 = new Skip2({ addAccessKey: true, reloadOnChange: true });
+    skip2.init();
+
+    /* ************** Open/Close ****************** */
+    document.getElementById('openMenu').addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      skip2.open();
+    });
+
+    document.getElementById('closeMenu').addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      skip2.close();
+    });
+
+    document.getElementById('removeMenu').addEventListener('click', () => {
+      skip2.remove();
+    });
+    /* ************** Modify Headers ****************** */
+    document
+      .getElementById('editHeaderTagText')
+      .addEventListener('click', () => {
+        document.getElementById('changeHeaderTag').innerText =
+          'This is a tag header - changed';
+      });
+
+    document
+      .getElementById('editHeaderAriaText')
+      .addEventListener('click', () => {
+        document
+          .getElementById('changeHeaderRole')
+          .setAttribute('aria-label', 'This is a role header - changed');
+      });
+
+    document
+      .getElementById('editHeaderAriaLevel')
+      .addEventListener('click', () => {
+        document
+          .getElementById('changeHeaderRole')
+          .setAttribute('aria-level', '2');
+      });
+
+    document.getElementById('addHeaderTag').addEventListener('click', () => {
+      const headerHTML = document.getElementById('headings').innerHTML;
+      document.getElementById('headings').innerHTML =
+        headerHTML + '<h1>This is a new tag header</h1>';
+    });
+
+    document.getElementById('addHeaderAria').addEventListener('click', () => {
+      const headerHTML = document.getElementById('headings').innerHTML;
+      document.getElementById('headings').innerHTML =
+        headerHTML +
+        '<div role="heading" aria-level="2">This is a new aria header</h1>';
+    });
+
+    /* ************** Modify Landmarks ****************** */
+
+    document.getElementById('editNavAriaText').addEventListener('click', () => {
+      document
+        .getElementById('changeLandmarkTag')
+        .setAttribute('aria-label', 'Arial label nav - changed');
+    });
+
+    document
+      .getElementById('editLandmarkRole')
+      .addEventListener('click', () => {
+        document
+          .getElementById('changeLandmarkRole')
+          .setAttribute('role', 'banner');
+      });
+
+    document.getElementById('addLandmarkTag').addEventListener('click', () => {
+      const headerHTML = document.getElementById('landmarks').innerHTML;
+      document.getElementById('landmarks').innerHTML =
+        headerHTML + '<aside>I am an aside</aside>';
+    });
+
+    document.getElementById('addLandmarkAria').addEventListener('click', () => {
+      const headerHTML = document.getElementById('landmarks').innerHTML;
+      document.getElementById('landmarks').innerHTML =
+        headerHTML + '<div role="region">I am a region</div>';
+    });
+
+    /* ************** Remove headers/landmarks ****************** */
+
+    document.getElementById('removeHeaders').addEventListener('click', () => {
+      document.getElementById('headings').innerHTML = '';
+    });
+
+    document.getElementById('removeLandmarks').addEventListener('click', () => {
+      document.getElementById('landmarks').innerHTML = '';
+    });
+
+    document.getElementById('removeBoth').addEventListener('click', () => {
+      document.getElementById('headings').innerHTML = '';
+      document.getElementById('landmarks').innerHTML = '';
+    });
+  </script>
+</html>

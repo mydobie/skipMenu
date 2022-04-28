@@ -53,7 +53,7 @@ const landMarkType = (element: HTMLElement) => {
       return 'Region';
     case 'complementary':
       return 'Complementary';
-    case 'header':
+    case 'banner':
       return 'Banner';
     case 'contentinfo':
       return 'Footer';
@@ -69,9 +69,9 @@ const landMarkType = (element: HTMLElement) => {
       return 'Form';
     case 'aside':
       return 'Complementary';
-    case 'banner':
+    case 'header':
       return 'Banner';
-    case 'footer':
+    case 'c':
       return 'Footer';
   }
   return null;

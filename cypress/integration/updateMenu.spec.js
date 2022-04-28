@@ -1,5 +1,5 @@
 /*global cy before*/
-const urls = ['simpleMenuUpdateManual' /*, 'simpleMenuUpdateAuto' */];
+const urls = [/*'simpleMenuUpdateAuto',*/ 'simpleMenuUpdateManual'];
 
 urls.forEach((url) => {
   describe(`Update ${url}`, () => {

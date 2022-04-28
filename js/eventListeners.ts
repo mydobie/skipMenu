@@ -28,7 +28,10 @@ export const addDomChangeListener = (
             (addedNode) => (addedNode as HTMLElement).id === config.id
           ) &&
           !(mutation.target as HTMLElement).closest(`#${config.id}`) &&
-          mutation.attributeName !== 'tabindex'
+          mutation.attributeName !== 'tabindex' &&
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //@ts-ignore
+          mutation.addedNodes[0]?.data !== '\n\n'
         ) {
           update();
         }

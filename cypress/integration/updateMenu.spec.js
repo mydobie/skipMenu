@@ -8,28 +8,30 @@ urls.forEach((url) => {
     });
     beforeEach(() => {
       cy.reload();
-      cy.get('#skip2_button').as('menuButton');
+      cy.get('#skipMenu_button').as('menuButton');
       cy.get('@menuButton').click(); // Open menu
-      cy.get('#skip2_headings').find('[role="menuitem"]').as('menuHeadings');
-      cy.get('#skip2_landmarks').find('[role="menuitem"]').as('menuLandmarks');
+      cy.get('#skipMenu_headings').find('[role="menuitem"]').as('menuHeadings');
+      cy.get('#skipMenu_landmarks')
+        .find('[role="menuitem"]')
+        .as('menuLandmarks');
     });
 
     it('close and open menu', () => {
-      cy.get('#skip2_menu').should('be.visible');
+      cy.get('#skipMenu_menu').should('be.visible');
       cy.get('#closeMenu').click(); // Close menu
-      cy.get('#skip2_menu').should('not.be.visible');
+      cy.get('#skipMenu_menu').should('not.be.visible');
       cy.get('#openMenu').click(); // Open menu
-      cy.get('#skip2_menu').should('be.visible');
+      cy.get('#skipMenu_menu').should('be.visible');
     });
 
     it('Remove menu', () => {
-      cy.get('#skip2').should('exist');
+      cy.get('#skipMenu').should('exist');
       cy.get('#removeMenu').click();
-      cy.get('#skip2').should('not.exist');
+      cy.get('#skipMenu').should('not.exist');
 
       // should not exist after adding update
       cy.get('#addHeaderTag').click({ force: true });
-      cy.get('#skip2').should('not.exist');
+      cy.get('#skipMenu').should('not.exist');
     });
 
     it('Edit header text', () => {
@@ -120,27 +122,27 @@ urls.forEach((url) => {
     });
 
     it('Remove headers', () => {
-      cy.get('#skip2_headings').should('exist');
+      cy.get('#skipMenu_headings').should('exist');
       cy.get('#removeHeaders').click();
       cy.get('@menuButton').click(); // open menu
-      cy.get('#skip2_headings').should('not.exist');
+      cy.get('#skipMenu_headings').should('not.exist');
     });
 
     it('Remove landmarks', () => {
-      cy.get('#skip2_landmarks').should('exist');
+      cy.get('#skipMenu_landmarks').should('exist');
       cy.get('#removeLandmarks').click();
       cy.get('@menuButton').click(); // open menu
-      cy.get('#skip2_landmarks').should('not.exist');
+      cy.get('#skipMenu_landmarks').should('not.exist');
     });
 
     it('Remove both landmarks and headers', () => {
-      cy.get('#skip2').should('exist');
+      cy.get('#skipMenu').should('exist');
       cy.get('#removeBoth').click();
-      cy.get('#skip2').should('not.exist');
+      cy.get('#skipMenu').should('not.exist');
 
       // should return after adding header/landmark and .update()
       cy.get('#addHeaderTag').click({ force: true });
-      cy.get('#skip2').should('exist');
+      cy.get('#skipMenu').should('exist');
     });
   });
 });

@@ -10,7 +10,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link href="dist/css/skip2-bootstrap.css" rel="stylesheet" />
+    <link href="dist/css/skipMenu-bootstrap.css" rel="stylesheet" />
     <title>Simple Menu test</title>
     <style>
       *:focus {
@@ -48,7 +48,9 @@
     </div>
   </div>
   <ul>
-    <li><button id="openMenu" class="skip2-do-not-close">Open Menu</button></li>
+    <li>
+      <button id="openMenu" class="skipMenu-do-not-close">Open Menu</button>
+    </li>
     <li><button id="closeMenu">Close Menu</button></li>
     <li><button id="removeMenu">Remove menu</button></li>
   </ul>
@@ -72,27 +74,27 @@
     <li><button id="removeBoth">Remove both</button></li>
   </ul>
 
-  <script src="dist/js/skip2.js"></script>
+  <script src="dist/js/skipMenu.js"></script>
   <script>
-    const skip2 = new Skip2();
-    skip2.init();
-    //skip2.open();
+    const skipMenu = new SkipMenu();
+    skipMenu.init();
+    //skipMenu.open();
 
     /* ************** Open/Close ****************** */
     document.getElementById('openMenu').addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      skip2.open();
+      skipMenu.open();
     });
 
     document.getElementById('closeMenu').addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      skip2.close();
+      skipMenu.close();
     });
 
     document.getElementById('removeMenu').addEventListener('click', () => {
-      skip2.remove();
+      skipMenu.remove();
     });
     /* ************** Modify Headers ****************** */
     document
@@ -100,7 +102,7 @@
       .addEventListener('click', () => {
         document.getElementById('changeHeaderTag').innerText =
           'This is a tag header - changed';
-        skip2.update();
+        skipMenu.update();
       });
 
     document
@@ -109,7 +111,7 @@
         document
           .getElementById('changeHeaderRole')
           .setAttribute('aria-label', 'This is a role header - changed');
-        skip2.update();
+        skipMenu.update();
       });
 
     document
@@ -118,14 +120,14 @@
         document
           .getElementById('changeHeaderRole')
           .setAttribute('aria-level', '2');
-        skip2.update();
+        skipMenu.update();
       });
 
     document.getElementById('addHeaderTag').addEventListener('click', () => {
       const headerHTML = document.getElementById('headings').innerHTML;
       document.getElementById('headings').innerHTML =
         headerHTML + '<h1>This is a new tag header</h1>';
-      skip2.update();
+      skipMenu.update();
     });
 
     document.getElementById('addHeaderAria').addEventListener('click', () => {
@@ -133,7 +135,7 @@
       document.getElementById('headings').innerHTML =
         headerHTML +
         '<div role="heading" aria-level="2">This is a new aria header</h1>';
-      skip2.update();
+      skipMenu.update();
     });
 
     /* ************** Modify Landmarks ****************** */
@@ -142,7 +144,7 @@
       document
         .getElementById('changeLandmarkTag')
         .setAttribute('aria-label', 'Arial label nav - changed');
-      skip2.update();
+      skipMenu.update();
     });
 
     document
@@ -151,39 +153,39 @@
         document
           .getElementById('changeLandmarkRole')
           .setAttribute('role', 'banner');
-        skip2.update();
+        skipMenu.update();
       });
 
     document.getElementById('addLandmarkTag').addEventListener('click', () => {
       const headerHTML = document.getElementById('landmarks').innerHTML;
       document.getElementById('landmarks').innerHTML =
         headerHTML + '<aside>I am an aside</aside>';
-      skip2.update();
+      skipMenu.update();
     });
 
     document.getElementById('addLandmarkAria').addEventListener('click', () => {
       const headerHTML = document.getElementById('landmarks').innerHTML;
       document.getElementById('landmarks').innerHTML =
         headerHTML + '<div role="region">I am a region</div>';
-      skip2.update();
+      skipMenu.update();
     });
 
     /* ************** Remove headers/landmarks ****************** */
 
     document.getElementById('removeHeaders').addEventListener('click', () => {
       document.getElementById('headings').innerHTML = '';
-      skip2.update();
+      skipMenu.update();
     });
 
     document.getElementById('removeLandmarks').addEventListener('click', () => {
       document.getElementById('landmarks').innerHTML = '';
-      skip2.update();
+      skipMenu.update();
     });
 
     document.getElementById('removeBoth').addEventListener('click', () => {
       document.getElementById('headings').innerHTML = '';
       document.getElementById('landmarks').innerHTML = '';
-      skip2.update();
+      skipMenu.update();
     });
   </script>
 </html>

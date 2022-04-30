@@ -1,7 +1,7 @@
-import { Skip2Config } from './skip2';
-import { closeMenu } from './skip2Button';
+import { SkipMenuConfig } from './skipMenu';
+import { closeMenu } from './button';
 
-export const addCloseMenuOnClick = (config: Skip2Config) => {
+export const addCloseMenuOnClick = (config: SkipMenuConfig) => {
   document.addEventListener('click', (e) => {
     const menu = document.getElementById(config.menuId);
     if (menu) {
@@ -14,7 +14,7 @@ export const addCloseMenuOnClick = (config: Skip2Config) => {
 };
 
 export const addDomChangeListener = (
-  config: Skip2Config,
+  config: SkipMenuConfig,
   update: () => void
 ) => {
   if (config.reloadOnChange) {

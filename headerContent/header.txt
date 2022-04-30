@@ -1,4 +1,4 @@
-/*! skip2 - v<VERSION> - <DATE> - Commit <COMMIT>
+/*! skipMenu - v<VERSION> - <DATE> - Commit <COMMIT>
 * <REPO>
 */
 /* ********************* */

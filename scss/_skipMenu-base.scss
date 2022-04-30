@@ -1,8 +1,9 @@
-#skip2 {
+/* stylelint-disable selector-id-pattern, selector-class-pattern */
+#skipMenu {
   position: absolute;
   left: 100px;
 
-  &.skip2-hidden {
+  &.skipMenu-hidden {
     top: -1000px;
     width: 1px;
     height: 1px;
@@ -31,23 +32,23 @@
   [role='menuitem'] {
     cursor: pointer;
 
-    &.skip2-menu-header-level-2 {
+    &.skipMenu-menu-header-level-2 {
       padding-left: 2em;
     }
 
-    &.skip2-menu-header-level-3 {
+    &.skipMenu-menu-header-level-3 {
       padding-left: 3em;
     }
 
-    &.skip2-menu-header-level-4 {
+    &.skipMenu-menu-header-level-4 {
       padding-left: 4em;
     }
 
-    &.skip2-menu-header-level-5 {
+    &.skipMenu-menu-header-level-5 {
       padding-left: 5em;
     }
 
-    &.skip2-menu-header-level-6 {
+    &.skipMenu-menu-header-level-6 {
       padding-left: 6em;
     }
   }

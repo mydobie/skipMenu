@@ -1,4 +1,4 @@
-import { Skip2Config } from './skip2';
+import { SkipMenuConfig } from './skipMenu';
 import { buildMenuSection } from './menuSection';
 
 const menuItemsEvent = (menu: HTMLElement): HTMLElement => {
@@ -29,7 +29,7 @@ const menuItemsEvent = (menu: HTMLElement): HTMLElement => {
   return menu;
 };
 
-export const buildMenu = (config: Skip2Config): DocumentFragment => {
+export const buildMenu = (config: SkipMenuConfig): DocumentFragment => {
   // build the actual menu
   const menuWrapper = document.createDocumentFragment(); // This probably isn't needed
   const menu = document.createElement('div');

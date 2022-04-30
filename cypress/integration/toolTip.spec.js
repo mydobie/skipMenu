@@ -8,64 +8,64 @@ describe('Navigation', () => {
     cy.visit('/toolTip.html');
   });
   beforeEach(() => {
-    cy.contains('Skip To Content').as('skip2Button');
-    cy.get('#skip2_menu').as('skip2Menu');
-    cy.get('#skip2_tooltip').as('skip2Tooltip');
-    cy.get('@skip2Menu').then(($menu) => {
+    cy.contains('Skip To Content').as('skipMenuButton');
+    cy.get('#skipMenu_menu').as('skipMenuMenu');
+    cy.get('#skipMenu_tooltip').as('skipMenuTooltip');
+    cy.get('@skipMenuMenu').then(($menu) => {
       if (!$menu.is(':visible')) {
-        cy.get('@skip2Button').click();
+        cy.get('@skipMenuButton').click();
       }
     });
   });
 
   it('Tooltip is not shown when menu is open', () => {
-    cy.get('@skip2Menu').should('be.visible');
-    cy.get('@skip2Tooltip').should('not.be.visible');
+    cy.get('@skipMenuMenu').should('be.visible');
+    cy.get('@skipMenuTooltip').should('not.be.visible');
 
-    cy.get('@skip2Button').focus();
-    cy.get('@skip2Menu').should('be.visible');
-    cy.get('@skip2Tooltip').should('not.be.visible');
+    cy.get('@skipMenuButton').focus();
+    cy.get('@skipMenuMenu').should('be.visible');
+    cy.get('@skipMenuTooltip').should('not.be.visible');
   });
 
   it('Tooltip is shown when button has focus', () => {
-    cy.get('@skip2Menu').then(($menu) => {
+    cy.get('@skipMenuMenu').then(($menu) => {
       if ($menu.is(':visible')) {
-        cy.get('@skip2Button').click();
+        cy.get('@skipMenuButton').click();
       }
     });
-    cy.get('@skip2Button').focus();
-    cy.get('@skip2Menu').should('not.be.visible');
-    cy.get('@skip2Tooltip').should('be.visible');
+    cy.get('@skipMenuButton').focus();
+    cy.get('@skipMenuMenu').should('not.be.visible');
+    cy.get('@skipMenuTooltip').should('be.visible');
   });
 
   it('Tooltip is not shown when button does not have focus', () => {
-    cy.get('@skip2Menu').then(($menu) => {
+    cy.get('@skipMenuMenu').then(($menu) => {
       if ($menu.is(':visible')) {
-        cy.get('@skip2Button').click();
+        cy.get('@skipMenuButton').click();
       }
     });
-    cy.get('@skip2Button').focus();
-    cy.get('@skip2Menu').should('not.be.visible');
-    cy.get('@skip2Tooltip').should('be.visible');
-    cy.get('@skip2Button').blur();
-    cy.get('@skip2Tooltip').should('not.be.visible');
+    cy.get('@skipMenuButton').focus();
+    cy.get('@skipMenuMenu').should('not.be.visible');
+    cy.get('@skipMenuTooltip').should('be.visible');
+    cy.get('@skipMenuButton').blur();
+    cy.get('@skipMenuTooltip').should('not.be.visible');
   });
 
   it('Toggle tooltip on mouse over and out', () => {
-    cy.get('@skip2Menu').then(($menu) => {
+    cy.get('@skipMenuMenu').then(($menu) => {
       if ($menu.is(':visible')) {
-        cy.get('@skip2Button').click();
+        cy.get('@skipMenuButton').click();
       }
     });
-    cy.get('@skip2Menu').should('not.be.visible');
-    cy.get('@skip2Button').trigger('mouseover');
-    cy.get('@skip2Tooltip').should('be.visible');
-    cy.get('@skip2Button').trigger('mouseout');
-    cy.get('@skip2Tooltip').should('not.be.visible');
+    cy.get('@skipMenuMenu').should('not.be.visible');
+    cy.get('@skipMenuButton').trigger('mouseover');
+    cy.get('@skipMenuTooltip').should('be.visible');
+    cy.get('@skipMenuButton').trigger('mouseout');
+    cy.get('@skipMenuTooltip').should('not.be.visible');
   });
 
   it('Tooltip describes access key', () => {
-    cy.get('@skip2Tooltip').contains('+ 0');
+    cy.get('@skipMenuTooltip').contains('+ 0');
   });
 
   // Leaving this as todo because the machine is unknown

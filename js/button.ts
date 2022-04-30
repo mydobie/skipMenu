@@ -1,7 +1,10 @@
-import { Skip2Config } from './skip2';
+import { SkipMenuConfig } from './skipMenu';
 import { isTouchEnabled } from './utilities';
 
-export const toggleMenu = (config: Skip2Config, keepVisibleOnClose = false) => {
+export const toggleMenu = (
+  config: SkipMenuConfig,
+  keepVisibleOnClose = false
+) => {
   const menu = document.getElementById(config.menuId);
   if (menu) {
     const isCurrentlyExpanded = menu.style.display !== 'none';
@@ -13,7 +16,7 @@ export const toggleMenu = (config: Skip2Config, keepVisibleOnClose = false) => {
   }
 };
 
-export const openMenu = (config: Skip2Config) => {
+export const openMenu = (config: SkipMenuConfig) => {
   const menu = document.getElementById(config.menuId);
   if (menu) {
     const button = document.getElementById(config.buttonId);
@@ -24,14 +27,17 @@ export const openMenu = (config: Skip2Config) => {
   }
 };
 
-export const closeMenu = (config: Skip2Config, keepVisibleOnClose = false) => {
+export const closeMenu = (
+  config: SkipMenuConfig,
+  keepVisibleOnClose = false
+) => {
   const menu = document.getElementById(config.menuId);
   if (menu) {
     const button = document.getElementById(config.buttonId);
     button.setAttribute('aria-expanded', 'false');
     menu.style.display = 'none';
     if (!keepVisibleOnClose && !config.showOnLoad) {
-      document.getElementById(config.id).classList.add('skip2-hidden');
+      document.getElementById(config.id).classList.add('skipMenu-hidden');
     }
   }
 };
@@ -63,7 +69,7 @@ const toolTipText = (accessKey: string): string => {
   return text;
 };
 
-const toolTip = (config: Skip2Config): HTMLElement | null => {
+const toolTip = (config: SkipMenuConfig): HTMLElement | null => {
   const toolTipTextString = toolTipText(config.accessKey);
   if (!toolTipTextString) {
     return null;
@@ -81,57 +87,57 @@ const toolTip = (config: Skip2Config): HTMLElement | null => {
   return tooltip;
 };
 
-export const createSkip2Button = (config: Skip2Config) => {
+export const createskipMenuButton = (config: SkipMenuConfig) => {
   const buttonWrapper = document.createDocumentFragment();
-  const skip2Button = document.createElement('button');
-  skip2Button.setAttribute('aria-haspopup', 'true');
-  skip2Button.setAttribute('aria-expanded', 'false');
-  skip2Button.setAttribute('aria-controls', config.menuId);
-  skip2Button.classList.add('btn', 'btn-secondary');
-  skip2Button.id = config.buttonId;
-  skip2Button.textContent = 'Skip To Content';
+  const skipMenuButton = document.createElement('button');
+  skipMenuButton.setAttribute('aria-haspopup', 'true');
+  skipMenuButton.setAttribute('aria-expanded', 'false');
+  skipMenuButton.setAttribute('aria-controls', config.menuId);
+  skipMenuButton.classList.add('btn', 'btn-secondary');
+  skipMenuButton.id = config.buttonId;
+  skipMenuButton.textContent = 'Skip To Content';
 
-  skip2Button.addEventListener('click', (e) => {
+  skipMenuButton.addEventListener('click', (e) => {
     e.stopPropagation();
     e.preventDefault();
     toggleMenu(config, true);
   });
   if (!config.showOnLoad) {
-    skip2Button.addEventListener('focus', () => {
-      document.getElementById(config.id).classList.remove('skip2-hidden');
+    skipMenuButton.addEventListener('focus', () => {
+      document.getElementById(config.id).classList.remove('skipMenu-hidden');
     });
 
-    skip2Button.addEventListener('blur', () => {
-      if (skip2Button.getAttribute('aria-expanded') === 'false') {
-        document.getElementById(config.id).classList.add('skip2-hidden');
+    skipMenuButton.addEventListener('blur', () => {
+      if (skipMenuButton.getAttribute('aria-expanded') === 'false') {
+        document.getElementById(config.id).classList.add('skipMenu-hidden');
       }
     });
   }
 
-  buttonWrapper.appendChild(skip2Button);
+  buttonWrapper.appendChild(skipMenuButton);
 
   if (config.addAccessKey) {
-    const skip2ToolTip = toolTip(config);
-    if (skip2ToolTip) {
-      skip2Button.addEventListener('focus', () => {
-        if (skip2Button.getAttribute('aria-expanded') === 'false') {
-          skip2ToolTip.style.display = 'block';
+    const skipMenuToolTip = toolTip(config);
+    if (skipMenuToolTip) {
+      skipMenuButton.addEventListener('focus', () => {
+        if (skipMenuButton.getAttribute('aria-expanded') === 'false') {
+          skipMenuToolTip.style.display = 'block';
         }
       });
-      skip2Button.addEventListener('blur', () => {
-        skip2ToolTip.style.display = 'none';
+      skipMenuButton.addEventListener('blur', () => {
+        skipMenuToolTip.style.display = 'none';
       });
-      skip2Button.addEventListener('mouseover', () => {
-        if (skip2Button.getAttribute('aria-expanded') === 'false') {
-          skip2ToolTip.style.display = 'block';
+      skipMenuButton.addEventListener('mouseover', () => {
+        if (skipMenuButton.getAttribute('aria-expanded') === 'false') {
+          skipMenuToolTip.style.display = 'block';
         }
       });
-      skip2Button.addEventListener('mouseout', () => {
-        skip2ToolTip.style.display = 'none';
+      skipMenuButton.addEventListener('mouseout', () => {
+        skipMenuToolTip.style.display = 'none';
       });
 
-      buttonWrapper.appendChild(skip2ToolTip);
-      skip2Button.setAttribute('accesskey', config.accessKey);
+      buttonWrapper.appendChild(skipMenuToolTip);
+      skipMenuButton.setAttribute('accesskey', config.accessKey);
     }
   }
   return buttonWrapper;

@@ -6,19 +6,19 @@ describe('Navigation', () => {
     // change event listener is off
     // defaults are used
     cy.visit('/simpleMenuNav.html');
-    cy.get('#skip2_menu').should('not.be.visible');
+    cy.get('#skipMenu_menu').should('not.be.visible');
     cy.contains('Skip To Content').click();
-    cy.get('#skip2_menu').should('be.visible');
-    cy.get('#skip2_menu').find('[role="menuitem"]').should('have.length', 4);
+    cy.get('#skipMenu_menu').should('be.visible');
+    cy.get('#skipMenu_menu').find('[role="menuitem"]').should('have.length', 4);
   });
   beforeEach(() => {
-    cy.get('#skip2_menu').then(($menu) => {
+    cy.get('#skipMenu_menu').then(($menu) => {
       if (!$menu.is(':visible')) {
         cy.contains('Skip To Content').click();
       }
     });
-    cy.get('#skip2_menu').find('[role="menuitem"]').as('menuItems');
-    cy.contains('Skip To Content').as('skip2Button');
+    cy.get('#skipMenu_menu').find('[role="menuitem"]').as('menuItems');
+    cy.contains('Skip To Content').as('skipMenuButton');
   });
 
   it('When menu opens, the first element has focus', () => {
@@ -59,21 +59,21 @@ describe('Navigation', () => {
     cy.get('@menuItems').eq(1).contains('1)');
     cy.get('@menuItems').eq(1).type('{enter}');
     cy.focused().contains('Heading 1');
-    cy.get('#skip2_menu').should('not.be.visible');
+    cy.get('#skipMenu_menu').should('not.be.visible');
   });
 
   it('Users can use the space key bring focus to element - landmark', () => {
     cy.get('@menuItems').eq(0).contains('Main');
     cy.get('@menuItems').eq(0).type('{enter}');
     cy.focused().should('have.prop', 'tagName').should('eq', 'MAIN');
-    cy.get('#skip2_menu').should('not.be.visible');
+    cy.get('#skipMenu_menu').should('not.be.visible');
   });
 
   it('Users can click on the menu to bring focus to element - header', () => {
     cy.get('@menuItems').eq(2).contains('2)');
     cy.get('@menuItems').eq(2).click();
     cy.focused().contains('Heading 2');
-    cy.get('#skip2_menu').should('not.be.visible');
+    cy.get('#skipMenu_menu').should('not.be.visible');
   });
 
   it('Headers have a tabindex set', () => {
@@ -91,19 +91,19 @@ describe('Navigation', () => {
   });
 
   it('Can use bring focus and return key to close/open menu', () => {
-    cy.get('@skip2Button').focus();
-    cy.get('#skip2_menu').should('be.visible');
-    cy.get('@skip2Button').type('{enter}');
-    cy.get('#skip2_menu').should('not.be.visible');
-    cy.get('@skip2Button').type('{enter}');
-    cy.get('#skip2_menu').should('be.visible');
+    cy.get('@skipMenuButton').focus();
+    cy.get('#skipMenu_menu').should('be.visible');
+    cy.get('@skipMenuButton').type('{enter}');
+    cy.get('#skipMenu_menu').should('not.be.visible');
+    cy.get('@skipMenuButton').type('{enter}');
+    cy.get('#skipMenu_menu').should('be.visible');
   });
 
   it('Tab will close menu and bring to next focusable element', () => {
     // Tab
     cy.get('@menuItems').eq(0).should('have.focus');
     cy.get('body').tab();
-    cy.get('#skip2_menu').should('not.be.visible');
+    cy.get('#skipMenu_menu').should('not.be.visible');
     cy.get('button').contains('Focusable element').should('have.focus');
   });
 
@@ -111,13 +111,13 @@ describe('Navigation', () => {
     // Shift tab (closes window and puts focus on the button)
     cy.get('@menuItems').eq(0).should('have.focus');
     cy.get('body').tab({ shift: true });
-    cy.get('#skip2_menu').should('not.be.visible');
-    cy.get('@skip2Button').should('have.focus');
+    cy.get('#skipMenu_menu').should('not.be.visible');
+    cy.get('@skipMenuButton').should('have.focus');
   });
 
   it('Can click anywhere to close menu', () => {
-    cy.get('#skip2_menu').should('be.visible');
+    cy.get('#skipMenu_menu').should('be.visible');
     cy.get('body').click();
-    cy.get('#skip2_menu').should('not.be.visible');
+    cy.get('#skipMenu_menu').should('not.be.visible');
   });
 });

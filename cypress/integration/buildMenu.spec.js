@@ -7,32 +7,32 @@ describe('Build initial menu ', () => {
     // defaults are used
     cy.visit('/simpleMenuDefault.html');
     cy.contains('Skip To Content').click();
-    cy.get('#skip2_menu').should('be.visible');
-    cy.get('#skip2_menu').should('have.attr', 'role', 'menu');
+    cy.get('#skipMenu_menu').should('be.visible');
+    cy.get('#skipMenu_menu').should('have.attr', 'role', 'menu');
 
     // headers = cy
-    //   .get('#skip2_menu')
-    //   .find('#skip2_headings')
+    //   .get('#skipMenu_menu')
+    //   .find('#skipMenu_headings')
     //   .find('[role="menuitem"]');
 
     // headers.should('have.length', 13);
 
     // landmarks = cy
-    //   .get('#skip2_menu')
-    //   .find('#skip2_landmarks')
+    //   .get('#skipMenu_menu')
+    //   .find('#skipMenu_landmarks')
     //   .find('[role="menuitem"]');
 
     // landmarks.should('have.length', 17);
   });
   beforeEach(() => {
-    cy.get('#skip2_menu')
-      .find('#skip2_headings')
+    cy.get('#skipMenu_menu')
+      .find('#skipMenu_headings')
       .find('[role="menuitem"]')
       .as('headers');
     cy.get('@headers').should('have.length', 13);
 
-    cy.get('#skip2_menu')
-      .find('#skip2_landmarks')
+    cy.get('#skipMenu_menu')
+      .find('#skipMenu_landmarks')
       .find('[role="menuitem"]')
       .as('landmarks');
     cy.get('@landmarks').should('have.length', 17);
@@ -124,22 +124,22 @@ describe('Build initial menu ', () => {
       cy.get('@headers').eq(0).contains('1)');
       cy.get('@headers')
         .eq(0)
-        .should('have.class', 'skip2-menu-header-level-1');
+        .should('have.class', 'skipMenu-menu-header-level-1');
 
       cy.get('@headers').eq(1).contains('2)');
       cy.get('@headers')
         .eq(1)
-        .should('have.class', 'skip2-menu-header-level-2');
+        .should('have.class', 'skipMenu-menu-header-level-2');
 
       cy.get('@headers').eq(2).contains('3)');
       cy.get('@headers')
         .eq(2)
-        .should('have.class', 'skip2-menu-header-level-3');
+        .should('have.class', 'skipMenu-menu-header-level-3');
 
       cy.get('@headers').eq(3).contains('1)');
       cy.get('@headers')
         .eq(3)
-        .should('have.class', 'skip2-menu-header-level-1');
+        .should('have.class', 'skipMenu-menu-header-level-1');
     });
   });
 });

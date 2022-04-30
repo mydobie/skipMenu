@@ -1,13 +1,13 @@
 import { isVisible, focusNextElement, isFocusable } from './utilities';
-import { closeMenu } from './skip2Button';
-import { Skip2Config } from './skip2';
+import { closeMenu } from './button';
+import { SkipMenuConfig } from './skipMenu';
 
 /* ********************************** */
 
 const addMenuItemEvents = (
   listItem: HTMLDivElement,
   targetElement: HTMLElement,
-  config: Skip2Config
+  config: SkipMenuConfig
 ) => {
   const buttonId = config.buttonId;
   listItem.addEventListener('click', (event) => {
@@ -102,7 +102,7 @@ const getMenuItemText = (element: HTMLElement) => {
 const buildMenuItem = (
   element: HTMLElement,
   depth: number,
-  config: Skip2Config
+  config: SkipMenuConfig
 ) => {
   let listItem = document.createElement('div');
   let listItemText = getMenuItemText(element);
@@ -128,7 +128,7 @@ export const buildMenuSection = (
   elements: NodeListOf<Element>,
   sectionTitle: string,
   sectionId: string,
-  config: Skip2Config
+  config: SkipMenuConfig
 ) => {
   if (elements.length === 0) {
     return null;

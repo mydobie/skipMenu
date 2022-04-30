@@ -2,10 +2,6 @@
 
 - Do calculations to determine if menu should be updated
 
-- Remove menu entirely (not sure why this is needed)
-
-- Add code to see if refresh is needed based on content changes
-
 - Create readme
 
   - Then add code to attach to the menu
@@ -17,7 +13,7 @@
 
 - Add action files
 
-- Rename repo - something not too close to skip2 - skipMenu
+- Rename repo - something not too close to skipMenu - skipMenu
 
 - Add option to change all labels
 
@@ -36,24 +32,3 @@
 - Add delay in showing tooltip
 
 - When completely removing the menu (via remove), remove listeners
-
-TESTS
-
-- X Menu changes when dom changes automatically
-
-- X Menu changes when update is called
-
-- X Menu open, menu close
-
-- X Menu remove
-
-- X Tooltips / access key
-
-- X Empty headers and landmarks
-
-// Files needed
-
-- tooltip (add too Navigation should work)
-
-  - Access key works
-  - Tooltip shows on focus but not on open menu

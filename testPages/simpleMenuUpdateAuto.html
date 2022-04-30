@@ -10,7 +10,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link href="dist/css/skip2-bootstrap.css" rel="stylesheet" />
+    <link href="dist/css/skipMenu-bootstrap.css" rel="stylesheet" />
     <title>Simple Menu test</title>
     <style>
       *:focus {
@@ -48,7 +48,9 @@
     </div>
   </div>
   <ul>
-    <li><button id="openMenu" class="skip2-do-not-close">Open Menu</button></li>
+    <li>
+      <button id="openMenu" class="skipMenu-do-not-close">Open Menu</button>
+    </li>
     <li><button id="closeMenu">Close Menu</button></li>
     <li><button id="removeMenu">Remove menu</button></li>
   </ul>
@@ -72,26 +74,26 @@
     <li><button id="removeBoth">Remove both</button></li>
   </ul>
 
-  <script src="dist/js/skip2.js"></script>
+  <script src="dist/js/skipMenu.js"></script>
   <script>
-    const skip2 = new Skip2({ reloadOnChange: true });
-    skip2.init();
+    const skipMenu = new SkipMenu({ reloadOnChange: true });
+    skipMenu.init();
 
     // ************** Open/Close ******************
     document.getElementById('openMenu').addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      skip2.open();
+      skipMenu.open();
     });
 
     document.getElementById('closeMenu').addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      skip2.close();
+      skipMenu.close();
     });
 
     document.getElementById('removeMenu').addEventListener('click', () => {
-      skip2.remove();
+      skipMenu.remove();
     });
     // ************** Modify Headers ******************
     document

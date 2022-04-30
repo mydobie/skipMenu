@@ -12,7 +12,7 @@ export const isVisible = (el: HTMLElement): boolean => {
   return isVisible(el.parentNode as HTMLElement);
 };
 
-export const focusNextElement = (menuButtonId = 'skip2_button'): void => {
+export const focusNextElement = (menuButtonId = 'skipMenu_button'): void => {
   const canHaveFocus =
     'a:not([disabled]), button:not([disabled]), input[type=text]:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])';
 

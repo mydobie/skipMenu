@@ -20,9 +20,9 @@ const jsDir = 'js';
 // COMPRESS A GIVEN LIST OF FILES
 entry = {
   // List all js/css/scss you want compressed
-  skip2: './js/skip2.ts',
-  base: ['./scss/skip2.scss'],
-  bootstrap: ['./scss/skip2-bootstrap.scss'],
+  skipMenu: './js/skipMenu.ts',
+  base: ['./scss/skipMenu.scss'],
+  bootstrap: ['./scss/skipMenu-bootstrap.scss'],
 };
 
 // COMPRESS ALL FILES IN A DIRECTORY
@@ -87,7 +87,7 @@ module.exports = {
       // both options are optional
       // filename: `css/[name].${gitCommit}.css`,
       // chunkFilename: `css/[id].${gitCommit}.css`,
-      filename: `css/skip2-[name].css`,
+      filename: `css/skipMenu-[name].css`,
       chunkFilename: `css/[id].css`,
     }),
     new EventHooksPlugin({

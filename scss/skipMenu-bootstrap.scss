@@ -1,6 +1,7 @@
-@import 'skip2-base';
+/* stylelint-disable selector-id-pattern, selector-class-pattern */
+@import 'skipMenu-base';
 
-#skip2 {
+#skipMenu {
   [role='menu'] {
     display: none;
     position: absolute;

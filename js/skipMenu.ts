@@ -1,8 +1,8 @@
-import { createSkip2Button, closeMenu, openMenu } from './skip2Button';
-import { buildMenu } from './skip2Menu';
+import { createskipMenuButton, closeMenu, openMenu } from './button';
+import { buildMenu } from './menu';
 import { addCloseMenuOnClick, addDomChangeListener } from './eventListeners';
 
-export type Skip2Config = {
+export type SkipMenuConfig = {
   id: string;
   attachTo: HTMLElement;
   showOnLoad: boolean;
@@ -16,11 +16,11 @@ export type Skip2Config = {
   addAccessKey: boolean;
   accessKey: string;
 };
-class Skip2 {
-  config: Skip2Config;
-  constructor(config: Skip2Config) {
-    const defaultConfig: Skip2Config = {
-      id: 'skip2',
+class SkipMenu {
+  config: SkipMenuConfig;
+  constructor(config: SkipMenuConfig) {
+    const defaultConfig: SkipMenuConfig = {
+      id: 'skipMenu',
       attachTo: document.getElementsByTagName('body')[0],
       showOnLoad: true,
       headers: 'h1, h2, h3, h4, h5, h6, [role=heading]',
@@ -55,19 +55,19 @@ class Skip2 {
   }
 
   _add() {
-    // builds the skip2 container
-    const skip2 = document.createDocumentFragment();
-    const skip2Wrapper = document.createElement('div');
-    skip2.appendChild(skip2Wrapper);
+    // builds the skipMenu container
+    const skipMenu = document.createDocumentFragment();
+    const skipMenuWrapper = document.createElement('div');
+    skipMenu.appendChild(skipMenuWrapper);
 
-    skip2Wrapper.id = this.config.id;
+    skipMenuWrapper.id = this.config.id;
     if (!this.config.showOnLoad) {
-      skip2Wrapper.classList.add('skip2-hidden');
+      skipMenuWrapper.classList.add('skipMenu-hidden');
     }
 
     // builds the button
-    const skip2Button = createSkip2Button(this.config);
-    skip2Wrapper.appendChild(skip2Button);
+    const skipMenuButton = createskipMenuButton(this.config);
+    skipMenuWrapper.appendChild(skipMenuButton);
 
     const menu = buildMenu(this.config);
 
@@ -80,8 +80,8 @@ class Skip2 {
     }
 
     // Append menu items and attach event listeners
-    skip2Wrapper.appendChild(menu);
-    this.config.attachTo.prepend(skip2Wrapper);
+    skipMenuWrapper.appendChild(menu);
+    this.config.attachTo.prepend(skipMenuWrapper);
   }
 
   update() {
@@ -108,13 +108,13 @@ class Skip2 {
   }
 
   remove() {
-    const skip2 = document.getElementById(this.config.id);
-    if (skip2) {
-      skip2.remove();
+    const skipMenu = document.getElementById(this.config.id);
+    if (skipMenu) {
+      skipMenu.remove();
     }
   }
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-window.Skip2 = Skip2;
+window.SkipMenu = SkipMenu;

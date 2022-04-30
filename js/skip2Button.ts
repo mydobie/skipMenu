@@ -114,10 +114,20 @@ export const createSkip2Button = (config: Skip2Config) => {
     const skip2ToolTip = toolTip(config);
     if (skip2ToolTip) {
       skip2Button.addEventListener('focus', () => {
-        skip2ToolTip.style.opacity = '1';
+        if (skip2Button.getAttribute('aria-expanded') === 'false') {
+          skip2ToolTip.style.display = 'block';
+        }
       });
       skip2Button.addEventListener('blur', () => {
-        skip2ToolTip.style.opacity = '0';
+        skip2ToolTip.style.display = 'none';
+      });
+      skip2Button.addEventListener('mouseover', () => {
+        if (skip2Button.getAttribute('aria-expanded') === 'false') {
+          skip2ToolTip.style.display = 'block';
+        }
+      });
+      skip2Button.addEventListener('mouseout', () => {
+        skip2ToolTip.style.display = 'none';
       });
 
       buttonWrapper.appendChild(skip2ToolTip);

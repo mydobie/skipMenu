@@ -52,23 +52,8 @@ TESTS
 - X Empty headers and landmarks
 
 // Files needed
-  
-
-- auto update
-
-  - add headers
-  - change headers
-  - add landmark
-  - change landmarks
-  - remove (and then add header when autoupdate is set)
-  - Empty
-  - remove headers
-  - remove landmarks (but add headers back)
-  - remove both
 
 - tooltip (add too Navigation should work)
 
   - Access key works
   - Tooltip shows on focus but not on open menu
-
-

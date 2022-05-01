@@ -7,21 +7,13 @@
   - Then add code to attach to the menu
   - Provide an example using Bootstrap
 
-- rename menuSection
-
 - create compiled file headers
 
 - Add action files
 
-- Rename repo - something not too close to skipMenu - skipMenu
-
-- Add option to change all labels
-
 - Change so main menu css doesn't depend on id
 
 - Add container role as option
-
-- Landmark labels as config
 
 - close menu on escape
 

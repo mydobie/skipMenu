@@ -41,13 +41,13 @@ export const buildMenu = (config: SkipMenuConfig): DocumentFragment => {
   // attach the sections
   const headerSection = buildMenuSection(
     document.querySelectorAll(config.headers),
-    'Headings',
+    config.text.headingsLabel,
     `${config.id}_headings`,
     config
   );
   const landmarkSection = buildMenuSection(
     document.querySelectorAll(config.landmarks),
-    'Landmarks',
+    config.text.landmarksLabel,
     `${config.id}_landmarks`,
     config
   );

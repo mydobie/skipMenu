@@ -6,23 +6,9 @@ describe('Build initial menu ', () => {
     // change event listener is off
     // defaults are used
     cy.visit('/simpleMenuDefault.html');
-    cy.contains('Skip To Content').click();
+    cy.contains('Skip to content').click();
     cy.get('#skipMenu_menu').should('be.visible');
     cy.get('#skipMenu_menu').should('have.attr', 'role', 'menu');
-
-    // headers = cy
-    //   .get('#skipMenu_menu')
-    //   .find('#skipMenu_headings')
-    //   .find('[role="menuitem"]');
-
-    // headers.should('have.length', 13);
-
-    // landmarks = cy
-    //   .get('#skipMenu_menu')
-    //   .find('#skipMenu_landmarks')
-    //   .find('[role="menuitem"]');
-
-    // landmarks.should('have.length', 17);
   });
   beforeEach(() => {
     cy.get('#skipMenu_menu')

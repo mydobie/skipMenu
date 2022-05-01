@@ -42,7 +42,7 @@ export const closeMenu = (
   }
 };
 
-const toolTipText = (accessKey: string): string => {
+const toolTipText = (accessKey: string, startText: string): string => {
   if (isTouchEnabled()) {
     return null;
   }
@@ -53,7 +53,7 @@ const toolTipText = (accessKey: string): string => {
   const isOpera = /(opera|opr)/.test(userAgent);
   const fireFox = /(firefox)/.test(userAgent);
 
-  let text = 'Shortcut: ';
+  let text = startText;
   if (isMac && isOpera) {
     text += 'Control + Alt';
   } else if (isMac) {
@@ -70,7 +70,10 @@ const toolTipText = (accessKey: string): string => {
 };
 
 const toolTip = (config: SkipMenuConfig): HTMLElement | null => {
-  const toolTipTextString = toolTipText(config.accessKey);
+  const toolTipTextString = toolTipText(
+    config.accessKey,
+    config.text.tooltipLabel
+  );
   if (!toolTipTextString) {
     return null;
   }
@@ -82,7 +85,10 @@ const toolTip = (config: SkipMenuConfig): HTMLElement | null => {
   tooltip.appendChild(tooltipArrow);
   const tooltipInner = document.createElement('div');
   tooltipInner.classList.add('tooltip-inner');
-  tooltipInner.textContent = toolTipText(config.accessKey);
+  tooltipInner.textContent = toolTipText(
+    config.accessKey,
+    config.text.tooltipLabel
+  );
   tooltip.appendChild(tooltipInner);
   return tooltip;
 };
@@ -95,7 +101,7 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
   skipMenuButton.setAttribute('aria-controls', config.menuId);
   skipMenuButton.classList.add('btn', 'btn-secondary');
   skipMenuButton.id = config.buttonId;
-  skipMenuButton.textContent = 'Skip To Content';
+  skipMenuButton.textContent = config.text.buttonLabel;
 
   skipMenuButton.addEventListener('click', (e) => {
     e.stopPropagation();

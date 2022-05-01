@@ -11,10 +11,19 @@ export type SkipMenuConfig = {
   headers?: string;
   tooltipId?: string;
   landmarks?: string;
-  buttonContent?: string | HTMLElement;
   reloadOnChange: boolean;
   addAccessKey: boolean;
   accessKey: string;
+  text?: {
+    buttonLabel?: string;
+    headingsLabel?: string;
+    landmarksLabel?: string;
+    tooltipLabel?: string;
+    controlKeyLabel?: string;
+    optionKeyLabel?: string;
+    altKeyLabel?: string;
+    shiftKeyLabel?: string;
+  };
 };
 class SkipMenu {
   config: SkipMenuConfig;
@@ -29,8 +38,22 @@ class SkipMenu {
       reloadOnChange: false,
       addAccessKey: false,
       accessKey: '0',
+      text: {
+        buttonLabel: 'Skip to content',
+        headingsLabel: 'Headings',
+        landmarksLabel: 'Landmarks',
+        tooltipLabel: 'Shortcut: ',
+        controlKeyLabel: 'Control',
+        optionKeyLabel: 'Option',
+        altKeyLabel: 'Alt',
+        shiftKeyLabel: 'Shift',
+      },
     };
     this.config = { ...defaultConfig, ...config };
+
+    if (config?.text) {
+      this.config.text = { ...defaultConfig.text, ...config.text };
+    }
     this.config.menuId = this.config.id + '_menu';
     this.config.buttonId = this.config.id + '_button';
     this.config.tooltipId = this.config.id + '_tooltip';

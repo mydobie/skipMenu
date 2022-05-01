@@ -1,5 +1,7 @@
 /*global cy before*/
 
+const buttonText = 'Skip to content';
+
 describe('Navigation', () => {
   before(() => {
     // This a simple list of headers and landmarks
@@ -7,18 +9,18 @@ describe('Navigation', () => {
     // defaults are used
     cy.visit('/simpleMenuNav.html');
     cy.get('#skipMenu_menu').should('not.be.visible');
-    cy.contains('Skip To Content').click();
+    cy.contains(buttonText).click();
     cy.get('#skipMenu_menu').should('be.visible');
     cy.get('#skipMenu_menu').find('[role="menuitem"]').should('have.length', 4);
   });
   beforeEach(() => {
     cy.get('#skipMenu_menu').then(($menu) => {
       if (!$menu.is(':visible')) {
-        cy.contains('Skip To Content').click();
+        cy.contains(buttonText).click();
       }
     });
     cy.get('#skipMenu_menu').find('[role="menuitem"]').as('menuItems');
-    cy.contains('Skip To Content').as('skipMenuButton');
+    cy.contains(buttonText).as('skipMenuButton');
   });
 
   it('When menu opens, the first element has focus', () => {

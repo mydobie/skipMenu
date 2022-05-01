@@ -133,10 +133,6 @@ export const buildMenuSection = (
   if (elements.length === 0) {
     return null;
   }
-
-  // if (sectionTitle === 'Landmarks') {
-  //   return null;
-  // }
   const container = document.createElement('div');
   container.setAttribute('role', 'group');
   container.id = sectionId;

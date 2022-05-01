@@ -8,7 +8,7 @@ describe('Navigation', () => {
     cy.visit('/toolTip.html');
   });
   beforeEach(() => {
-    cy.contains('Skip To Content').as('skipMenuButton');
+    cy.contains('Skip to content').as('skipMenuButton');
     cy.get('#skipMenu_menu').as('skipMenuMenu');
     cy.get('#skipMenu_tooltip').as('skipMenuTooltip');
     cy.get('@skipMenuMenu').then(($menu) => {

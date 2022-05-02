@@ -1,7 +1,12 @@
 import { SkipMenuConfig } from './skipMenu';
 import { buildMenuSection } from './menuSection';
+import { closeMenu } from './button';
 
-const menuItemsEvent = (menu: HTMLElement): HTMLElement => {
+const menuItemsEvent = (
+  menu: HTMLElement,
+  config: SkipMenuConfig
+): HTMLElement => {
+  // const menu = document
   const menuItems = menu.querySelectorAll('[role="menuitem"]');
   menuItems.forEach((item, index) => {
     (item as HTMLElement).tabIndex = -1;
@@ -23,6 +28,9 @@ const menuItemsEvent = (menu: HTMLElement): HTMLElement => {
             (menuItems[menuItems.length - 1] as HTMLElement).focus();
           }
         }
+      }
+      if (e.key === 'Escape') {
+        closeMenu(config);
       }
     });
   });
@@ -64,7 +72,7 @@ export const buildMenu = (config: SkipMenuConfig): DocumentFragment => {
 
   // attach the events
   if (headerSection !== null || landmarkSection !== null) {
-    menuItemsEvent(menu);
+    menuItemsEvent(menu, config);
     return menuWrapper;
   }
   return null;

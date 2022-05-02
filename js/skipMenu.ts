@@ -5,15 +5,16 @@ import { addCloseMenuOnClick, addDomChangeListener } from './eventListeners';
 export type SkipMenuConfig = {
   id: string;
   attachTo: HTMLElement;
-  showOnLoad: boolean;
+  showOnLoad: boolean; // This need to be changed to alwaysShow
   buttonId?: string;
   menuId?: string;
   headers?: string;
   tooltipId?: string;
   landmarks?: string;
   reloadOnChange: boolean;
-  addAccessKey: boolean;
+  addAccessKey: boolean; // change to useAccessKey
   accessKey: string;
+  // tabIndex
   text?: {
     buttonLabel?: string;
     headingsLabel?: string;

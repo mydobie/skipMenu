@@ -1,9 +1,12 @@
 /node_modules
 .DS_Store
 /.vscode
-# NOTE this is added by the build script
+
 /dist 
 /testPages/dist
+/archive
 
 /cypress/videos
-/cypres/screenshots
+/cypress/screenshots
+
+npmAuditReport.json

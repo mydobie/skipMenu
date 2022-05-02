@@ -39,6 +39,7 @@ export const closeMenu = (
     if (!keepVisibleOnClose && !config.showOnLoad) {
       document.getElementById(config.id).classList.add('skipMenu-hidden');
     }
+    button.focus();
   }
 };
 
@@ -108,6 +109,7 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
     e.preventDefault();
     toggleMenu(config, true);
   });
+
   if (!config.showOnLoad) {
     skipMenuButton.addEventListener('focus', () => {
       document.getElementById(config.id).classList.remove('skipMenu-hidden');

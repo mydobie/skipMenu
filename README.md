@@ -21,7 +21,7 @@ In order for skiMenu to work, you need to download the files and add them to you
 In the head section of your HTML file, add the following:
 
 ```html
-<link rel="stylesheet" href="/path-to/skipMenu.css" />
+<link rel="stylesheet" href="/path-to/skipMenu-full.css" />
 <script src="/path-to/skipMenu.js"></script>
 ```
 

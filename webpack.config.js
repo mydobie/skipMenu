@@ -21,7 +21,7 @@ const jsDir = 'js';
 entry = {
   // List all js/css/scss you want compressed
   skipMenu: './js/skipMenu.ts',
-  base: ['./scss/skipMenu.scss'],
+  full: ['./scss/skipMenu-full.scss'],
   bootstrap: ['./scss/skipMenu-bootstrap.scss'],
 };
 

@@ -9,18 +9,12 @@
 
 - create compiled file headers
 
-- Add action files
-
 - Change so main menu css doesn't depend on id
 
 - Add container role as option
 
-- close menu on escape
-
 - For headings, add aria-label
 
 - For menu group, add aria-labeledby
-
-- Add delay in showing tooltip
 
 - When completely removing the menu (via remove), remove listeners

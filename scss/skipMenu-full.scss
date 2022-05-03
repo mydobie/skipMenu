@@ -1,7 +1,7 @@
 /* stylelint-disable selector-id-pattern, selector-class-pattern */
 @import 'skipMenu-base';
 
-#skipMenu {
+[data-skip-menu] {
   [role='menu'] {
     display: none;
     position: absolute;

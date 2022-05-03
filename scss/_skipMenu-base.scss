@@ -1,5 +1,5 @@
 /* stylelint-disable selector-id-pattern, selector-class-pattern */
-#skipMenu {
+[data-skip-menu] {
   position: absolute;
   left: 100px;
 

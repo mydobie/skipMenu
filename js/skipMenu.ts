@@ -85,6 +85,7 @@ class SkipMenu {
     skipMenu.appendChild(skipMenuWrapper);
 
     skipMenuWrapper.id = this.config.id;
+    skipMenuWrapper.setAttribute('data-skip-menu', 'true');
     if (!this.config.showOnLoad) {
       skipMenuWrapper.classList.add('skipMenu-hidden');
     }

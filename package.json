@@ -2,7 +2,7 @@
   "name": "includes_and_webpack_demo",
   "version": "0.0.1",
   "description": "",
-  "repository": "",
+  "repository": "https://github.com/mydobie/skipMenu",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.17.8",

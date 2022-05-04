@@ -71,29 +71,33 @@ const landMarkType = (element: HTMLElement) => {
       return 'Complementary';
     case 'header':
       return 'Banner';
-    case 'c':
+    case 'footer':
       return 'Footer';
   }
   return null;
 };
 
-const getMenuItemText = (element: HTMLElement) => {
+const getMenuItemText = (element: HTMLElement, isHeader: boolean) => {
   const landmark = landMarkType(element);
   let text = '';
   if (element.hasAttribute('aria-label')) {
     text = element.getAttribute('aria-label');
   } else if (element.hasAttribute('aria-labelledby')) {
-    text = document.getElementById(
-      element.getAttribute('aria-labelledby')
-    ).innerText;
+    text = document
+      .getElementById(element.getAttribute('aria-labelledby'))
+      .innerText.trim();
   } else if (element.hasAttribute('title')) {
     text = element.getAttribute('title');
   }
 
   if (landmark) {
     return text ? `${landmark}: ${text}` : landmark;
+  } else if (isHeader) {
+    const headerText = text || element.innerText;
+    return headerText.trim();
   } else {
-    return text ? text : element.innerText;
+    // unsure what this is, return tagname
+    return element.tagName.toLocaleLowerCase();
   }
 };
 
@@ -105,7 +109,11 @@ const buildMenuItem = (
   config: SkipMenuConfig
 ) => {
   let listItem = document.createElement('div');
-  let listItemText = getMenuItemText(element);
+  let listItemText = getMenuItemText(element, !!depth);
+
+  if (!listItemText || listItemText === '') {
+    return null;
+  }
 
   if (depth) {
     listItem.className = `${config.id}-menu-header-level-${depth}`;
@@ -151,9 +159,12 @@ export const buildMenuSection = (
       if (!isFocusable(element as HTMLElement)) {
         (element as HTMLElement).tabIndex = -1;
       }
-      container.appendChild(
-        buildMenuItem(element as HTMLElement, depth, config)
-      );
+      const menuItem = buildMenuItem(element as HTMLElement, depth, config);
+      if (menuItem) {
+        container.appendChild(
+          buildMenuItem(element as HTMLElement, depth, config)
+        );
+      }
     }
   });
   return container;

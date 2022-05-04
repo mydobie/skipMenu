@@ -2,7 +2,16 @@
 
 ## Description:
 
-Plugin for any webpage to automatically create a menu allowing users to easily navigate to major parts of the page.
+Plugin for any webpage to automatically create a menu allowing users to easily navigate to major parts of the page. This allows you automatically add an accessible "skip to content" link(s).
+
+This project was heavily inspired by the [SkipTo Project](https://github.com/paypal/skipto), but includes:
+
+- Separation of typescript and css for easier styling custimization
+- Use Bootstrap classes for styling (but can also be used without Bootstrap)
+- Separation of typescript into multiple files for easier development
+- Use of webpack to build and bundle files
+- Linting
+- Unit testing via Cypress
 
 [See a skipMenu in action](https://mydobie.github.io/skipMenu/)
 
@@ -10,13 +19,13 @@ Plugin for any webpage to automatically create a menu allowing users to easily n
 
 ### Download files
 
-Both the JavaScript and CSS files are available for download for each release on [releases page](https://github.com/mydobie/featureFlags/releases).
+Both the JavaScript and CSS files are available for download for each release on [releases page](https://github.com/mydobie/skipMenu/releases).
 
 ---
 
 ## Using skipMenu on your website
 
-In order for skiMenu to work, you need to download the files and add them to your project. Once that is done, include both the `skipMenu.js` and `skipMenu.css` files in your HTML file.
+In order for skiMenu to work, you need to download the files and add them to your project. Once that is done, include both the `skipMenu.js` and a `skipMenu.css` files in your HTML file. There are two css files, one for sites that use Bootstrap (`skipMenu-bootstrap.css`) and one for sites that do not (`skipMenu-full.css`).
 
 In the head section of your HTML file, add the following:
 
@@ -62,7 +71,7 @@ NOTE: All options are optional.
             <td>id</td>
             <td>string</td>
             <td>`skipMenu`</td>
-            <td>Id tied to the menu.</td>
+            <td>Id tied to the menu.  Note that you must set the id if you have multiple skipMenus on a single page.</td>
         </tr>
         <tr>
             <td>attachTo</td>
@@ -80,13 +89,13 @@ NOTE: All options are optional.
             <td>headers</td>
             <td>string</td>
             <td>`h1, h2, h3, h4, h5, h6, [role=heading]`</td>
-            <td>Query string of items to show in the headings section of the menu.</td>
+            <td>Query string of items to show in the headings section of the menu.  If no headers are found, that section is not included in the menu.  If neither the headers or landmark have items, the menu and its button will not be shown.</td>
         </tr>
         <tr>
             <td>landmarks</td>
             <td>string</td>
             <td>`main, [role=main], [role=search], nav, [role=navigation], section, [role=region],  form, aside, [role=complementary], body > header, [role=banner], body > footer, [role=contentinfo]`</td>
-            <td>Query string of items to show in the landmarks section of the menu.</td>
+            <td>Query string of items to show in the landmarks section of the menu.  If no landmarks are found, that section is not included in the menu.  If neither the headers or landmark have items, the menu and its button will not be shown.</td>
         </tr>
         <tr>
             <td>reloadOnChange</td>
@@ -284,7 +293,7 @@ At the root of the project run the following commands in a terminal to verify yo
 1.  Verify you can check for lint errors => `npm run lint`
 1.  Verify you can run the tests => `npm run cypress` Note: this will open cypress, but the tests will fail. See testing section below.
 1.  Verify you can check for security advisories => `npm run npmAudit`
-1.  Verify you can build the files => `npm run build`
+1.  Verify you can build the files in watch mode => `npm run build:watch`
 
 ---
 
@@ -301,7 +310,7 @@ The version of the application is done automatically when merging a pull request
 There are special branches that should not be committed to directly.
 
 - `main` - Branch that contains the latest published code. All changes into main should go through a pull request.
-- `gh-pages` - Branch that contains the files for the demo site. Updates to this branch happen automatically when there is a pull request is merged into `main`.
+- `gh-pages` - Branch that contains the files for the demo page. Updates to this branch happen automatically when there is a pull request is merged into `main`.
 
 ---
 
@@ -381,9 +390,9 @@ When a pull request is merged into the `main` branch, the following is automatic
 - Check for high or critical security advisories
 - Unit tests
 - Updates version on package.json (see [CONTRIBUTING for more information](CONTRIBUTING.md))
-- Creates a [release](https://github.com/mydobie/featureFlags/releases)
-- Updates the [demo site](https://mydobie.github.io/featureFlags) on the `gh-pages` branch.
+- Creates a [release](https://github.com/mydobie/skipMenu/releases)
+- Updates the [demo site](https://mydobie.github.io/skipMenu) on the `gh-pages` branch.
 
-**Note** that these series of actions can take a while. Check the [actions page](https://github.com/mydobie/featureFlags/actions) to see if there are any actions still running.
+**Note** that these series of actions can take a while. Check the [actions page](https://github.com/mydobie/skipMenu/actions) to see if there are any actions still running.
 
-**Note** that you will need to manually update the [release](https://github.com/mydobie/featureFlags/releases) text. See [CONTRIBUTING](CONTRIBUTING.md) on what is required for the release text.
+**Note** that you will need to manually update the [release](https://github.com/mydobie/skipMenu/releases) text. See [CONTRIBUTING](CONTRIBUTING.md) on what is required for the release text.

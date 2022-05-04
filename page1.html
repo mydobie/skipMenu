@@ -37,9 +37,10 @@
     <script src="dist/js/skipMenu.js"></script>
     <script>
       const skipMenu = new SkipMenu({
-        showOnLoad: true,
+        alwaysShow: true,
         reloadOnChange: true,
-        addAccessKey: true,
+        useAccessKey: true,
+        tabIndex: 200,
         text: {
           buttonLabel: 'HELLO!',
         },

@@ -38,47 +38,51 @@ const addMenuItemEvents = (
 
 // *****************************************************************************
 
-const landMarkType = (element: HTMLElement) => {
+const landMarkType = (element: HTMLElement, config: SkipMenuConfig) => {
   const tag = element.tagName;
   const role = element.getAttribute('role');
 
   switch (role) {
     case 'main':
-      return 'Main';
+      return config.text.mainLabel;
     case 'search':
-      return 'Search';
+      return config.text.searchLabel;
     case 'navigation':
-      return 'Navigation';
+      return config.text.navigationLabel;
     case 'region':
-      return 'Region';
+      return config.text.regionLabel;
     case 'complementary':
-      return 'Complementary';
+      return config.text.complementaryLabel;
     case 'banner':
-      return 'Banner';
+      return config.text.bannerLabel;
     case 'contentinfo':
-      return 'Footer';
+      return config.text.footerLabel;
   }
   switch (tag.toLowerCase()) {
     case 'main':
-      return 'Main';
+      return config.text.mainLabel;
     case 'nav':
-      return 'Navigation';
+      return config.text.navigationLabel;
     case 'section':
-      return 'Section';
+      return config.text.sectionLabel;
     case 'form':
-      return 'Form';
+      return config.text.formLabel;
     case 'aside':
-      return 'Complementary';
+      return config.text.complementaryLabel;
     case 'header':
-      return 'Banner';
+      return config.text.bannerLabel;
     case 'footer':
-      return 'Footer';
+      return config.text.footerLabel;
   }
   return null;
 };
 
-const getMenuItemText = (element: HTMLElement, isHeader: boolean) => {
-  const landmark = landMarkType(element);
+const getMenuItemText = (
+  element: HTMLElement,
+  isHeader: boolean,
+  config: SkipMenuConfig
+) => {
+  const landmark = landMarkType(element, config);
   let text = '';
   if (element.hasAttribute('aria-label')) {
     text = element.getAttribute('aria-label');
@@ -109,7 +113,7 @@ const buildMenuItem = (
   config: SkipMenuConfig
 ) => {
   let listItem = document.createElement('div');
-  let listItemText = getMenuItemText(element, !!depth);
+  let listItemText = getMenuItemText(element, !!depth, config);
 
   if (!listItemText || listItemText === '') {
     return null;

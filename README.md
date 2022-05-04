@@ -40,7 +40,7 @@ When you create a `new SkipMenu()`, you can pass in an object of options. For ex
 
 ```js
 <script>
-  const skipMenu = new SkipMenu({showOnLoad: true, text:{buttonLabel: 'Skip Menu Shortcuts'}});
+  const skipMenu = new SkipMenu({alwaysShow: true, text:{buttonLabel: 'Skip Menu Shortcuts'}});
   skipMenu.init();
 </script>
 
@@ -71,7 +71,7 @@ NOTE: All options are optional.
             <td>HTML element that the menu should be attached to.  Usually this would be the header or navigation.</td>
         </tr>
         <tr>
-            <td>showOnLoad</td>
+            <td>alwaysShow</td>
             <td>boolean</td>
             <td>true</td>
             <td>If set to `true`, the menu button will will always show.  If set to false, the menu button will only show if has been tabbed to and while it has focus.</td>
@@ -95,7 +95,7 @@ NOTE: All options are optional.
             <td>EXPERIMENTAL.  The menu is automatically rebuild anytime the DOM changes.  This removes the need to call the update method.</td>
        </tr>
         <tr>
-            <td>addAccessKey</td>
+            <td>useAccessKey</td>
             <td>boolean</td>
             <td>false</td>
             <td>If set to true, an accesskey will automatically be added.  In addition, a tooltip will be shown when the button has focus notifying the users how to use the access key.</td>
@@ -104,7 +104,13 @@ NOTE: All options are optional.
             <td>accessKey</td>
             <td>number | string</td>
             <td>0</td>
-            <td>If `addAccessKey` is set to true, this will be the accesskey.</td>
+            <td>If `useAccessKey` is set to true, this will be the accesskey.</td>
+        </tr>
+        <tr>
+            <td>tabIndex</td>
+            <td>number</td>
+            <td></td>
+            <td>Adds the tabindex to the menu button.</td>
         </tr>
         <tr>
             <td>text</td>
@@ -160,6 +166,42 @@ Note: All options are optional.
         <tr>
             <td>shiftKeyLabel</td>
             <td>`Shift`</td>
+        </tr>
+         <tr>
+            <td>mainLabel</td>
+            <td>`Main`</td>
+        </tr>
+         <tr>
+            <td>searchLabel</td>
+            <td>`Search`</td>
+        </tr>
+         <tr>
+            <td>navigationLabel</td>
+            <td>`Navigation`</td>
+        </tr>
+         <tr>
+            <td>regionLabel</td>
+            <td>`Region`</td>
+        </tr>
+         <tr>
+            <td>complementaryLabel</td>
+            <td>`Complementary`</td>
+        </tr>
+         <tr>
+            <td>bannerLabel</td>
+            <td>`Banner`</td>
+        </tr>
+         <tr>
+            <td>footerLabel</td>
+            <td>`Footer`</td>
+        </tr>
+         <tr>
+            <td>sectionLabel</td>
+            <td>`Section`</td>
+        </tr>
+         <tr>
+            <td>formLabel</td>
+            <td>`Form`</td>
         </tr>
       </tbody>
   

@@ -3,18 +3,18 @@ import { buildMenu } from './menu';
 import { addCloseMenuOnClick, addDomChangeListener } from './eventListeners';
 
 export type SkipMenuConfig = {
-  id: string;
-  attachTo: HTMLElement;
-  showOnLoad: boolean; // This need to be changed to alwaysShow
+  id?: string;
+  attachTo?: HTMLElement;
+  alwaysShow?: boolean; // This need to be changed to alwaysShow
   buttonId?: string;
   menuId?: string;
   headers?: string;
   tooltipId?: string;
   landmarks?: string;
-  reloadOnChange: boolean;
-  addAccessKey: boolean; // change to useAccessKey
-  accessKey: string;
-  // tabIndex
+  reloadOnChange?: boolean;
+  useAccessKey?: boolean;
+  accessKey?: string;
+  tabIndex?: number | null;
   text?: {
     buttonLabel?: string;
     headingsLabel?: string;
@@ -24,6 +24,15 @@ export type SkipMenuConfig = {
     optionKeyLabel?: string;
     altKeyLabel?: string;
     shiftKeyLabel?: string;
+    mainLabel?: string;
+    searchLabel?: string;
+    navigationLabel?: string;
+    regionLabel?: string;
+    complementaryLabel?: string;
+    bannerLabel?: string;
+    footerLabel?: string;
+    sectionLabel?: string;
+    formLabel?: string;
   };
 };
 class SkipMenu {
@@ -32,13 +41,14 @@ class SkipMenu {
     const defaultConfig: SkipMenuConfig = {
       id: 'skipMenu',
       attachTo: document.getElementsByTagName('body')[0],
-      showOnLoad: true,
+      alwaysShow: true,
       headers: 'h1, h2, h3, h4, h5, h6, [role=heading]',
       landmarks:
         'main, [role=main], [role=search], nav, [role=navigation], section, [role=region],  form, aside, [role=complementary], body > header, [role=banner], body > footer, [role=contentinfo]',
       reloadOnChange: false,
-      addAccessKey: false,
+      useAccessKey: false,
       accessKey: '0',
+      tabIndex: null,
       text: {
         buttonLabel: 'Skip to content',
         headingsLabel: 'Headings',
@@ -48,6 +58,15 @@ class SkipMenu {
         optionKeyLabel: 'Option',
         altKeyLabel: 'Alt',
         shiftKeyLabel: 'Shift',
+        mainLabel: 'Main',
+        searchLabel: 'Search',
+        navigationLabel: 'Navigation',
+        regionLabel: 'Region',
+        complementaryLabel: 'Complementary',
+        bannerLabel: 'Banner',
+        footerLabel: 'Footer',
+        sectionLabel: 'Section',
+        formLabel: 'Form',
       },
     };
     this.config = { ...defaultConfig, ...config };
@@ -86,7 +105,7 @@ class SkipMenu {
 
     skipMenuWrapper.id = this.config.id;
     skipMenuWrapper.setAttribute('data-skip-menu', 'true');
-    if (!this.config.showOnLoad) {
+    if (!this.config.alwaysShow) {
       skipMenuWrapper.classList.add('skipMenu-hidden');
     }
 

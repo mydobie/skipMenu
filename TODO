@@ -1,20 +1,11 @@
-- Get "other" elements (should be passed as elements then use text and/or aria-label, aria-labled-by)
-
 - Do calculations to determine if menu should be updated
 
-- Create readme
-
-  - Then add code to attach to the menu
-  - Provide an example using Bootstrap
-
 - create compiled file headers
-
-- Change so main menu css doesn't depend on id
-
-- Add container role as option
-
-- For headings, add aria-label
 
 - For menu group, add aria-labeledby
 
 - When completely removing the menu (via remove), remove listeners
+
+- Rename repo
+
+- Add to readme if no elements are found

@@ -36,7 +36,7 @@ export const closeMenu = (
     const button = document.getElementById(config.buttonId);
     button.setAttribute('aria-expanded', 'false');
     menu.style.display = 'none';
-    if (!keepVisibleOnClose && !config.showOnLoad) {
+    if (!keepVisibleOnClose && !config.alwaysShow) {
       document.getElementById(config.id).classList.add('skipMenu-hidden');
     }
     button.focus();
@@ -103,6 +103,9 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
   skipMenuButton.classList.add('btn', 'btn-secondary');
   skipMenuButton.id = config.buttonId;
   skipMenuButton.textContent = config.text.buttonLabel;
+  if (config.tabIndex) {
+    skipMenuButton.tabIndex = config.tabIndex;
+  }
 
   skipMenuButton.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -110,7 +113,7 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
     toggleMenu(config, true);
   });
 
-  if (!config.showOnLoad) {
+  if (!config.alwaysShow) {
     skipMenuButton.addEventListener('focus', () => {
       document.getElementById(config.id).classList.remove('skipMenu-hidden');
     });
@@ -124,7 +127,7 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
 
   buttonWrapper.appendChild(skipMenuButton);
 
-  if (config.addAccessKey) {
+  if (config.useAccessKey) {
     const skipMenuToolTip = toolTip(config);
     if (skipMenuToolTip) {
       skipMenuButton.addEventListener('focus', () => {

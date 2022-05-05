@@ -1,0 +1,55 @@
+/* stylelint-disable selector-id-pattern, selector-class-pattern */
+[data-skip-menu] {
+  position: absolute;
+  left: 100px;
+
+  &.skipMenu-hidden {
+    top: -1000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .tooltip {
+    .tooltip-arrow {
+      left: 1.5rem;
+    }
+
+    opacity: 1;
+    display: none;
+  }
+
+  [role='separator'] {
+    padding: 0.25rem 0.5rem;
+    border-bottom: 1px solid #757575;
+    font-weight: bold;
+  }
+
+  [role='menu'] {
+    box-shadow: 3px 3px 10px #ccc;
+  }
+
+  [role='menuitem'] {
+    cursor: pointer;
+
+    &.skipMenu-menu-header-level-2 {
+      padding-left: 2em;
+    }
+
+    &.skipMenu-menu-header-level-3 {
+      padding-left: 3em;
+    }
+
+    &.skipMenu-menu-header-level-4 {
+      padding-left: 4em;
+    }
+
+    &.skipMenu-menu-header-level-5 {
+      padding-left: 5em;
+    }
+
+    &.skipMenu-menu-header-level-6 {
+      padding-left: 6em;
+    }
+  }
+}

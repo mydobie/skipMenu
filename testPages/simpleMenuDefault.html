@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link href="dist/css/skipMenu-bootstrap.css" rel="stylesheet" />
+    <title>Simple Menu test</title>
+    <style>
+      *:focus {
+        border: 1px solid #f0f;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      This page is filled with landmarks and headers to verify the building of
+      the menu. Only default values are used.
+    </p>
+    <p>
+      Note that this page does not contain valid landmarks or heder positioning.
+      The ordering is purely for testing purposes.
+    </p>
+  </body>
+
+  <!-- HEADERS - The test depend on this order-->
+
+  <h1 aria-label="Aria label heading 1">
+    This title should not be shown in the menu - pull aria-label
+  </h1>
+
+  <p id="heading2label">Aria label heading 2</p>
+  <h2 aria-labelledby="heading2label">
+    This title should not be shown in the menu - pull aria-labelledby
+  </h2>
+
+  <h3 title="Title heading 3">
+    This title should not be shown in the menu - pull title
+  </h3>
+
+  <h1>Heading 1 - tag</h1>
+  <div role="heading" aria-level="1">Heading 1 - aria</div>
+
+  <h2>Heading 2 - tag</h2>
+  <div role="heading" aria-level="2">Heading 2 - aria</div>
+
+  <h3>Heading 3 - tag</h3>
+  <div role="heading" aria-level="3">Heading 3 - aria</div>
+
+  <h4>Heading 4 - tag</h4>
+  <div role="heading" aria-level="4">Heading 4 - aria</div>
+
+  <h5>Heading 5 - tag</h5>
+  <div role="heading" aria-level="5">Heading 5 - aria</div>
+
+  <!-- LANDMARKS - tests depend on this order -->
+  <nav aria-label="Aria label">Nav 1 - Aria label</nav>
+
+  <p id="navAriaLabel">Aria labeled by</p>
+  <nav aria-labelledby="navAriaLabel">Nav 2 - Aria label</nav>
+
+  <nav title="Aria title">Nav 3 - title</nav>
+
+  <nav>Simple nav</nav>
+
+  <main>Main - tag</main>
+  <div role="main">Main - aria</div>
+
+  <div role="search">Search</div>
+
+  <div role="navigation">Nav - aria</div>
+
+  <section>Section</section>
+
+  <div role="region">Region - aria</div>
+
+  <form>Form</form>
+
+  <aside>Aside</aside>
+  <div role="complementary">Complementary - aria</div>
+
+  <header>Banner</header>
+  <div role="banner">Banner - aria</div>
+
+  <footer>Footer</footer>
+  <div role="contentinfo">Content info - aria</div>
+
+  <script src="dist/js/skipMenu.js"></script>
+  <script>
+    const skipMenu = new SkipMenu({});
+    skipMenu.init();
+  </script>
+</html>

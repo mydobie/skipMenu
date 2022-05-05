@@ -1,0 +1,50 @@
+name: Publish Package
+on:
+  workflow_run:
+    workflows:
+      - 'Version and tag'
+    types:
+      - completed
+
+jobs:
+  publish:
+    name: publish module
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+          registry-url: https://npm.pkg.github.com/
+          scope: '@mydobie'
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build Artifact
+        run: node utils/createArchive.js
+
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          # See utils/createArchive.js for the directory and name of file
+          file: archive/skipMenu-${{ steps.package-version.outputs.current-version}}.tgz
+          tag: v${{ steps.package-version.outputs.current-version}}
+
+      - name: Build files
+        run: npm run build
+
+      - name: Deploy to GH pages
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: demoPage
+          CLEAN: true

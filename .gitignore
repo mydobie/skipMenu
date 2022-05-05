@@ -1,0 +1,16 @@
+/node_modules
+.DS_Store
+/.vscode
+
+/dist 
+/testPages/dist
+/archive
+/demoPage/dist
+
+/cypress/videos
+/cypress/screenshots
+
+npmAuditReport.json
+
+TODO
+TODO.md

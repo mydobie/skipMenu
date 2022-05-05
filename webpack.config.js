@@ -149,6 +149,7 @@ module.exports = {
           });
           // copy files
           fs.copySync(`./${outputDir}/`, `./testPages/${outputDir}/`);
+          fs.copySync(`./${outputDir}/`, `./demoPage/${outputDir}/`);
         });
       },
     }),

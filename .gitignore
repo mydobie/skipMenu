@@ -5,6 +5,7 @@
 /dist 
 /testPages/dist
 /archive
+/demoPage/dist
 
 /cypress/videos
 /cypress/screenshots

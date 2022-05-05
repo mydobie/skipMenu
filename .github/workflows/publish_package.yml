@@ -38,13 +38,13 @@ jobs:
           file: archive/skipMenu-${{ steps.package-version.outputs.current-version}}.tgz
           tag: v${{ steps.package-version.outputs.current-version}}
 
-      - name: Build pages
-        run: npm run build:hash
+      - name: Build files
+        run: npm run build
 
       - name: Deploy to GH pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build
+          FOLDER: demoPage
           CLEAN: true

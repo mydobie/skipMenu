@@ -16,14 +16,14 @@ const addMenuItemEvents = (
     event.stopPropagation();
     event.preventDefault();
   });
-  // TODO - move logic to add listeners to a new method
+
   listItem.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      closeMenu(config);
+      (targetElement as HTMLElement).focus();
+    }
     e.stopPropagation();
     e.preventDefault();
-    if (e.key === 'Enter' || e.key === ' ') {
-      (targetElement as HTMLElement).focus();
-      closeMenu(config);
-    }
     if (e.key === 'Tab') {
       closeMenu(config);
       if (e.shiftKey) {
@@ -148,8 +148,10 @@ export const buildMenuSection = (
   const container = document.createElement('div');
   container.setAttribute('role', 'group');
   container.id = sectionId;
+  container.setAttribute('aria-labelledby', `${sectionId}-title`);
   const containerTitle = document.createElement('div');
   containerTitle.setAttribute('role', 'separator');
+  containerTitle.id = `${sectionId}-title`;
   containerTitle.appendChild(document.createTextNode(sectionTitle));
   container.appendChild(containerTitle);
 

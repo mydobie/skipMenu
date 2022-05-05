@@ -14,23 +14,61 @@ export const isVisible = (el: HTMLElement): boolean => {
 
 export const focusNextElement = (menuButtonId = 'skipMenu_button'): void => {
   const canHaveFocus =
-    'a:not([disabled]), button:not([disabled]), input[type=text]:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])';
+    'a:not([disabled]), button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])';
 
   const focusableElements = document.querySelectorAll(canHaveFocus);
-  const index = Array.from(focusableElements).findIndex((el) =>
+  const buttonIndex = Array.from(focusableElements).findIndex((el) =>
     el.isEqualNode(document.getElementById(menuButtonId))
   );
+  const buttonTabIndex = document.getElementById(menuButtonId).tabIndex || 0;
 
-  let next = index + 1;
-  while (
-    next < focusableElements.length &&
-    !isVisible(focusableElements[next] as HTMLElement)
-  ) {
-    next = next + 1;
+  /*
+  If buttonIndex === 0 then find next tabIndex of 0
+    If non is found, then done
+
+  If buttonIndex > 0 then find next tabIndex >= buttonIndex
+    If non is found, then  start at beginning looking for tabIndex === 0
+  */
+
+  let nextElement;
+  if (buttonTabIndex === 0) {
+    for (
+      let i = buttonIndex + 1;
+      i < focusableElements.length && !nextElement;
+      i++
+    ) {
+      if (
+        isVisible(focusableElements[i] as HTMLElement) &&
+        (focusableElements[i] as HTMLElement).tabIndex === 0
+      ) {
+        nextElement = focusableElements[i];
+      }
+    }
+  } else {
+    for (
+      let i = buttonIndex + 1;
+      i < focusableElements.length && !nextElement;
+      i++
+    ) {
+      if (
+        isVisible(focusableElements[i] as HTMLElement) &&
+        (focusableElements[i] as HTMLElement).tabIndex >= buttonTabIndex
+      ) {
+        nextElement = focusableElements[i];
+      }
+    }
+    for (let i = 0; i < buttonIndex && !nextElement; i++) {
+      if (
+        isVisible(focusableElements[i] as HTMLElement) &&
+        (focusableElements[i] as HTMLElement).tabIndex === 0
+      ) {
+        nextElement = focusableElements[i];
+      }
+    }
   }
 
-  if (focusableElements[next]) {
-    (focusableElements[next] as HTMLElement).focus();
+  if (nextElement) {
+    (nextElement as HTMLElement).focus();
   } else {
     document.getElementById(menuButtonId).focus();
   }

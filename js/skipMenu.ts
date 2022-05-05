@@ -15,6 +15,7 @@ export type SkipMenuConfig = {
   useAccessKey?: boolean;
   accessKey?: string;
   tabIndex?: number | null;
+  isRemoved?: boolean;
   text?: {
     buttonLabel?: string;
     headingsLabel?: string;
@@ -49,6 +50,7 @@ class SkipMenu {
       useAccessKey: false,
       accessKey: '0',
       tabIndex: null,
+      isRemoved: false,
       text: {
         buttonLabel: 'Skip to content',
         headingsLabel: 'Headings',
@@ -97,8 +99,11 @@ class SkipMenu {
     this._add();
   }
 
-  _add() {
+  _add(): void | null {
     // builds the skipMenu container
+    if (this.config.isRemoved) {
+      return null;
+    }
     const skipMenu = document.createDocumentFragment();
     const skipMenuWrapper = document.createElement('div');
     skipMenu.appendChild(skipMenuWrapper);
@@ -139,7 +144,7 @@ class SkipMenu {
       this._add();
     }
     if (!updatedMenu && currentMenu) {
-      this.remove();
+      this._remove();
     }
   }
 
@@ -151,11 +156,16 @@ class SkipMenu {
     closeMenu(this.getConfig());
   }
 
-  remove() {
+  _remove() {
     const skipMenu = document.getElementById(this.config.id);
     if (skipMenu) {
       skipMenu.remove();
     }
+  }
+
+  remove() {
+    this.config.isRemoved = true;
+    this._remove();
   }
 }
 

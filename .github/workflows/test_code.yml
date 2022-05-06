@@ -17,11 +17,11 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-      - name: Linting
-        run: npm run lint
-
       - name: Security audit
         run: npm run npmAudit
+
+      - name: Linting
+        run: npm run lint
 
       - name: Build files
         run: npm run build

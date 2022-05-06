@@ -16,6 +16,7 @@ export type SkipMenuConfig = {
   accessKey?: string;
   tabIndex?: number | null;
   isRemoved?: boolean;
+  ignoreClass?: string;
   text?: {
     buttonLabel?: string;
     headingsLabel?: string;
@@ -51,6 +52,7 @@ class SkipMenu {
       accessKey: '0',
       tabIndex: null,
       isRemoved: false,
+      ignoreClass: 'skipMenu-ignore',
       text: {
         buttonLabel: 'Skip to content',
         headingsLabel: 'Headings',

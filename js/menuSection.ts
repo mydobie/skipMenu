@@ -115,7 +115,11 @@ const buildMenuItem = (
   let listItem = document.createElement('div');
   let listItemText = getMenuItemText(element, !!depth, config);
 
-  if (!listItemText || listItemText === '') {
+  if (
+    !listItemText ||
+    listItemText === '' ||
+    element.classList.contains(config.ignoreClass)
+  ) {
     return null;
   }
 

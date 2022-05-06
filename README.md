@@ -116,6 +116,12 @@ NOTE: All options are optional.
             <td>If `useAccessKey` is set to true, this will be the accesskey.</td>
         </tr>
         <tr>
+            <td>ignoreClass</td>
+            <td>string</td>
+            <td>skipMenu-ignore</td>
+            <td>Any item with this class will be ignored and not added to the menu.</td>
+        </tr>
+        <tr>
             <td>tabIndex</td>
             <td>number</td>
             <td></td>

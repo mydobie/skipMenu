@@ -1,7 +1,10 @@
 /* stylelint-disable selector-id-pattern, selector-class-pattern */
 [data-skip-menu] {
   position: absolute;
-  left: 100px;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 999;
+  top: 0;
 
   &.skipMenu-hidden {
     top: -1000px;

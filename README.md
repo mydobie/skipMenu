@@ -6,12 +6,13 @@ Plugin for any webpage to automatically create a menu allowing users to easily n
 
 This project was heavily inspired by the [SkipTo Project](https://github.com/paypal/skipto), but includes:
 
-- Separation of typescript and css for easier styling custimization
-- Use Bootstrap classes for styling (but can also be used without Bootstrap)
+- Separation of typescript and css for easier styling customization
+- Use of Bootstrap classes (but can also be used without Bootstrap)
 - Separation of typescript into multiple files for easier development
 - Use of webpack to build and bundle files
 - Linting
 - Unit testing via Cypress
+- Methods to update menu when the page is changed, so your menu can always be up to date
 
 [See a skipMenu in action](https://mydobie.github.io/skipMenu/)
 
@@ -25,7 +26,7 @@ Both the JavaScript and CSS files are available for download for each release on
 
 ## Using skipMenu on your website
 
-In order for skiMenu to work, you need to download the files and add them to your project. Once that is done, include both the `skipMenu.js` and a `skipMenu.css` files in your HTML file. There are two css files, one for sites that use Bootstrap (`skipMenu-bootstrap.css`) and one for sites that do not (`skipMenu-full.css`).
+In order for skipMenu to work, you need to download the files and add them to your project. Once that is done, include both the `skipMenu.js` and a `skipMenu.css` files in your HTML file. There are two css files, one for sites that use Bootstrap (`skipMenu-bootstrap.css`) and one for sites that do not (`skipMenu-full.css`).
 
 In the head section of your HTML file, add the following:
 
@@ -101,7 +102,7 @@ NOTE: All options are optional.
             <td>reloadOnChange</td>
             <td>boolean</td>
             <td>false</td>
-            <td>EXPERIMENTAL.  The menu is automatically rebuild anytime the DOM changes.  This removes the need to call the update method.</td>
+            <td>EXPERIMENTAL.  The menu is automatically rebuild anytime the DOM changes.  This replaces the need to call the update method.</td>
        </tr>
         <tr>
             <td>useAccessKey</td>
@@ -138,7 +139,7 @@ NOTE: All options are optional.
 
 ### Labeling Options
 
-In order to support internalization and customization, you can pass in an object of options for custom labels.
+In order to support internationalization and customization, you can pass in an object of options for custom labels.
 
 Note: All options are optional.
 
@@ -288,7 +289,7 @@ SkipMenu.version
 
 # Developing
 
-If you want to modify how the menu works, the following section describes how to setup the development tools. Note, pull requests are welcome.
+If you want to modify how the menu works, the following section describes how to setup the development tools. Pull requests are always welcome.
 
 ## Get me started:
 
@@ -305,7 +306,7 @@ At the root of the project run the following commands in a terminal to verify yo
 
 ## Project structure
 
-All of the files that will be built are located in the `js` and `scss` directories. All other files are demo or test pages and development config files.
+All of the files that will be built are located in the `js` and `scss` directories. All other files are demo pages, test pages and development config files.
 
 ## Versioning
 
@@ -322,7 +323,7 @@ There are special branches that should not be committed to directly.
 
 ## Node
 
-The only requirement is that development system has Node.js installed. You can verify you have node installed by running `node -v` in a terminal.
+The only requirement is that your development system has Node.js installed. You can verify you have node installed by running `node -v` in a terminal.
 
 NOTE: The development tools require a node version listed in the `engines` section of the `package.json` file.
 
@@ -370,7 +371,7 @@ To build the dist files that can be used on a web page run `npm run build`. If y
 
 This repository uses numerous GitHub actions to run tests, build files, and create tags. Many of these actions will happen automatically, but some of them can be run manually.
 
-The status of any actions can be viewed on the [actions page](https://github.com/mydobie/featureFlags/actions). The action files are located in the `.github/workflows` directory.
+The status of any actions can be viewed on the [actions page](https://github.com/mydobie/skipMenu/actions). The action files are located in the `.github/workflows` directory.
 
 ### Run tests
 
@@ -383,7 +384,7 @@ All pull requests will have the following tests run:
 
 If you want to run these tests against another branch, you can do the following at any time:
 
-1. Go to [the test code actions page](https://github.com/mydobie/featureFlags/actions/workflows/test_code.yml) and click "Run workflow" drop down.
+1. Go to [the test code actions page](https://github.com/mydobie/skipMenu/actions/workflows/test_code.yml) and click "Run workflow" drop down.
 1. Choose the branch you want to run the tests against.
 
 If you get a "Workflow does not exist or does not have a workflow_dispatch trigger in this branch" warning, be sure that the `.github/workflows/test_and_build.yml` file exists on the branch.
@@ -401,4 +402,4 @@ When a pull request is merged into the `main` branch, the following is automatic
 
 **Note** that these series of actions can take a while. Check the [actions page](https://github.com/mydobie/skipMenu/actions) to see if there are any actions still running.
 
-**Note** that you will need to manually update the [release](https://github.com/mydobie/skipMenu/releases) text. See [CONTRIBUTING](CONTRIBUTING.md) on what is required for the release text.
+**Note** that approvers will need to manually update the [release](https://github.com/mydobie/skipMenu/releases) text. See [CONTRIBUTING](CONTRIBUTING.md) on what is required for the release text.

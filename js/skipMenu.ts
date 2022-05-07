@@ -15,7 +15,7 @@ export type SkipMenuConfig = {
   useAccessKey?: boolean;
   accessKey?: string;
   tabIndex?: number | null;
-  isRemoved?: boolean;
+  isRemoved?: boolean; // This is used internally and should not be called directly
   ignoreClass?: string;
   text?: {
     buttonLabel?: string;
@@ -51,7 +51,7 @@ class SkipMenu {
       useAccessKey: false,
       accessKey: '0',
       tabIndex: null,
-      isRemoved: false,
+      isRemoved: false, // This is used internally and should not be called directly
       ignoreClass: 'skipMenu-ignore',
       text: {
         buttonLabel: 'Skip to content',
@@ -73,6 +73,7 @@ class SkipMenu {
         formLabel: 'Form',
       },
     };
+
     this.config = { ...defaultConfig, ...config };
 
     if (config?.text) {

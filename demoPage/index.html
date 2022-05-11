@@ -234,6 +234,8 @@
           document.getElementById('newHeaderButton').style.display = 'none';
           document.getElementById('removeHeaderButton').style.display = 'block';
           skipMenu.update();
+          // There is a known issue where update is a fraction of a second to
+          // complete building menu
           setTimeout(() => {
             skipMenu.open();
           }, 10);

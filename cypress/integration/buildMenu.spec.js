@@ -2,9 +2,6 @@
 
 describe('Build initial menu ', () => {
   before(() => {
-    // This a simple list of headers and landmarks
-    // change event listener is off
-    // defaults are used
     cy.visit('/simpleMenuDefault.html');
     cy.contains('Skip to content').click();
     cy.get('#skipMenu_menu').should('be.visible');

@@ -140,8 +140,9 @@ class SkipMenu {
     const currentMenu = document.getElementById(this.config.menuId);
     const updatedMenu = buildMenu(this.config);
     if (currentMenu && updatedMenu) {
-      const currentMenu = document.getElementById(this.config.menuId);
+      currentMenu.setAttribute('aria-busy', 'true');
       currentMenu.parentNode.replaceChild(updatedMenu, currentMenu);
+      currentMenu.setAttribute('aria-busy', 'false');
     }
     if (updatedMenu && !currentMenu) {
       this._add();

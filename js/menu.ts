@@ -37,10 +37,10 @@ const menuItemsEvent = (
   return menu;
 };
 
-export const buildMenu = (config: SkipMenuConfig): DocumentFragment => {
+export const buildMenu = (config: SkipMenuConfig): HTMLElement => {
   // build the actual menu
-  const menuWrapper = document.createDocumentFragment(); // This probably isn't needed
   const menu = document.createElement('div');
+  menu.setAttribute('aria-live', 'off');
   menu.setAttribute('role', 'menu');
   menu.classList.add('dropdown-menu');
   menu.style.display = 'none';
@@ -68,12 +68,10 @@ export const buildMenu = (config: SkipMenuConfig): DocumentFragment => {
     menu.appendChild(headerSection);
   }
 
-  menuWrapper.appendChild(menu);
-
   // attach the events
   if (headerSection !== null || landmarkSection !== null) {
     menuItemsEvent(menu, config);
-    return menuWrapper;
+    return menu;
   }
   return null;
 };

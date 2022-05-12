@@ -36,6 +36,7 @@ export type SkipMenuConfig = {
     sectionLabel?: string;
     formLabel?: string;
   };
+  ensureAbsoluteParent?: boolean;
 };
 class SkipMenu {
   config: SkipMenuConfig;
@@ -72,6 +73,7 @@ class SkipMenu {
         sectionLabel: 'Section',
         formLabel: 'Form',
       },
+      ensureAbsoluteParent: true,
     };
 
     this.config = { ...defaultConfig, ...config };
@@ -133,6 +135,18 @@ class SkipMenu {
 
     // Append menu items and attach event listeners
     skipMenuWrapper.appendChild(menu);
+
+    const attachToStyles = window.getComputedStyle(this.config.attachTo);
+
+    if (
+      this.config.ensureAbsoluteParent &&
+      this.config.attachTo.tagName.toLocaleLowerCase() !== 'body' &&
+      !['sticky', 'absolute', 'fixed', 'relative', '-webkit-sticky'].some(
+        (style) => style === attachToStyles.getPropertyValue('position')
+      )
+    ) {
+      this.config.attachTo.style.position = 'relative';
+    }
     this.config.attachTo.prepend(skipMenuWrapper);
   }
 

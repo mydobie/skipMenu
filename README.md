@@ -129,6 +129,11 @@ NOTE: All options are optional.
             <td>Adds the tabindex to the menu button.</td>
         </tr>
         <tr>
+            <td>ensureAbsoluteParent</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>If the parent element (attachTo value) of the menu does not have a position of `relative`, `absolute`, `fixed` or `sticky`, the parent's position will be set to `relative` to ensure the menu displays correctly.</td>
+        <tr>
             <td>text</td>
             <td>object</td>
             <td></td>

@@ -102,7 +102,7 @@ NOTE: All options are optional.
             <td>reloadOnChange</td>
             <td>boolean</td>
             <td>false</td>
-            <td>EXPERIMENTAL.  The menu is automatically rebuild anytime the DOM changes.  This replaces the need to call the update method.</td>
+            <td>EXPERIMENTAL.  The menu is automatically rebuild anytime the DOM changes.  This replaces the need to call the update method. If more than one skipMenu is on the page and set to reloadOnChange, this will cause an infinite looping.  To avoid this issue, only have one skipMenu per page.</td>
        </tr>
         <tr>
             <td>useAccessKey</td>

@@ -31,7 +31,9 @@ export const addDomChangeListener = (
           mutation.attributeName !== 'tabindex' &&
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-ignore
-          mutation.addedNodes[0]?.data !== '\n\n'
+          mutation.addedNodes[0]?.data !== '\n\n' &&
+          (mutation.target as HTMLElement).id !== config.id &&
+          (mutation.target as HTMLElement).id !== config.menuId
         ) {
           update();
         }

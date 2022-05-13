@@ -13,67 +13,130 @@
       crossorigin="anonymous"
     />
 
-    <link href="dist/css/skipMenu-bootstrap.css" rel="stylesheet" />
+    <link href="../dist/css/skipMenu-full.css" rel="stylesheet" />
     <style>
-      #skipMenu {
-        left: 50%;
-        transform: translate(-50%);
-        z-index: 999;
-      }
       *:focus {
-        border: 2px solid #f0f;
+        box-shadow: 0 0 5px #f0f;
+      }
+      #header {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        width: 100%;
+      }
+      #header .h5 {
+        padding-top: 1.25rem;
+      }
+      .code-block {
+        margin-bottom: 15px;
+      }
+      code {
+        color: inherit;
       }
     </style>
 
     <title>SkipMenu</title>
   </head>
   <body>
-    <header class="card text-white bg-dark mb-3">
+    <header class="card text-white bg-dark mb-3" id="header">
       <div class="card-body">
         <h1 class="h5">SkipMenu Demo Page</h1>
       </div>
     </header>
-    <main class="container">
-      <h2>Hello, world!</h2>
+    <main class="container" id="main">
+      <h2>About</h2>
 
-      <form aria-labelledby="button-addon2">
-        <div class="input-group mb-3">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search for"
-            aria-label="Search for"
-            aria-describedby="button-addon2"
-          />
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            id="button-addon2"
-          >
-            Search page
-          </button>
+      <p>
+        <a
+          href="https://github.com/mydobie/skipMenu"
+          class="btn btn-outline-secondary"
+          ><img src="GitHub-Mark-32px.png" alt="" /> View me on GitHub!</a
+        >
+      </p>
+      <div class="alert alert-primary" id="version">
+        <a href="" class="alert-link">Download version <span></span></a>
+      </div>
+      <p>
+        SkipMenu is a drop-down menu containing links to major places on your
+        web page. While helping all users, it is especially helpful to users
+        using a keyboard to navigate the web. Use it as a replacement for
+        traditional 'skip to content' links.
+      </p>
+
+      <p>
+        Just add SkipMenu's Javascript and CSS files to your webpage. It
+        automatically detects and adds links to all the headings and landmarks
+        on your webpage. Webpage content changes? - no problem. Automatically
+        update the menu by calling the `update` method or use the experimental
+        config setting to automatically detect DOM changes.
+      </p>
+
+      <h2>How do I add it to my webpage?</h2>
+      <p>
+        The first step is to download the files from the
+        <a href="https://github.com/mydobie/skipMenu/releases"
+          >GitHub releases</a
+        >
+        page or use the downlink above.
+      </p>
+
+      <p>Then add the following to the head section of your HTML file:</p>
+      <div class="card bg-light code-block">
+        <div class="card-body">
+          <code>
+            &lt;link rel="stylesheet" href="/path-to/skipMenu-full.css" /&gt;<br />
+            &lt;script src="/path-to/skipMenu.js"&gt; &lt;/script&gt;
+          </code>
         </div>
-      </form>
+      </div>
 
       <p>
-        Cupcake ipsum dolor sit amet cotton candy muffin. Gummies topping I love
-        biscuit I love jelly beans jelly beans. Halvah lemon drops pie I love
-        cupcake brownie. I love sugar plum shortbread marshmallow pie chupa
-        chups tart. Tart gummi bears tootsie roll tootsie roll marzipan. Oat
-        cake topping I love chupa chups bear claw I love sugar plum tiramisu
-        topping. Fruitcake tiramisu pie halvah chocolate cake. Tart sweet roll
-        lollipop shortbread jujubes gummies sweet I love.
+        The next step is to add the skipMenu to your webpage. Put the following
+        at the bottom of the <code>body</code> tag or call it after the DOM is
+        ready.
       </p>
-      <h3>Another heading</h3>
+
+      <div class="card bg-light code-block">
+        <div class="card-body">
+          <code>
+            &lt;script &gt; <br />
+            &nbsp; &nbsp;const skipMenu = new SkipMenu({ useAccessKey: true,
+            attachTo: document.querySelector('header'), }); <br />
+            &nbsp; &nbsp; skipMenu.init(); <br />
+            &lt;/script&gt;
+          </code>
+        </div>
+      </div>
+
+      <h3>Configuration</h3>
       <p>
-        Wafer gummi bears jelly-o donut halvah. Liquorice gummies dessert I love
-        gummies caramels lemon drops I love. Danish bonbon cotton candy tart I
-        love croissant chupa chups sweet. I love sesame snaps pie I love
-        cheesecake bonbon ice cream. Jelly-o cake gummi bears candy canes I
-        love. Caramels chocolate cake I love liquorice dessert apple pie
-        caramels pie. Sugar plum wafer chocolate bar bear claw tiramisu.
+        There are numerous configuration settings that support
+        internationalization, determining what headings and landmarks are added
+        to the menu along with many others. See the
+        <a id="readMeURL">GitHub repo</a>
+        for more configuration options.
       </p>
-      <h2></h2>
+
+      <h2>Try it out</h2>
+
+      <ol>
+        <li>
+          Tab to the "Skip to content" button and use either the space or
+          enter/return key to open the menu
+        </li>
+        <li>Use the up and arrow keys to choose an item</li>
+        <li>
+          Use either the enter/return or space key to go to that item, or the
+          tab key to close the menu.
+        </li>
+      </ol>
+
+      <p>
+        You can update the menu any time by calling the
+        <code>update()</code> method. Try clicking the button below and notice
+        that the newly added header is added to the menu.
+      </p>
       <div id="newHeader"></div>
       <p>
         <button type="button" class="btn btn-primary" id="newHeaderButton">
@@ -88,25 +151,94 @@
           Clear new header
         </button>
       </p>
+      <p>Example code when calling the update method:</p>
+
+      <div class="card bg-light code-block">
+        <div class="card-body">
+          <code>
+            document<br />
+            &nbsp; &nbsp;.getElementById('newHeaderButton')<br />
+            &nbsp; &nbsp;.addEventListener('click', () => {<br />
+            &nbsp; &nbsp;&nbsp;
+            &nbsp;document.getElementById('newHeader').innerHTML = '&lt;h2&gt;My
+            new header&lt;/h2&gt;';<br />
+            &nbsp; &nbsp;&nbsp; &nbsp;skipMenu.update();<br />
+            &nbsp; &nbsp;});
+          </code>
+        </div>
+      </div>
+
+      <h3>Styling</h3>
+      <p>
+        SkipMenu uses standard Bootstrap classes, so it can be easily
+        incorporated into a site that is already using Bootstrap. Otherwise,
+        stylings can be easily over written by using the data attribute attached
+        to the skipMenu wrapper. For example, the following code would move the
+        button to the left part of the screen and turn the button purple.
+      </p>
+      <div class="card bg-light code-block">
+        <div class="card-body">
+          <code>
+            &lt;style&gt;<br />
+            &nbsp; &nbsp;[data-skip-menu] {<br />
+            &nbsp; &nbsp;&nbsp; &nbsp;left: 20px;<br />
+            &nbsp; &nbsp;&nbsp; &nbsp;transform: none;<br />
+            &nbsp; &nbsp; }<br />
+            &nbsp; &nbsp; [data-skip-menu] button {<br />
+            &nbsp; &nbsp;&nbsp; &nbsp; background-color: rgb(133, 4, 133);<br />
+            &nbsp; &nbsp; }<br />
+            &lt;/style&gt;
+          </code>
+        </div>
+      </div>
     </main>
     <footer class="card text-white bg-secondary mb-3">
-      <div class="card-body">This is the footer</div>
+      <div class="card-body">SkipMenu by Kim Doberstein</div>
     </footer>
 
-    <script src="dist/js/skipMenu.js"></script>
+    <script src="../dist/js/skipMenu.js"></script>
     <script>
-      const skipMenu = new SkipMenu();
+      const skipMenu = new SkipMenu({
+        useAccessKey: true,
+        attachTo: document.querySelector('header'),
+      });
       skipMenu.init();
+
+      // Add version
+      const version = SkipMenu.version;
+      if (version) {
+        document.querySelector('#version span').innerHTML = version;
+        document
+          .querySelector('#version a')
+          .setAttribute(
+            'href',
+            `https://github.com/mydobie/skipMenu/releases/download/${version}/skipMenu-${
+              version.split('v')[1]
+            }.tgz`
+          );
+      }
+
+      document
+        .getElementById('readMeURL')
+        .setAttribute(
+          'href',
+          `https://github.com/mydobie/skipMenu/blob/${version}/README.md#options`
+        );
 
       // Add new header
       document
         .getElementById('newHeaderButton')
         .addEventListener('click', () => {
           document.getElementById('newHeader').innerHTML =
-            '<h2>My new header</h2>';
+            '<h2 class="h5">My new header</h2>';
           document.getElementById('newHeaderButton').style.display = 'none';
           document.getElementById('removeHeaderButton').style.display = 'block';
           skipMenu.update();
+          // There is a known issue where update is a fraction of a second to
+          // complete building menu
+          setTimeout(() => {
+            skipMenu.open();
+          }, 10);
         });
 
       document

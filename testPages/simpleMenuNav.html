@@ -16,6 +16,10 @@
       *:focus {
         border: 1px solid #f0f;
       }
+      [data-skip-menu] {
+        left: 0;
+        transform: none;
+      }
     </style>
   </head>
   <body>
@@ -31,6 +35,7 @@
   <main>
     <h1>Heading 1</h1>
     <h2 tabindex="10">Heading 2</h2>
+    <h3 class="skipMenu-ignore">Heading 3 - This should be ignored</h3>
   </main>
 
   <button role="heading" aria-level="2">Focusable element</button>

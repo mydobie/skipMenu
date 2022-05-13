@@ -122,4 +122,11 @@ describe('Navigation', () => {
     cy.get('body').click();
     cy.get('#skipMenu_menu').should('not.be.visible');
   });
+
+  it('Items with ignore class are not added to the menu', () => {
+    cy.get('h3.skipMenu-ignore').should('exist');
+    cy.get('#skipMenu_menu')
+      .contains('This should be ignored')
+      .should('not.exist');
+  });
 });

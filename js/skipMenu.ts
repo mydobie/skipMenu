@@ -15,7 +15,8 @@ export type SkipMenuConfig = {
   useAccessKey?: boolean;
   accessKey?: string;
   tabIndex?: number | null;
-  isRemoved?: boolean;
+  isRemoved?: boolean; // This is used internally and should not be called directly
+  ignoreClass?: string;
   text?: {
     buttonLabel?: string;
     headingsLabel?: string;
@@ -35,6 +36,7 @@ export type SkipMenuConfig = {
     sectionLabel?: string;
     formLabel?: string;
   };
+  ensureAbsoluteParent?: boolean;
 };
 class SkipMenu {
   config: SkipMenuConfig;
@@ -50,7 +52,8 @@ class SkipMenu {
       useAccessKey: false,
       accessKey: '0',
       tabIndex: null,
-      isRemoved: false,
+      isRemoved: false, // This is used internally and should not be called directly
+      ignoreClass: 'skipMenu-ignore',
       text: {
         buttonLabel: 'Skip to content',
         headingsLabel: 'Headings',
@@ -70,7 +73,9 @@ class SkipMenu {
         sectionLabel: 'Section',
         formLabel: 'Form',
       },
+      ensureAbsoluteParent: true,
     };
+
     this.config = { ...defaultConfig, ...config };
 
     if (config?.text) {
@@ -130,15 +135,29 @@ class SkipMenu {
 
     // Append menu items and attach event listeners
     skipMenuWrapper.appendChild(menu);
+
+    const attachToStyles = window.getComputedStyle(this.config.attachTo);
+
+    if (
+      this.config.ensureAbsoluteParent &&
+      this.config.attachTo.tagName.toLocaleLowerCase() !== 'body' &&
+      !['sticky', 'absolute', 'fixed', 'relative', '-webkit-sticky'].some(
+        (style) => style === attachToStyles.getPropertyValue('position')
+      )
+    ) {
+      this.config.attachTo.style.position = 'relative';
+    }
     this.config.attachTo.prepend(skipMenuWrapper);
   }
 
   update() {
     const currentMenu = document.getElementById(this.config.menuId);
     const updatedMenu = buildMenu(this.config);
+
     if (currentMenu && updatedMenu) {
-      const currentMenu = document.getElementById(this.config.menuId);
-      currentMenu.parentNode.replaceChild(updatedMenu, currentMenu);
+      currentMenu.setAttribute('aria-busy', 'true');
+      currentMenu.replaceWith(updatedMenu);
+      currentMenu.setAttribute('aria-busy', 'false');
     }
     if (updatedMenu && !currentMenu) {
       this._add();

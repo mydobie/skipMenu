@@ -1,5 +1,7 @@
 /*global cy before*/
-const urls = [/*'simpleMenuUpdateAuto',*/ 'simpleMenuUpdateManual'];
+const urls = ['simpleMenuUpdateAuto', 'simpleMenuUpdateManual'];
+//const urls = ['simpleMenuUpdateAuto'];
+// const urls = ['simpleMenuUpdateManual'];
 
 urls.forEach((url) => {
   describe(`Update ${url}`, () => {
@@ -9,7 +11,6 @@ urls.forEach((url) => {
     beforeEach(() => {
       cy.reload();
       cy.get('#skipMenu_button').as('menuButton');
-      cy.get('@menuButton').click(); // Open menu
       cy.get('#skipMenu_headings').find('[role="menuitem"]').as('menuHeadings');
       cy.get('#skipMenu_landmarks')
         .find('[role="menuitem"]')
@@ -17,11 +18,19 @@ urls.forEach((url) => {
     });
 
     it('close and open menu', () => {
-      cy.get('#skipMenu_menu').should('be.visible');
+      cy.get('#skipMenu').should('exist');
+      cy.get('#skipMenu_button').click({ force: true }); // Open menu
+
+      //   cy.get('#skipMenu_menu').should('be.visible'); // There is an issue with cyress on auto test
+      cy.get('#skipMenu_button').should('have.attr', 'aria-expanded', 'true');
+
       cy.get('#closeMenu').click(); // Close menu
-      cy.get('#skipMenu_menu').should('not.be.visible');
+      //cy.get('#skipMenu_menu').should('not.be.visible'); // There is an issue with cyress on auto test
+      cy.get('#skipMenu_button').should('have.attr', 'aria-expanded', 'false');
+
       cy.get('#openMenu').click(); // Open menu
-      cy.get('#skipMenu_menu').should('be.visible');
+      //cy.get('#skipMenu_menu').should('be.visible'); // There is an issue with cyress on auto test
+      cy.get('#skipMenu_button').should('have.attr', 'aria-expanded', 'true');
     });
 
     it('Remove menu', () => {

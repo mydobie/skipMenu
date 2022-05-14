@@ -20,8 +20,8 @@ export const openMenu = (config: SkipMenuConfig) => {
   const menu = document.getElementById(config.menuId);
   if (menu) {
     const button = document.getElementById(config.buttonId);
-    button.setAttribute('aria-expanded', 'true');
     menu.style.display = 'block';
+    button.setAttribute('aria-expanded', 'true');
     const firstItem = menu.querySelector('[role="menuitem"]');
     (firstItem as HTMLElement).focus();
   }

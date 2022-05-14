@@ -27,152 +27,168 @@
       Note that this page does not contain valid landmarks or heder positioning.
       The ordering is purely for testing purposes.
     </p>
-  </body>
-  <div id="headings">
-    <h1 id="changeHeaderTag">This is a tag header</h1>
-    <div
-      role="heading"
-      aria-level="1"
-      id="changeHeaderRole"
-      aria-label="This is a role header"
-    >
-      This is a role header (do not show - aria-label is set)
+
+    <div id="headings">
+      <h1 id="changeHeaderTag">This is a tag header</h1>
+      <div
+        role="heading"
+        aria-level="1"
+        id="changeHeaderRole"
+        aria-label="This is a role header"
+      >
+        This is a role header (do not show - aria-label is set)
+      </div>
     </div>
-  </div>
-  <div id="landmarks">
-    <nav aria-label="Arial label nav" id="changeLandmarkTag">
-      This is the tag navigation
-    </nav>
-    <div role="navigation" aria-label="Aria role nav" id="changeLandmarkRole">
-      This is the aria role navigation
+    <div id="landmarks">
+      <nav aria-label="Arial label nav" id="changeLandmarkTag">
+        This is the tag navigation
+      </nav>
+      <div role="navigation" aria-label="Aria role nav" id="changeLandmarkRole">
+        This is the aria role navigation
+      </div>
     </div>
-  </div>
-  <ul>
-    <li>
-      <button id="openMenu" class="skipMenu-do-not-close">Open Menu</button>
-    </li>
-    <li><button id="closeMenu">Close Menu</button></li>
-    <li><button id="removeMenu">Remove menu</button></li>
-  </ul>
-  <ul>
-    <li><button id="editHeaderTagText">Edit Header Tag Text</button></li>
-    <li><button id="editHeaderAriaText">Edit Header Aria Text</button></li>
-    <li><button id="editHeaderAriaLevel">Edit Header Aria Level</button></li>
-    <li><button id="addHeaderTag">Add Header Tag</button></li>
-    <li><button id="addHeaderAria">Add Header Aria</button></li>
-  </ul>
-  <ul>
-    <li><button id="editNavAriaText">Edit Nav Aria Text</button></li>
-    <li><button id="editLandmarkRole">Edit landmark role</button></li>
-    <li><button id="addLandmarkTag">Add Landmark Tag</button></li>
-    <li><button id="addLandmarkAria">Add Landmark Aria</button></li>
-  </ul>
+    <div id="planText"></div>
+    <ul>
+      <li>
+        <button id="openMenu" class="skipMenu-do-not-close">Open Menu</button>
+      </li>
+      <li><button id="closeMenu">Close Menu</button></li>
+      <li><button id="removeMenu">Remove menu</button></li>
+      <li><button id="addText">Add text</button></li>
+    </ul>
+    <ul>
+      <li><button id="editHeaderTagText">Edit Header Tag Text</button></li>
+      <li><button id="editHeaderAriaText">Edit Header Aria Text</button></li>
+      <li><button id="editHeaderAriaLevel">Edit Header Aria Level</button></li>
+      <li><button id="addHeaderTag">Add Header Tag</button></li>
+      <li><button id="addHeaderAria">Add Header Aria</button></li>
+    </ul>
+    <ul>
+      <li><button id="editNavAriaText">Edit Nav Aria Text</button></li>
+      <li><button id="editLandmarkRole">Edit landmark role</button></li>
+      <li><button id="addLandmarkTag">Add Landmark Tag</button></li>
+      <li><button id="addLandmarkAria">Add Landmark Aria</button></li>
+    </ul>
 
-  <ul>
-    <li><button id="removeHeaders">Remove Headers</button></li>
-    <li><button id="removeLandmarks">Remove Landmarks</button></li>
-    <li><button id="removeBoth">Remove both</button></li>
-  </ul>
+    <ul>
+      <li><button id="removeHeaders">Remove Headers</button></li>
+      <li><button id="removeLandmarks">Remove Landmarks</button></li>
+      <li><button id="removeBoth">Remove both</button></li>
+    </ul>
 
-  <script src="dist/js/skipMenu.js"></script>
-  <script>
-    const skipMenu = new SkipMenu({ reloadOnChange: true });
-    skipMenu.init();
+    <script src="dist/js/skipMenu.js"></script>
+    <script>
+      const skipMenu = new SkipMenu({ reloadOnChange: true });
+      skipMenu.init();
 
-    // ************** Open/Close ******************
-    document.getElementById('openMenu').addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      skipMenu.open();
-    });
-
-    document.getElementById('closeMenu').addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      skipMenu.close();
-    });
-
-    document.getElementById('removeMenu').addEventListener('click', () => {
-      skipMenu.remove();
-    });
-    // ************** Modify Headers ******************
-    document
-      .getElementById('editHeaderTagText')
-      .addEventListener('click', () => {
-        document.getElementById('changeHeaderTag').innerText =
-          'This is a tag header - changed';
+      // ************** Open/Close ******************
+      document.getElementById('openMenu').addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        skipMenu.open();
       });
 
-    document
-      .getElementById('editHeaderAriaText')
-      .addEventListener('click', () => {
-        document
-          .getElementById('changeHeaderRole')
-          .setAttribute('aria-label', 'This is a role header - changed');
+      document.getElementById('closeMenu').addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        skipMenu.close();
       });
 
-    document
-      .getElementById('editHeaderAriaLevel')
-      .addEventListener('click', () => {
-        document
-          .getElementById('changeHeaderRole')
-          .setAttribute('aria-level', '2');
+      document.getElementById('removeMenu').addEventListener('click', () => {
+        skipMenu.remove();
       });
 
-    document.getElementById('addHeaderTag').addEventListener('click', () => {
-      const headerHTML = document.getElementById('headings').innerHTML;
-      document.getElementById('headings').innerHTML =
-        headerHTML + '<h1>This is a new tag header</h1>';
-    });
-
-    document.getElementById('addHeaderAria').addEventListener('click', () => {
-      const headerHTML = document.getElementById('headings').innerHTML;
-      document.getElementById('headings').innerHTML =
-        headerHTML +
-        '<div role="heading" aria-level="2">This is a new aria header</h1>';
-    });
-
-    // ************** Modify Landmarks ******************
-
-    document.getElementById('editNavAriaText').addEventListener('click', () => {
+      document.getElementById('addText').addEventListener('click', () => {
+        document.getElementById('planText').innerHTML +=
+          '<p>This is a new text</p>';
+      });
+      // ************** Modify Headers ******************
       document
-        .getElementById('changeLandmarkTag')
-        .setAttribute('aria-label', 'Arial label nav - changed');
-    });
+        .getElementById('editHeaderTagText')
+        .addEventListener('click', () => {
+          document.getElementById('changeHeaderTag').innerText =
+            'This is a tag header - changed';
+        });
 
-    document
-      .getElementById('editLandmarkRole')
-      .addEventListener('click', () => {
-        document
-          .getElementById('changeLandmarkRole')
-          .setAttribute('role', 'banner');
+      document
+        .getElementById('editHeaderAriaText')
+        .addEventListener('click', () => {
+          document
+            .getElementById('changeHeaderRole')
+            .setAttribute('aria-label', 'This is a role header - changed');
+        });
+
+      document
+        .getElementById('editHeaderAriaLevel')
+        .addEventListener('click', () => {
+          document
+            .getElementById('changeHeaderRole')
+            .setAttribute('aria-level', '2');
+        });
+
+      document.getElementById('addHeaderTag').addEventListener('click', () => {
+        const headerHTML = document.getElementById('headings').innerHTML;
+        document.getElementById('headings').innerHTML =
+          headerHTML + '<h1>This is a new tag header</h1>';
       });
 
-    document.getElementById('addLandmarkTag').addEventListener('click', () => {
-      const headerHTML = document.getElementById('landmarks').innerHTML;
-      document.getElementById('landmarks').innerHTML =
-        headerHTML + '<aside>I am an aside</aside>';
-    });
+      document.getElementById('addHeaderAria').addEventListener('click', () => {
+        const headerHTML = document.getElementById('headings').innerHTML;
+        document.getElementById('headings').innerHTML =
+          headerHTML +
+          '<div role="heading" aria-level="2">This is a new aria header</h1>';
+      });
 
-    document.getElementById('addLandmarkAria').addEventListener('click', () => {
-      const headerHTML = document.getElementById('landmarks').innerHTML;
-      document.getElementById('landmarks').innerHTML =
-        headerHTML + '<div role="region">I am a region</div>';
-    });
+      // ************** Modify Landmarks ******************
 
-    // ************** Remove headers/landmarks ******************
+      document
+        .getElementById('editNavAriaText')
+        .addEventListener('click', () => {
+          document
+            .getElementById('changeLandmarkTag')
+            .setAttribute('aria-label', 'Arial label nav - changed');
+        });
 
-    document.getElementById('removeHeaders').addEventListener('click', () => {
-      document.getElementById('headings').innerHTML = '';
-    });
+      document
+        .getElementById('editLandmarkRole')
+        .addEventListener('click', () => {
+          document
+            .getElementById('changeLandmarkRole')
+            .setAttribute('role', 'banner');
+        });
 
-    document.getElementById('removeLandmarks').addEventListener('click', () => {
-      document.getElementById('landmarks').innerHTML = '';
-    });
+      document
+        .getElementById('addLandmarkTag')
+        .addEventListener('click', () => {
+          const headerHTML = document.getElementById('landmarks').innerHTML;
+          document.getElementById('landmarks').innerHTML =
+            headerHTML + '<aside>I am an aside</aside>';
+        });
 
-    document.getElementById('removeBoth').addEventListener('click', () => {
-      document.getElementById('headings').innerHTML = '';
-      document.getElementById('landmarks').innerHTML = '';
-    });
-  </script>
+      document
+        .getElementById('addLandmarkAria')
+        .addEventListener('click', () => {
+          const headerHTML = document.getElementById('landmarks').innerHTML;
+          document.getElementById('landmarks').innerHTML =
+            headerHTML + '<div role="region">I am a region</div>';
+        });
+
+      // ************** Remove headers/landmarks ******************
+
+      document.getElementById('removeHeaders').addEventListener('click', () => {
+        document.getElementById('headings').innerHTML = '';
+      });
+
+      document
+        .getElementById('removeLandmarks')
+        .addEventListener('click', () => {
+          document.getElementById('landmarks').innerHTML = '';
+        });
+
+      document.getElementById('removeBoth').addEventListener('click', () => {
+        document.getElementById('headings').innerHTML = '';
+        document.getElementById('landmarks').innerHTML = '';
+      });
+    </script>
+  </body>
 </html>

@@ -1,4 +1,4 @@
-export const isVisible = (el: HTMLElement): boolean => {
+export const isElementVisible = (el: HTMLElement): boolean => {
   if (el.nodeType === 9 || el.parentElement === null) {
     return true;
   } // is at document level
@@ -9,7 +9,7 @@ export const isVisible = (el: HTMLElement): boolean => {
   if (display === 'none' || visibility === 'hidden' || hidden !== null) {
     return false;
   }
-  return isVisible(el.parentNode as HTMLElement);
+  return isElementVisible(el.parentNode as HTMLElement);
 };
 
 export const focusNextElement = (menuButtonId = 'skipMenu_button'): void => {
@@ -38,7 +38,7 @@ export const focusNextElement = (menuButtonId = 'skipMenu_button'): void => {
       i++
     ) {
       if (
-        isVisible(focusableElements[i] as HTMLElement) &&
+        isElementVisible(focusableElements[i] as HTMLElement) &&
         (focusableElements[i] as HTMLElement).tabIndex === 0
       ) {
         nextElement = focusableElements[i];
@@ -51,7 +51,7 @@ export const focusNextElement = (menuButtonId = 'skipMenu_button'): void => {
       i++
     ) {
       if (
-        isVisible(focusableElements[i] as HTMLElement) &&
+        isElementVisible(focusableElements[i] as HTMLElement) &&
         (focusableElements[i] as HTMLElement).tabIndex >= buttonTabIndex
       ) {
         nextElement = focusableElements[i];
@@ -59,7 +59,7 @@ export const focusNextElement = (menuButtonId = 'skipMenu_button'): void => {
     }
     for (let i = 0; i < buttonIndex && !nextElement; i++) {
       if (
-        isVisible(focusableElements[i] as HTMLElement) &&
+        isElementVisible(focusableElements[i] as HTMLElement) &&
         (focusableElements[i] as HTMLElement).tabIndex === 0
       ) {
         nextElement = focusableElements[i];

@@ -1,4 +1,4 @@
-import { isVisible, focusNextElement, isFocusable } from './utilities';
+import { isElementVisible, focusNextElement, isFocusable } from './utilities';
 import { closeMenu } from './button';
 import { SkipMenuConfig } from './skipMenu';
 
@@ -160,7 +160,7 @@ export const buildMenuSection = (
   container.appendChild(containerTitle);
 
   elements.forEach((element) => {
-    if (isVisible(element as HTMLElement)) {
+    if (isElementVisible(element as HTMLElement)) {
       let depth = parseInt(element.tagName.substring(1));
       if (element.getAttribute('aria-level')) {
         depth = parseInt(element.getAttribute('aria-level'));

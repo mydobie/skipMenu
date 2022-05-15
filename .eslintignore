@@ -7,3 +7,5 @@ npm-cache/
 lint-staged.config.js
 .nyc_output/out.json
 demoPage/dist/**
+
+/js/bookmarklet*

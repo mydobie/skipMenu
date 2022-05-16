@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <link href="dist/css/skipMenu-full.css" rel="stylesheet" />
+    <style>
+      *:focus {
+        box-shadow: 0 0 5px #f0f;
+      }
+      #header {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        width: 100%;
+      }
+      #header .h5 {
+        padding-top: 1.25rem;
+      }
+      .code-block {
+        margin-bottom: 15px;
+      }
+      code {
+        color: inherit;
+      }
+      #bookmarkletLink img,
+      #bookmarkletLinkAuto img {
+        height: 30px;
+      }
+    </style>
+
+    <title>SkipMenu Bookmarklet</title>
+  </head>
+  <body>
+    <header class="card text-white bg-dark mb-3" id="header">
+      <div class="card-body">
+        <h1 class="h5">SkipMenu Bookmarklet</h1>
+      </div>
+    </header>
+    <main class="container" id="main">
+      <h2>About</h2>
+      <p>
+        <a
+          href="https://github.com/mydobie/skipMenu"
+          class="btn btn-outline-secondary"
+          ><img src="GitHub-Mark-32px.png" alt="" /> View me on GitHub!</a
+        >
+        <a href="index.html" class="btn btn-outline-secondary">Demo page</a>
+      </p>
+
+      <p>
+        A bookmarklet allows to add the SkipMenu on any web pages. It is saved
+        like a bookmark and the SkipMenu code is applied in your browser when
+        you activate the bookmark.
+      </p>
+
+      <h2>Bookmarklets</h2>
+
+      <p>
+        <a
+          id="bookmarkletLink"
+          href=""
+          class="btn btn-success"
+          style="display: none"
+          ><img src="noun-bookmark-4803860-FFFFFF.svg" alt="" />SkipMenu
+          <span></span
+        ></a>
+      </p>
+      <p>
+        <a
+          id="bookmarkletLinkAuto"
+          href=""
+          class="btn btn-success"
+          style="display: none"
+          ><img src="noun-bookmark-4803860-FFFFFF.svg" alt="" />SkipMenu Auto
+          Update <span></span
+        ></a>
+        Updated when the page changes.
+      </p>
+      <h3>How to add to your browser</h3>
+      <ul>
+        <li>Open the bookmark toolbar in your browser</li>
+        <li>Drag the SkipMenu on the bookmark toolbar</li>
+        <li>Go to another webpage</li>
+        <li>Click on the SkipMenu bookmark</li>
+        <li>Look for the SkipMenu at the top of the webpage</li>
+      </ul>
+
+      <p>
+        This will open the SkipMenu with the default settings and stylings.
+        There may be conflicts withe site's styles causing styling issues. In
+        addition, there may be issues if the page content is loaded with
+        scrolling.
+      </p>
+    </main>
+    <footer class="card text-white bg-secondary mb-3">
+      <div class="card-body">SkipMenu by Kim Doberstein</div>
+    </footer>
+
+    <script src="dist/js/skipMenu.js"></script>
+    <script>
+      const skipMenu = new SkipMenu({
+        useAccessKey: true,
+        attachTo: document.querySelector('header'),
+      });
+      skipMenu.init();
+
+      // Add version
+      const version = SkipMenu.version;
+      if (version) {
+        // .querySelector('#bookmarkletLink span')
+        document.querySelector('#bookmarkletLink span').textContent = version;
+        document.querySelector('#bookmarkletLinkAuto span').textContent =
+          version;
+      }
+
+      fetch('./dist/js/bookmarklet.js', { method: 'GET' })
+        .then((response) => response.text())
+        .then((data) => {
+          document.querySelector('#bookmarkletLink').setAttribute('href', data);
+          document.querySelector('#bookmarkletLink').style.display =
+            'inline-block';
+        });
+
+      fetch('./dist/js/bookmarkletAuto.js', { method: 'GET' })
+        .then((response) => response.text())
+        .then((data) => {
+          document
+            .querySelector('#bookmarkletLinkAuto')
+            .setAttribute('href', data);
+          document.querySelector('#bookmarkletLinkAuto').style.display =
+            'inline-block';
+        });
+    </script>
+  </body>
+</html>

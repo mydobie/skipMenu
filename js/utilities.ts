@@ -22,14 +22,6 @@ export const focusNextElement = (menuButtonId = 'skipMenu_button'): void => {
   );
   const buttonTabIndex = document.getElementById(menuButtonId).tabIndex || 0;
 
-  /*
-  If buttonIndex === 0 then find next tabIndex of 0
-    If non is found, then done
-
-  If buttonIndex > 0 then find next tabIndex >= buttonIndex
-    If non is found, then  start at beginning looking for tabIndex === 0
-  */
-
   let nextElement;
   if (buttonTabIndex === 0) {
     for (

@@ -84,7 +84,7 @@ NOTE: All options are optional.
             <td>alwaysShow</td>
             <td>boolean</td>
             <td>true</td>
-            <td>If set to `true`, the menu button will will always show.  If set to false, the menu button will only show if has been tabbed to and while it has focus.</td>
+            <td>If set to `true`, the menu button will will always show.  If set to false, the menu button will only show if has been tabbed to and while it has focus.  It is not recommended to set this to true.  Having the menu button can help all users.</td>
         </tr>
         <tr>
             <td>headers</td>
@@ -120,7 +120,7 @@ NOTE: All options are optional.
             <td>ignoreClass</td>
             <td>string</td>
             <td>skipMenu-ignore</td>
-            <td>Any item with this class will be ignored and not added to the menu.</td>
+            <td>Any item with this class will be ignored and not added to the menu. This is normally not recommended.</td>
         </tr>
         <tr>
             <td>tabIndex</td>

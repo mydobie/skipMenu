@@ -5,10 +5,20 @@ export const isElementVisible = (el: HTMLElement): boolean => {
   const computedStyle = window.getComputedStyle(el);
   const display = computedStyle.getPropertyValue('display');
   const visibility = computedStyle.getPropertyValue('visibility');
+  const width = computedStyle.getPropertyValue('width');
+  const height = computedStyle.getPropertyValue('height');
   const hidden = el.getAttribute('hidden');
-  if (display === 'none' || visibility === 'hidden' || hidden !== null) {
+
+  if (
+    display === 'none' ||
+    visibility === 'hidden' ||
+    hidden !== null ||
+    width === '0px' ||
+    height === '0px'
+  ) {
     return false;
   }
+
   return isElementVisible(el.parentNode as HTMLElement);
 };
 

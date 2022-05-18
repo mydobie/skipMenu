@@ -62,6 +62,9 @@
   <!-- empty tag-->
   <h5></h5>
 
+  <!-- ignore me -->
+  <h4 class="ignoreMe">Ignore me</h4>
+
   <!-- hidden headings -->
   <h1 style="display: none">Heading 1 - hidden</h1>
   <h2 style="width: 0; overflow: hidden">Heading 2 - hidden</h2>
@@ -98,9 +101,11 @@
   <footer>Footer</footer>
   <div role="contentinfo">Content info - aria</div>
 
+  <section class="ignoreMe" aria-title="Ignore me">Ignore me</section>
+
   <script src="dist/js/skipMenu.js"></script>
   <script>
-    const skipMenu = new SkipMenu({});
+    const skipMenu = new SkipMenu({ ignoreClass: 'ignoreMe' });
     skipMenu.init();
   </script>
 </html>

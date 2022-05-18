@@ -84,7 +84,7 @@ NOTE: All options are optional.
             <td>alwaysShow</td>
             <td>boolean</td>
             <td>true</td>
-            <td>If set to `true`, the menu button will will always show.  If set to false, the menu button will only show if has been tabbed to and while it has focus.</td>
+            <td>If set to `true`, the menu button will will always show.  If set to false, the menu button will only show if has been tabbed to and while it has focus.  It is not recommended to set this to true.  Having the menu button can help all users.</td>
         </tr>
         <tr>
             <td>headers</td>
@@ -102,7 +102,7 @@ NOTE: All options are optional.
             <td>reloadOnChange</td>
             <td>boolean</td>
             <td>false</td>
-            <td>EXPERIMENTAL.  The menu is automatically rebuild anytime the DOM changes.  This replaces the need to call the update method. If more than one skipMenu is on the page and set to reloadOnChange, this will cause an infinite looping.  To avoid this issue, only have one skipMenu per page.</td>
+            <td>The menu is automatically rebuild anytime the DOM changes.  This replaces the need to call the update method.</td>
        </tr>
         <tr>
             <td>useAccessKey</td>
@@ -120,7 +120,7 @@ NOTE: All options are optional.
             <td>ignoreClass</td>
             <td>string</td>
             <td>skipMenu-ignore</td>
-            <td>Any item with this class will be ignored and not added to the menu.</td>
+            <td>Any item with this class will be ignored and not added to the menu. This is normally not recommended.</td>
         </tr>
         <tr>
             <td>tabIndex</td>
@@ -260,7 +260,7 @@ skipMenu.close()
 
 ### update()
 
-Updates the menu based on the current DOM. It is recommended calling this method anytime DOM changes impact the headers or landmarks. Example:
+Updates the menu based on the current DOM. It is recommended calling this method anytime DOM changes impact the headers or landmarks. NOTE: This should not be called if `reloadOnChange` is set to true. Example:
 
 ```
 skipMenu.update()
@@ -385,7 +385,7 @@ All pull requests will have the following tests run:
 - Linting
 - Check for high or critical security advisories
 - Unit tests
-- Verify that the code can be built as a package
+- Verify that the code can be built
 
 If you want to run these tests against another branch, you can do the following at any time:
 

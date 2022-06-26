@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="patternfly/patternfly.css" rel="stylesheet" />
+
+    <link href="dist/css/skipMenu-patternfly.css" rel="stylesheet" />
+    <style>
+      *:focus {
+        box-shadow: 0 0 5px #f0f;
+      }
+      #header {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        width: 100%;
+        min-height: 70px;
+      }
+      html,
+      body {
+        height: inherit;
+      }
+
+      .pf-c-panel {
+        max-width: 1140px;
+        margin-right: auto;
+        margin-left: auto;
+        padding-top: 1.5rem;
+      }
+      .pf-c-code-block {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 0.85em;
+      }
+    </style>
+
+    <title>SkipMenu</title>
+  </head>
+  <body>
+    <header class="card text-white bg-dark mb-3 pf-c-masthead" id="header">
+      <div class="card-body pf-c-masthead__content">
+        <h1 class="h5">SkipMenu Demo Page - PatternFly</h1>
+      </div>
+    </header>
+    <nav class="pf-c-nav pf-m-tertiary" aria-label="Local">
+      <ul class="pf-c-nav__list">
+        <li class="pf-c-nav__item">
+          <a href="index.html" class="pf-c-nav__link">Bootstrap/Default</a>
+        </li>
+        <li class="pf-c-nav__item">
+          <a href="#" class="pf-c-nav__link pf-m-current" aria-current="page"
+            >PatternFly</a
+          >
+        </li>
+
+        <li class="pf-c-nav__item">
+          <a href="bookmarklet.html" class="pf-c-nav__link">Bookmarklet</a>
+        </li>
+        <li class="pf-c-nav__item version">
+          <a href="#" class="pf-c-nav__link">Download <span></span></a>
+        </li>
+        <li class="pf-c-nav__item">
+          <a href="https://github.com/mydobie/skipMenu" class="pf-c-nav__link"
+            >GitHub</a
+          >
+        </li>
+      </ul>
+      <button
+        class="pf-c-nav__scroll-button"
+        disabled
+        aria-label="Scroll right"
+      >
+        <i class="fas fa-angle-right" aria-hidden="true"></i>
+      </button>
+    </nav>
+
+    <main class="pf-c-panel pf-c-content" id="main">
+      <div class="pf-c-panel__main-body">
+        <h2>About</h2>
+
+        <p>
+          <a
+            href="https://github.com/mydobie/skipMenu"
+            class="pf-c-button pf-m-tertiary"
+            ><img
+              src="GitHub-Mark-32px.png"
+              alt=""
+              style="vertical-align: middle"
+            />
+            View me on GitHub!</a
+          >
+        </p>
+        <div
+          class="pf-c-alert pf-m-info pf-m-inline"
+          style="margin-bottom: 20px"
+        >
+          <div class="pf-c-title version">
+            <a href="">Download version <span></span></a>
+          </div>
+        </div>
+        <p>
+          SkipMenu is a drop-down menu containing links to major places on your
+          web page. While helping all users, it is especially helpful to users
+          using a keyboard to navigate the web. Use it as a replacement for
+          traditional 'skip to content' links.
+        </p>
+
+        <p>
+          Just add SkipMenu's Javascript and CSS files to your webpage. It
+          automatically detects and adds links to all the headings and landmarks
+          on your webpage. Webpage content changes? - no problem. Automatically
+          update the menu by calling the `update` method or use the experimental
+          config setting to automatically detect DOM changes.
+        </p>
+
+        <h2>How do I add it to my webpage?</h2>
+        <p>
+          The first step is to download the files from the
+          <a href="https://github.com/mydobie/skipMenu/releases"
+            >GitHub releases</a
+          >
+          page or use the downlink above.
+        </p>
+
+        <p>Then add the following to the head section of your HTML file:</p>
+        <div class="pf-c-code-block">
+          <div class="pf-c-code-block__content">
+            <code class="">
+              &lt;link rel="stylesheet" href="/path-to/skipMenu-full.css"
+              /&gt;<br />
+              &lt;script src="/path-to/skipMenu.js"&gt; &lt;/script&gt;
+            </code>
+          </div>
+        </div>
+
+        <p>
+          The next step is to add the skipMenu to your webpage. Put the
+          following at the bottom of the <code>body</code> tag or call it after
+          the DOM is ready.
+        </p>
+
+        <div class="pf-c-code-block">
+          <div class="pf-c-code-block__content">
+            <code class="">
+              &lt;script &gt; <br />
+              &nbsp; &nbsp;const skipMenu = new SkipMenu({ useAccessKey: true,
+              attachTo: document.querySelector('header'), }); <br />
+              &nbsp; &nbsp; skipMenu.init(); <br />
+              &lt;/script&gt;
+            </code>
+          </div>
+        </div>
+
+        <h3>Configuration</h3>
+        <p>
+          There are numerous configuration settings that support
+          internationalization, determining what headings and landmarks are
+          added to the menu along with many others. See the
+          <a class="readMeURL">GitHub repo</a>
+          for more configuration options.
+        </p>
+
+        <h2>Try it out</h2>
+
+        <ol>
+          <li>
+            Tab to the "Skip to content" button and use either the space or
+            enter/return key to open the menu
+          </li>
+          <li>Use the up and arrow keys to choose an item</li>
+          <li>
+            Use either the enter/return or space key to go to that item, or the
+            tab key to close the menu.
+          </li>
+        </ol>
+
+        <p>
+          You can update the menu any time by calling the
+          <code>update()</code> method. Try clicking the button below and notice
+          that the newly added header is added to the menu.
+        </p>
+        <div id="newHeader"></div>
+        <p>
+          <button
+            type="button"
+            class="pf-c-button pf-m-primary"
+            id="newHeaderButton"
+          >
+            Add a new header
+          </button>
+          <button
+            type="button"
+            class="pf-c-button pf-m-primary"
+            id="removeHeaderButton"
+            style="display: none"
+          >
+            Clear new header
+          </button>
+        </p>
+        <p>Example code when calling the update method:</p>
+
+        <div class="pf-c-code-block">
+          <div class="pf-c-code-block__content">
+            <code class="">
+              document<br />
+              &nbsp; &nbsp;.getElementById('newHeaderButton')<br />
+              &nbsp; &nbsp;.addEventListener('click', () => {<br />
+              &nbsp; &nbsp;&nbsp;
+              &nbsp;document.getElementById('newHeader').innerHTML =
+              '&lt;h2&gt;My new header&lt;/h2&gt;';<br />
+              &nbsp; &nbsp;&nbsp; &nbsp;skipMenu.update();<br />
+              &nbsp; &nbsp;});
+            </code>
+          </div>
+        </div>
+
+        <h3>Styling</h3>
+        <p>
+          SkipMenu uses standard Bootstrap classes, so it can be easily
+          incorporated into a site that is already using Bootstrap. Otherwise,
+          stylings can be easily over written by using the data attribute
+          attached to the skipMenu wrapper. For example, the following code
+          would move the button to the left part of the screen and turn the
+          button purple.
+        </p>
+        <div class="pf-c-code-block">
+          <div class="pf-c-code-block__content">
+            <code class="">
+              &lt;style&gt;<br />
+              &nbsp; &nbsp;[data-skip-menu] {<br />
+              &nbsp; &nbsp;&nbsp; &nbsp;left: 20px;<br />
+              &nbsp; &nbsp;&nbsp; &nbsp;transform: none;<br />
+              &nbsp; &nbsp; }<br />
+              &nbsp; &nbsp; [data-skip-menu] button {<br />
+              &nbsp; &nbsp;&nbsp; &nbsp; background-color: rgb(133, 4, 133);<br />
+              &nbsp; &nbsp; }<br />
+              &lt;/style&gt;
+            </code>
+          </div>
+        </div>
+
+        <h3>Bookmarklet</h3>
+        <p>
+          <a href="bookmarklet.html" class="pf-c-button pf-m-tertiary"
+            >Install Bookmarklet</a
+          >
+        </p>
+        <p>You can try SkipMenu on other webpages right in your browser.</p>
+      </div>
+    </main>
+    <footer class="card text-white bg-secondary mb-3">
+      <div class="card-body">SkipMenu by Kim Doberstein</div>
+    </footer>
+
+    <script src="dist/js/skipMenu.js"></script>
+    <script src="demo.js"></script>
+  </body>
+</html>

@@ -127,14 +127,18 @@ const buildMenuItem = (
     listItem.className = `${config.id}-menu-header-level-${depth}`;
     listItemText = `${depth}) ${listItemText}`;
   }
-
+  const span = document.createElement('span');
+  span.classList.add('pf-c-menu__item');
   const text = document.createTextNode(listItemText);
-  listItem.appendChild(text);
+
+  span.appendChild(text);
+  listItem.appendChild(span);
   listItem.setAttribute('role', 'menuitem');
-  listItem.classList.add('dropdown-item');
+  listItem.classList.add('dropdown-item', 'pf-c-menu__list-item');
   listItem.setAttribute('tabindex', '-1');
 
   listItem = addMenuItemEvents(listItem, element, config);
+
   return listItem;
 };
 
@@ -151,6 +155,7 @@ export const buildMenuSection = (
   }
   const container = document.createElement('div');
   container.setAttribute('role', 'group');
+  container.classList.add('pf-c-menu__list');
   container.id = sectionId;
   container.setAttribute('aria-labelledby', `${sectionId}-title`);
   const containerTitle = document.createElement('div');

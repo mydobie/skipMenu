@@ -13,7 +13,7 @@
       crossorigin="anonymous"
     />
 
-    <link href="dist/css/skipMenu-full.css" rel="stylesheet" />
+    <link href="dist/css/skipMenu-bootstrap.css" rel="stylesheet" />
     <style>
       *:focus {
         box-shadow: 0 0 5px #f0f;
@@ -25,25 +25,37 @@
         z-index: 100;
         width: 100%;
       }
-      #header .h5 {
-        padding-top: 1.25rem;
+      .nav {
+        padding-left: 20px;
       }
-      .code-block {
-        margin-bottom: 15px;
+      .nav-link {
+        color: #000;
       }
-      code {
-        color: inherit;
+      .nav-link.active {
+        color: rgb(0, 102, 204);
+        border-bottom: 3px solid rgb(0, 102, 204);
       }
     </style>
 
     <title>SkipMenu</title>
   </head>
   <body>
-    <header class="card text-white bg-dark mb-3" id="header">
+    <header class="card text-white bg-dark" id="header">
       <div class="card-body">
-        <h1 class="h5">SkipMenu Demo Page</h1>
+        <h1 class="h5">SkipMenu Demo Page - PatternFly</h1>
       </div>
     </header>
+    <nav class="nav mb-3">
+      <a class="nav-link active" aria-current="page" href="#"
+        >Bootstrap/Default</a
+      >
+      <a class="nav-link" href="index-patternfly.html">Patternfly</a>
+      <a class="nav-link" href="bookmarklet.html">Bookmarklet</a>
+      <span class="version"
+        ><a class="nav-link" href="#">Download <span></span></a
+      ></span>
+      <a class="nav-link" href="https://github.com/mydobie/skipMenu">GitHub</a>
+    </nav>
     <main class="container" id="main">
       <h2>About</h2>
 
@@ -54,7 +66,7 @@
           ><img src="GitHub-Mark-32px.png" alt="" /> View me on GitHub!</a
         >
       </p>
-      <div class="alert alert-primary" id="version">
+      <div class="alert alert-primary version">
         <a href="" class="alert-link">Download version <span></span></a>
       </div>
       <p>
@@ -114,7 +126,7 @@
         There are numerous configuration settings that support
         internationalization, determining what headings and landmarks are added
         to the menu along with many others. See the
-        <a id="readMeURL">GitHub repo</a>
+        <a class="readMeURL">GitHub repo</a>
         for more configuration options.
       </p>
 
@@ -205,58 +217,6 @@
     </footer>
 
     <script src="dist/js/skipMenu.js"></script>
-    <script>
-      const skipMenu = new SkipMenu({
-        useAccessKey: true,
-        attachTo: document.querySelector('header'),
-      });
-      skipMenu.init();
-
-      // Add version
-      const version = SkipMenu.version;
-      if (version) {
-        document.querySelector('#version span').innerHTML = version;
-        document
-          .querySelector('#version a')
-          .setAttribute(
-            'href',
-            `https://github.com/mydobie/skipMenu/releases/download/${version}/skipMenu-${
-              version.split('v')[1]
-            }.tgz`
-          );
-      }
-
-      document
-        .getElementById('readMeURL')
-        .setAttribute(
-          'href',
-          `https://github.com/mydobie/skipMenu/blob/${version}/README.md#options`
-        );
-
-      // Add new header
-      document
-        .getElementById('newHeaderButton')
-        .addEventListener('click', () => {
-          document.getElementById('newHeader').innerHTML =
-            '<h2 class="h5">My new header</h2>';
-          document.getElementById('newHeaderButton').style.display = 'none';
-          document.getElementById('removeHeaderButton').style.display = 'block';
-          skipMenu.update();
-          // There is a known issue where update is a fraction of a second to
-          // complete building menu
-          setTimeout(() => {
-            skipMenu.open();
-          }, 10);
-        });
-
-      document
-        .getElementById('removeHeaderButton')
-        .addEventListener('click', () => {
-          document.getElementById('newHeader').innerHTML = '';
-          document.getElementById('newHeaderButton').style.display = 'block';
-          document.getElementById('removeHeaderButton').style.display = 'none';
-          skipMenu.update();
-        });
-    </script>
+    <script src="demo.js"></script>
   </body>
 </html>

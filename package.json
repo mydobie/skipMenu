@@ -10,6 +10,7 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/runtime": "^7.17.8",
+    "@patternfly/patternfly": "4.196.7",
     "@types/mini-css-extract-plugin": "^1.2.1",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",

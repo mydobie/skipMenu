@@ -1,0 +1,14 @@
+@import 'skipMenu-base';
+
+.tooltip {
+  position: absolute;
+  z-index: 1080;
+}
+
+.dropdown-menu {
+  position: absolute;
+}
+
+.dropdown-item {
+  white-space: nowrap;
+}

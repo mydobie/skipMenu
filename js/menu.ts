@@ -42,7 +42,7 @@ export const buildMenu = (config: SkipMenuConfig): HTMLElement => {
   const menu = document.createElement('div');
   menu.setAttribute('aria-live', 'off');
   menu.setAttribute('role', 'menu');
-  menu.classList.add('dropdown-menu');
+  menu.classList.add('dropdown-menu', 'pf-c-menu');
   menu.style.display = 'none';
   menu.id = config.menuId;
 

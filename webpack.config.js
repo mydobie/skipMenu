@@ -23,6 +23,7 @@ entry = {
   skipMenu: './js/skipMenu.ts',
   full: ['./scss/skipMenu-full.scss'],
   bootstrap: ['./scss/skipMenu-bootstrap.scss'],
+  patternfly: ['./scss/skipMenu-patternfly.scss'],
 };
 
 module.exports = {
@@ -66,7 +67,7 @@ module.exports = {
             .replace('<COMMIT>', hash)
             .replace('<REPO>', repo);
 
-          header = '';
+          // header = '';
 
           const jsFiles = fs.readdirSync(`./${outputDir}/${jsDir}`);
           jsFiles.forEach((filePath) => {
@@ -105,6 +106,7 @@ module.exports = {
             `./${outputDir}/${cssDir}/skipMenu-full.css`,
             'utf8'
           );
+
           const javascript = fs.readFileSync(
             `./${outputDir}/${jsDir}/skipMenu.js`,
             'utf8'
@@ -125,6 +127,33 @@ module.exports = {
               fs.readFileSync('./js/bookmarkletAuto.js', 'utf8'),
               javascript,
               cssFull
+            )
+          );
+
+          const bootstrapCSS = fs.readFileSync(
+            `./${outputDir}/${cssDir}/skipMenu-bootstrap.css`,
+            'utf8'
+          );
+
+          fs.writeFileSync(
+            `./${outputDir}/${jsDir}/bookmarkletBootstrap.js`,
+            createBookmarklet(
+              fs.readFileSync('./js/bookmarkletAuto.js', 'utf8'),
+              javascript,
+              bootstrapCSS
+            )
+          );
+
+          const patternflyCSS = fs.readFileSync(
+            `./${outputDir}/${cssDir}/skipMenu-patternfly.css`,
+            'utf8'
+          );
+          fs.writeFileSync(
+            `./${outputDir}/${jsDir}/bookmarkletPatternfly.js`,
+            createBookmarklet(
+              fs.readFileSync('./js/bookmarkletAuto.js', 'utf8'),
+              javascript,
+              patternflyCSS
             )
           );
 

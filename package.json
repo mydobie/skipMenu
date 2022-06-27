@@ -53,7 +53,7 @@
     "npmAudit": "npm audit --audit-level moderate",
     "npmAuditJson": "npm run npmAudit -- --json --audit-level moderate > npmAuditReport.json",
     "build": " rm -rf dist && webpack --mode production ",
-    "build:watch": "rm -rf dist && webpack --mode development --watch",
+    "build:watch": "npm run build -- --watch",
     "// ------------------------------------------------------------1": "",
     "lint:js": "eslint  --ext .ts,.js ",
     "lint:js:fix": "npm run lint:js -- --fix",

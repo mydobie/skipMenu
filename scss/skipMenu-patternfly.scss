@@ -16,9 +16,9 @@
 /* stylelint-disable custom-property-pattern */
 
 /* This is to ensure that the button text and color have contrasting colors */
-[data-skip-menu]>.pf-c-button.pf-m-tertiary{
-  background-color:var(--pf-global--Color--dark-100);
-  color:var(--pf-global--Color--light-100);
+[data-skip-menu] > .pf-c-button.pf-m-tertiary {
+  background-color: var(--pf-global--Color--dark-100);
+  color: var(--pf-global--Color--light-100);
 }
 
 /* stylelint-enable custom-property-pattern */

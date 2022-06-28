@@ -1,4 +1,4 @@
-/*! skipMenu - v1.2.1 - 2022-06-28 - Commit 84be14b
+/*! skipMenu - v1.2.1 - 2022-06-28 - Commit fc7d729
  https://github.com/mydobie/skipMenu
 
 Copyright (c) 2022 Kim Doberstein and myDobie. All rights reserved.

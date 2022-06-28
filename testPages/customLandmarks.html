@@ -20,8 +20,9 @@
   </head>
   <body>
     <main>
-      <h1>Heading 1</h1>
-      <h2>Heading 2</h2>
+      <section aria-label="I am section 1">Section 1</section>
+      <section aria-label="I am section 2">Section 2</section>
+      <section aria-label="I am section 3">Section 3</section>
       <p>
         This page is filled with landmarks and headings to verify the building
         of the menu. Only default values are used.
@@ -36,7 +37,7 @@
   <script src="dist/js/skipMenu.js"></script>
   <script>
     const skipMenu = new SkipMenu({
-      headings: '',
+      landmarks: 'main',
     });
     skipMenu.init();
   </script>

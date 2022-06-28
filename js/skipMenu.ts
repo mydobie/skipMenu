@@ -10,6 +10,7 @@ export type SkipMenuConfig = {
   menuId?: string;
   menuContainerId?: string;
   headers?: string | false;
+  headings?: string | false;
   tooltipId?: string;
   landmarks?: string | false;
   reloadOnChange?: boolean;
@@ -46,7 +47,8 @@ class SkipMenu {
       id: 'skipMenu',
       attachTo: document.getElementsByTagName('body')[0],
       alwaysShow: true,
-      headers: 'h1, h2, h3, h4, h5, h6, [role=heading]',
+      // headers: 'h1, h2, h3, h4, h5, h6, [role=heading]',
+      headings: 'h1, h2, h3, h4, h5, h6, [role=heading]',
       landmarks:
         'main, [role=main], [role=search], nav, [role=navigation], section, [role=region],  form, aside, [role=complementary], body > header, [role=banner], body > footer, [role=contentinfo]',
       reloadOnChange: false,
@@ -78,6 +80,11 @@ class SkipMenu {
     };
 
     this.config = { ...defaultConfig, ...config };
+
+    // This is to support deprecated headers configuration
+    if (config?.headers) {
+      this.config.headings = config.headers;
+    }
 
     if (config?.text) {
       this.config.text = { ...defaultConfig.text, ...config.text };
@@ -130,7 +137,7 @@ class SkipMenu {
     if (menu === null) {
       // eslint-disable-next-line no-console
       console.warn(
-        'No landmarks or headers found  - skipmenu could not be built'
+        'No landmarks or headings found  - skipmenu could not be built'
       );
       return;
     }

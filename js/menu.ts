@@ -48,9 +48,9 @@ export const buildMenu = (config: SkipMenuConfig): HTMLElement => {
   menu.id = config.menuId;
 
   // attach the sections
-  const headerSection = config.headers
+  const headerSection = config.headings
     ? buildMenuSection(
-        document.querySelectorAll(config.headers),
+        document.querySelectorAll(config.headings),
         config.text.headingsLabel,
         `${config.id}_headings`,
         config

@@ -89,6 +89,12 @@ NOTE: All options are optional.
         <tr>
             <td>headers</td>
             <td>string | false</td>
+            <td>see "headings"</td>
+            <td>This is a deprecated option that will be replaced by "headings"</td>
+        </tr>
+        <tr>
+            <td>headings</td>
+            <td>string | false</td>
             <td>`h1, h2, h3, h4, h5, h6, [role=heading]`</td>
             <td>Query string of items to show in the headings section of the menu.  If no headers are found, that section is not included in the menu.  If neither the headers or landmark have items, the menu and its button will not be shown.  Pass an empty string or false if the header section should not be shown.</td>
         </tr>

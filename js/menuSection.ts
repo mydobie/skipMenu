@@ -124,7 +124,7 @@ const buildMenuItem = (
   }
 
   if (depth) {
-    listItem.className = `${config.id}-menu-header-level-${depth}`;
+    listItem.className = `skipMenu-menu-header-level-${depth}`;
     listItemText = `${depth}) ${listItemText}`;
   }
   const span = document.createElement('span');

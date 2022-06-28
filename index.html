@@ -13,11 +13,11 @@
       crossorigin="anonymous"
     />
 
-    <link href="dist/css/skipMenu-full.css" rel="stylesheet" />
+    <link href="dist/css/skipMenu-bootstrap.css" rel="stylesheet" />
     <style>
-      *:focus {
+      /* *:focus {
         box-shadow: 0 0 5px #f0f;
-      }
+      } */
       #header {
         position: -webkit-sticky;
         position: sticky;
@@ -25,25 +25,45 @@
         z-index: 100;
         width: 100%;
       }
-      #header .h5 {
-        padding-top: 1.25rem;
+      .nav {
+        padding-left: 20px;
       }
-      .code-block {
+      .nav-link {
+        color: #000;
+      }
+      .nav-link.active {
+        color: rgb(0, 102, 204);
+        border-bottom: 3px solid rgb(0, 102, 204);
+      }
+      h2,
+      h3 {
         margin-bottom: 15px;
+        margin-top: 50px;
       }
-      code {
-        color: inherit;
+      h2 {
+        border-bottom: 1px solid #ccc;
       }
     </style>
 
     <title>SkipMenu</title>
   </head>
   <body>
-    <header class="card text-white bg-dark mb-3" id="header">
+    <header class="card text-white bg-dark" id="header">
       <div class="card-body">
-        <h1 class="h5">SkipMenu Demo Page</h1>
+        <h1 class="h5">SkipMenu Demo Page - PatternFly</h1>
       </div>
     </header>
+    <nav class="nav mb-3">
+      <a class="nav-link active" aria-current="page" href="#"
+        >Bootstrap/Default</a
+      >
+      <a class="nav-link" href="index-patternfly.html">Patternfly</a>
+      <a class="nav-link" href="bookmarklet.html">Bookmarklet</a>
+      <span class="version"
+        ><a class="nav-link" href="#">Download <span></span></a
+      ></span>
+      <a class="nav-link" href="https://github.com/mydobie/skipMenu">GitHub</a>
+    </nav>
     <main class="container" id="main">
       <h2>About</h2>
 
@@ -54,7 +74,7 @@
           ><img src="GitHub-Mark-32px.png" alt="" /> View me on GitHub!</a
         >
       </p>
-      <div class="alert alert-primary" id="version">
+      <div class="alert alert-primary version">
         <a href="" class="alert-link">Download version <span></span></a>
       </div>
       <p>
@@ -68,8 +88,8 @@
         Just add SkipMenu's Javascript and CSS files to your webpage. It
         automatically detects and adds links to all the headings and landmarks
         on your webpage. Webpage content changes? - no problem. Automatically
-        update the menu by calling the `update` method or use the experimental
-        config setting to automatically detect DOM changes.
+        update the menu by calling the `update` method or use the
+        `reloadOnChange` config setting to automatically detect DOM changes.
       </p>
 
       <h2>How do I add it to my webpage?</h2>
@@ -102,7 +122,8 @@
           <code>
             &lt;script &gt; <br />
             &nbsp; &nbsp;const skipMenu = new SkipMenu({ useAccessKey: true,
-            attachTo: document.querySelector('header'), }); <br />
+            reloadOnChange: true, attachTo: document.querySelector('header'),
+            }); <br />
             &nbsp; &nbsp; skipMenu.init(); <br />
             &lt;/script&gt;
           </code>
@@ -114,8 +135,8 @@
         There are numerous configuration settings that support
         internationalization, determining what headings and landmarks are added
         to the menu along with many others. See the
-        <a id="readMeURL">GitHub repo</a>
-        for more configuration options.
+        <a class="readMeURL">GitHub repo</a>
+        for configuration options.
       </p>
 
       <h2>Try it out</h2>
@@ -131,7 +152,7 @@
           tab key to close the menu.
         </li>
       </ol>
-
+      <h3>Manually updating the menu</h3>
       <p>
         You can update the menu any time by calling the
         <code>update()</code> method. Try clicking the button below and notice
@@ -141,14 +162,6 @@
       <p>
         <button type="button" class="btn btn-primary" id="newHeaderButton">
           Add a new header
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          id="removeHeaderButton"
-          style="display: none"
-        >
-          Clear new header
         </button>
       </p>
       <p>Example code when calling the update method:</p>
@@ -168,7 +181,22 @@
         </div>
       </div>
 
-      <h3>Styling</h3>
+      <h3>Automatically updating menu</h3>
+
+      <p>
+        If the menu has the `reloadOnChange` configuration set to `true` then
+        the menu will be automatically updated when the page changes.
+      </p>
+
+      <div id="autoHeadings"></div>
+
+      <p>
+        <button type="button" class="btn btn-primary" id="startAddHeadings">
+          Automatically start adding headings.
+        </button>
+      </p>
+
+      <h2>Styling</h2>
       <p>
         SkipMenu uses standard Bootstrap classes, so it can be easily
         incorporated into a site that is already using Bootstrap. Otherwise,
@@ -192,7 +220,7 @@
         </div>
       </div>
 
-      <h3>Bookmarklet</h3>
+      <h2>Bookmarklet</h2>
       <p>
         <a href="bookmarklet.html" class="btn btn-outline-secondary"
           >Install Bookmarklet</a
@@ -205,58 +233,6 @@
     </footer>
 
     <script src="dist/js/skipMenu.js"></script>
-    <script>
-      const skipMenu = new SkipMenu({
-        useAccessKey: true,
-        attachTo: document.querySelector('header'),
-      });
-      skipMenu.init();
-
-      // Add version
-      const version = SkipMenu.version;
-      if (version) {
-        document.querySelector('#version span').innerHTML = version;
-        document
-          .querySelector('#version a')
-          .setAttribute(
-            'href',
-            `https://github.com/mydobie/skipMenu/releases/download/${version}/skipMenu-${
-              version.split('v')[1]
-            }.tgz`
-          );
-      }
-
-      document
-        .getElementById('readMeURL')
-        .setAttribute(
-          'href',
-          `https://github.com/mydobie/skipMenu/blob/${version}/README.md#options`
-        );
-
-      // Add new header
-      document
-        .getElementById('newHeaderButton')
-        .addEventListener('click', () => {
-          document.getElementById('newHeader').innerHTML =
-            '<h2 class="h5">My new header</h2>';
-          document.getElementById('newHeaderButton').style.display = 'none';
-          document.getElementById('removeHeaderButton').style.display = 'block';
-          skipMenu.update();
-          // There is a known issue where update is a fraction of a second to
-          // complete building menu
-          setTimeout(() => {
-            skipMenu.open();
-          }, 10);
-        });
-
-      document
-        .getElementById('removeHeaderButton')
-        .addEventListener('click', () => {
-          document.getElementById('newHeader').innerHTML = '';
-          document.getElementById('newHeaderButton').style.display = 'block';
-          document.getElementById('removeHeaderButton').style.display = 'none';
-          skipMenu.update();
-        });
-    </script>
+    <script src="demo.js"></script>
   </body>
 </html>

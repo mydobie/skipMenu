@@ -35,6 +35,14 @@
         color: rgb(0, 102, 204);
         border-bottom: 3px solid rgb(0, 102, 204);
       }
+      h2,
+      h3 {
+        margin-bottom: 15px;
+        margin-top: 50px;
+      }
+      h2 {
+        border-bottom: 1px solid #ccc;
+      }
     </style>
 
     <title>SkipMenu</title>
@@ -80,8 +88,8 @@
         Just add SkipMenu's Javascript and CSS files to your webpage. It
         automatically detects and adds links to all the headings and landmarks
         on your webpage. Webpage content changes? - no problem. Automatically
-        update the menu by calling the `update` method or use the experimental
-        config setting to automatically detect DOM changes.
+        update the menu by calling the `update` method or use the
+        `reloadOnChange` config setting to automatically detect DOM changes.
       </p>
 
       <h2>How do I add it to my webpage?</h2>
@@ -114,7 +122,8 @@
           <code>
             &lt;script &gt; <br />
             &nbsp; &nbsp;const skipMenu = new SkipMenu({ useAccessKey: true,
-            attachTo: document.querySelector('header'), }); <br />
+            reloadOnChange: true, attachTo: document.querySelector('header'),
+            }); <br />
             &nbsp; &nbsp; skipMenu.init(); <br />
             &lt;/script&gt;
           </code>
@@ -127,7 +136,7 @@
         internationalization, determining what headings and landmarks are added
         to the menu along with many others. See the
         <a class="readMeURL">GitHub repo</a>
-        for more configuration options.
+        for configuration options.
       </p>
 
       <h2>Try it out</h2>
@@ -143,7 +152,7 @@
           tab key to close the menu.
         </li>
       </ol>
-
+      <h3>Manually updating the menu</h3>
       <p>
         You can update the menu any time by calling the
         <code>update()</code> method. Try clicking the button below and notice
@@ -153,14 +162,6 @@
       <p>
         <button type="button" class="btn btn-primary" id="newHeaderButton">
           Add a new header
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          id="removeHeaderButton"
-          style="display: none"
-        >
-          Clear new header
         </button>
       </p>
       <p>Example code when calling the update method:</p>
@@ -180,7 +181,22 @@
         </div>
       </div>
 
-      <h3>Styling</h3>
+      <h3>Automatically updating menu</h3>
+
+      <p>
+        If the menu has the `reloadOnChange` configuration set to `true` then
+        the menu will be automatically updated when the page changes.
+      </p>
+
+      <div id="autoHeadings"></div>
+
+      <p>
+        <button type="button" class="btn btn-primary" id="startAddHeadings">
+          Automatically start adding headings.
+        </button>
+      </p>
+
+      <h2>Styling</h2>
       <p>
         SkipMenu uses standard Bootstrap classes, so it can be easily
         incorporated into a site that is already using Bootstrap. Otherwise,
@@ -204,7 +220,7 @@
         </div>
       </div>
 
-      <h3>Bookmarklet</h3>
+      <h2>Bookmarklet</h2>
       <p>
         <a href="bookmarklet.html" class="btn btn-outline-secondary"
           >Install Bookmarklet</a

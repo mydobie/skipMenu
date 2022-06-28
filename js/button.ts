@@ -5,7 +5,7 @@ export const toggleMenu = (
   config: SkipMenuConfig,
   keepVisibleOnClose = false
 ) => {
-  const menu = document.getElementById(config.menuId);
+  const menu = document.getElementById(config.menuContainerId);
   if (menu) {
     const isCurrentlyExpanded = menu.style.display !== 'none';
     if (isCurrentlyExpanded) {
@@ -17,7 +17,7 @@ export const toggleMenu = (
 };
 
 export const openMenu = (config: SkipMenuConfig) => {
-  const menu = document.getElementById(config.menuId);
+  const menu = document.getElementById(config.menuContainerId);
   if (menu) {
     const button = document.getElementById(config.buttonId);
     menu.style.display = 'block';
@@ -31,7 +31,7 @@ export const closeMenu = (
   config: SkipMenuConfig,
   keepVisibleOnClose = false
 ) => {
-  const menu = document.getElementById(config.menuId);
+  const menu = document.getElementById(config.menuContainerId);
   if (menu) {
     const button = document.getElementById(config.buttonId);
     button.setAttribute('aria-expanded', 'false');

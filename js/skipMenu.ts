@@ -8,6 +8,7 @@ export type SkipMenuConfig = {
   alwaysShow?: boolean; // This need to be changed to alwaysShow
   buttonId?: string;
   menuId?: string;
+  menuContainerId?: string;
   headers?: string;
   tooltipId?: string;
   landmarks?: string;
@@ -82,6 +83,7 @@ class SkipMenu {
       this.config.text = { ...defaultConfig.text, ...config.text };
     }
     this.config.menuId = this.config.id + '_menu';
+    this.config.menuContainerId = this.config.menuId + '-container';
     this.config.buttonId = this.config.id + '_button';
     this.config.tooltipId = this.config.id + '_tooltip';
 
@@ -89,7 +91,7 @@ class SkipMenu {
     this.getConfig = this.getConfig.bind(this);
   }
 
-  static version = 'VERSION CANNOT BE DETERMINED'; // Note - this is replace on build
+  static version = 'VERSION CANNOT BE DETERMINED'; // Note - this is replaced on build
 
   getConfig() {
     return this.config;
@@ -133,8 +135,15 @@ class SkipMenu {
       return;
     }
 
+    const menuContainer = document.createElement('div');
+    menuContainer.id = this.config.menuContainerId;
+    menuContainer.classList.add('dropdown-menu');
+    menuContainer.style.display = 'none';
+
+    menuContainer.appendChild(menu);
+
     // Append menu items and attach event listeners
-    skipMenuWrapper.appendChild(menu);
+    skipMenuWrapper.appendChild(menuContainer);
 
     const attachToStyles = window.getComputedStyle(this.config.attachTo);
 
@@ -155,9 +164,15 @@ class SkipMenu {
     const updatedMenu = buildMenu(this.config);
 
     if (currentMenu && updatedMenu && !currentMenu.isEqualNode(updatedMenu)) {
+      const focusedElement = document.activeElement;
       currentMenu.setAttribute('aria-busy', 'true');
       currentMenu.replaceWith(updatedMenu);
       currentMenu.setAttribute('aria-busy', 'false');
+      updatedMenu.querySelectorAll('[role="menuitem"]').forEach((item) => {
+        if (focusedElement.isEqualNode(item)) {
+          (item as HTMLElement).focus();
+        }
+      });
     }
     if (updatedMenu && !currentMenu) {
       this._add();

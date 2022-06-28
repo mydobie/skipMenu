@@ -3,7 +3,7 @@ import { closeMenu } from './button';
 
 export const addCloseMenuOnClick = (config: SkipMenuConfig) => {
   document.addEventListener('click', (e) => {
-    const menu = document.getElementById(config.menuId);
+    const menu = document.getElementById(config.menuContainerId);
     if (menu) {
       const isMenuOpen = menu.style.display !== 'none';
       if (isMenuOpen && !(e.target as HTMLElement).closest(`#${config.id}`)) {

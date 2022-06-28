@@ -5,6 +5,7 @@
 const skipMenu = new SkipMenu({
   useAccessKey: true,
   attachTo: document.querySelector('header'),
+  reloadOnChange: true,
 });
 skipMenu.init();
 
@@ -32,24 +33,39 @@ document.querySelectorAll('.readMeURL').forEach((link) => {
 
 // Add new header
 document.getElementById('newHeaderButton')?.addEventListener('click', () => {
-  document.getElementById('newHeader').innerHTML =
-    '<h2 class="h5">My new header</h2>';
-  document.getElementById('newHeaderButton').style.display = 'none';
-  document.getElementById('removeHeaderButton').style.display = 'block';
-  skipMenu.update();
-  // There is a known issue where update is a fraction of a second to
-  // complete building menu
+  if (!document.getElementById('myNewHeader')) {
+    document.getElementById('newHeader').innerHTML =
+      '<h2 class="h5" id="myNewHeader">!!! My new header !!!</h2>';
+    skipMenu.update();
+    // There is a known issue where update takes a moment
+    setTimeout(() => {
+      skipMenu.open();
+    }, 10);
+    document.getElementById('newHeaderButton').innerHTML = 'Clear new header';
+  } else {
+    document.getElementById('newHeader').innerHTML = '';
+    skipMenu.update();
+    document.getElementById('newHeaderButton').innerHTML = 'Add a new header';
+  }
+});
+
+document.getElementById('startAddHeadings')?.addEventListener('click', () => {
+  let counter = 0;
+  document.getElementById('startAddHeadings').disabled = true;
   setTimeout(() => {
     skipMenu.open();
   }, 10);
-});
-
-// Remove new header
-document.getElementById('removeHeaderButton')?.addEventListener('click', () => {
-  document.getElementById('newHeader').innerHTML = '';
-  document.getElementById('newHeaderButton').style.display = 'block';
-  document.getElementById('removeHeaderButton').style.display = 'none';
-  skipMenu.update();
+  let interval = setInterval(() => {
+    if (counter > 4) {
+      clearInterval(interval);
+      document.getElementById('startAddHeadings').disabled = false;
+    } else {
+      counter++;
+      const newHeader = document.createElement('h4');
+      newHeader.innerHTML = `!!! New Header ${counter}`;
+      document.getElementById('autoHeadings').appendChild(newHeader);
+    }
+  }, 1000);
 });
 
 const setBookmarklet = (id, url, hideIfFail) => {

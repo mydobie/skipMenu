@@ -7,7 +7,7 @@ Plugin for any webpage to automatically create a menu allowing users to easily n
 This project was heavily inspired by the [SkipTo Project](https://github.com/paypal/skipto), but includes:
 
 - Separation of typescript and css for easier styling customization
-- Use of Bootstrap classes (but can also be used without Bootstrap)
+- Use of Bootstrap and PatternFly classes (but can also be used without Bootstrap or PatternFly)
 - Separation of typescript into multiple files for easier development
 - Use of webpack to build and bundle files
 - Linting
@@ -26,7 +26,7 @@ Both the JavaScript and CSS files are available for download for each release on
 
 ## Using skipMenu on your website
 
-In order for skipMenu to work, you need to download the files and add them to your project. Once that is done, include both the `skipMenu.js` and a `skipMenu.css` files in your HTML file. There are two css files, one for sites that use Bootstrap (`skipMenu-bootstrap.css`) and one for sites that do not (`skipMenu-full.css`).
+In order for skipMenu to work, you need to download the files and add them to your project. Once that is done, include both the `skipMenu.js` and a `skipMenu.css` files in your HTML file. There are three css files, one for sites that use Bootstrap (`skipMenu-bootstrap.css`), one for sites that use PatternFly (`skipMenu-patternfly.css`) and one for sites that do not use either Bootstrap or PatternFly(`skipMenu-full.css`).
 
 In the head section of your HTML file, add the following:
 
@@ -280,10 +280,6 @@ Prints out the skipMenu version. Example:
 
 ```
 SkipMenu.version
-```
-
-```
-
 ```
 
 ---

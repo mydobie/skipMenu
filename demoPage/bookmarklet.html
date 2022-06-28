@@ -15,9 +15,9 @@
 
     <link href="dist/css/skipMenu-full.css" rel="stylesheet" />
     <style>
-      *:focus {
+      /* *:focus {
         box-shadow: 0 0 5px #f0f;
-      }
+      } */
       #header {
         position: -webkit-sticky;
         position: sticky;
@@ -133,58 +133,23 @@
       const hideIfFail = true;
       // const hideIfFail = false;
 
-      setBookmarklet(
-        'bookmarkletLinkAuto',
-        './dist/js/bookmarkletAuto.js',
-        hideIfFail
-      );
-      setBookmarklet(
-        'bookmarkletLinkBootstrap',
-        './dist/js/bookmarkletBootstrap.js',
-        hideIfFail
-      );
-      setBookmarklet(
-        'bookmarkletLinkPatternFly',
-        './dist/js/bookmarkletPatternfly.js',
-        hideIfFail
-      );
+      // setBookmarklet(
+      //   'bookmarkletLinkAuto',
+      //   './dist/js/bookmarkletAuto.js',
+      //   hideIfFail
+      // );
+      // setBookmarklet(
+      //   'bookmarkletLinkBootstrap',
+      //   './dist/js/bookmarkletBootstrap.js',
+      //   hideIfFail
+      // );
+      // setBookmarklet(
+      //   'bookmarkletLinkPatternFly',
+      //   './dist/js/bookmarkletPatternfly.js',
+      //   hideIfFail
+      // );
 
-      setBookmarklet('bookmarkletLink', './dist/js/bookmarklet.js', hideIfFail);
-      // fetch('./dist/js/bookmarklet.js', { method: 'GET' })
-      //   .then((response) => response.text())
-      //   .then((data) => {
-      //     document.querySelector('#bookmarkletLink').setAttribute('href', data);
-      //   })
-      //   .catch((error) => {
-      //     if (hideIfFail)
-      //       document.querySelector('#bookmarkletLink').style.display = 'none';
-      //   });
-
-      // fetch('./dist/js/bookmarkletBootstrap.js', { method: 'GET' })
-      //   .then((response) => response.text())
-      //   .then((data) => {
-      //     document
-      //       .querySelector('#bookmarkletLinkAuto')
-      //       .setAttribute('href', data);
-      //   })
-      //   .catch((error) => {
-      //     if (hideIfFail)
-      //       document.querySelector('#bookmarkletLinkAuto').style.display =
-      //         'none';
-      //   });
-
-      // fetch('./dist/js/bookmarkletAuto.js', { method: 'GET' })
-      //   .then((response) => response.text())
-      //   .then((data) => {
-      //     document
-      //       .querySelector('#bookmarkletLinkBootstrap')
-      //       .setAttribute('href', data);
-      //   })
-      //   .catch((error) => {
-      //     if (hideIfFail)
-      //       document.querySelector('#bookmarkletLinkBootstrap').style.display =
-      //         'none';
-      //   });
+      // setBookmarklet('bookmarkletLink', './dist/js/bookmarklet.js', hideIfFail);
     </script>
   </body>
 </html>

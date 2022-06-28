@@ -28,10 +28,6 @@
     font-weight: bold;
   }
 
-  [role='menu'] {
-    box-shadow: 3px 3px 10px #ccc;
-  }
-
   [role='menuitem'] {
     cursor: pointer;
 
@@ -54,5 +50,11 @@
     &.skipMenu-menu-header-level-6 {
       padding-left: 6em;
     }
+  }
+
+  .dropdown-menu {
+    max-height: calc(85vh - 30px);
+    overflow: scroll;
+    box-shadow: 3px 3px 10px #ccc;
   }
 }

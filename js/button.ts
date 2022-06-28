@@ -5,7 +5,7 @@ export const toggleMenu = (
   config: SkipMenuConfig,
   keepVisibleOnClose = false
 ) => {
-  const menu = document.getElementById(config.menuId);
+  const menu = document.getElementById(config.menuContainerId);
   if (menu) {
     const isCurrentlyExpanded = menu.style.display !== 'none';
     if (isCurrentlyExpanded) {
@@ -17,7 +17,7 @@ export const toggleMenu = (
 };
 
 export const openMenu = (config: SkipMenuConfig) => {
-  const menu = document.getElementById(config.menuId);
+  const menu = document.getElementById(config.menuContainerId);
   if (menu) {
     const button = document.getElementById(config.buttonId);
     menu.style.display = 'block';
@@ -31,7 +31,7 @@ export const closeMenu = (
   config: SkipMenuConfig,
   keepVisibleOnClose = false
 ) => {
-  const menu = document.getElementById(config.menuId);
+  const menu = document.getElementById(config.menuContainerId);
   if (menu) {
     const button = document.getElementById(config.buttonId);
     button.setAttribute('aria-expanded', 'false');
@@ -80,12 +80,18 @@ const toolTip = (config: SkipMenuConfig): HTMLElement | null => {
   }
   const tooltip = document.createElement('div');
   tooltip.id = config.tooltipId;
-  tooltip.classList.add('tooltip', 'bs-tooltip-bottom');
+  tooltip.classList.add(
+    'tooltip',
+    'bs-tooltip-bottom',
+    'pf-c-tooltip',
+    'pf-m-bottom'
+  );
+  tooltip.setAttribute('role', 'tooltip');
   const tooltipArrow = document.createElement('div');
-  tooltipArrow.classList.add('tooltip-arrow');
+  tooltipArrow.classList.add('tooltip-arrow', 'pf-c-tooltip__arrow');
   tooltip.appendChild(tooltipArrow);
   const tooltipInner = document.createElement('div');
-  tooltipInner.classList.add('tooltip-inner');
+  tooltipInner.classList.add('tooltip-inner', 'pf-c-tooltip__content');
   tooltipInner.textContent = toolTipText(
     config.accessKey,
     config.text.tooltipLabel
@@ -100,7 +106,12 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
   skipMenuButton.setAttribute('aria-haspopup', 'true');
   skipMenuButton.setAttribute('aria-expanded', 'false');
   skipMenuButton.setAttribute('aria-controls', config.menuId);
-  skipMenuButton.classList.add('btn', 'btn-secondary');
+  skipMenuButton.classList.add(
+    'btn',
+    'btn-secondary',
+    'pf-c-button',
+    'pf-m-tertiary'
+  );
   skipMenuButton.id = config.buttonId;
   skipMenuButton.textContent = config.text.buttonLabel;
   if (config.tabIndex) {

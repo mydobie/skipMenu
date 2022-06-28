@@ -9,3 +9,4 @@ lint-staged.config.js
 demoPage/dist/**
 
 /js/bookmarklet*
+/demoPage/patternfly/**

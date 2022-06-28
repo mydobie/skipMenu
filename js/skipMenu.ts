@@ -9,9 +9,9 @@ export type SkipMenuConfig = {
   buttonId?: string;
   menuId?: string;
   menuContainerId?: string;
-  headers?: string;
+  headers?: string | false;
   tooltipId?: string;
-  landmarks?: string;
+  landmarks?: string | false;
   reloadOnChange?: boolean;
   useAccessKey?: boolean;
   accessKey?: string;

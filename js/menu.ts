@@ -48,18 +48,22 @@ export const buildMenu = (config: SkipMenuConfig): HTMLElement => {
   menu.id = config.menuId;
 
   // attach the sections
-  const headerSection = buildMenuSection(
-    document.querySelectorAll(config.headers),
-    config.text.headingsLabel,
-    `${config.id}_headings`,
-    config
-  );
-  const landmarkSection = buildMenuSection(
-    document.querySelectorAll(config.landmarks),
-    config.text.landmarksLabel,
-    `${config.id}_landmarks`,
-    config
-  );
+  const headerSection = config.headers
+    ? buildMenuSection(
+        document.querySelectorAll(config.headers),
+        config.text.headingsLabel,
+        `${config.id}_headings`,
+        config
+      )
+    : null;
+  const landmarkSection = config.landmarks
+    ? buildMenuSection(
+        document.querySelectorAll(config.landmarks),
+        config.text.landmarksLabel,
+        `${config.id}_landmarks`,
+        config
+      )
+    : null;
 
   if (landmarkSection !== null) {
     menu.appendChild(landmarkSection);

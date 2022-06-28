@@ -88,15 +88,15 @@ NOTE: All options are optional.
         </tr>
         <tr>
             <td>headers</td>
-            <td>string</td>
+            <td>string | false</td>
             <td>`h1, h2, h3, h4, h5, h6, [role=heading]`</td>
-            <td>Query string of items to show in the headings section of the menu.  If no headers are found, that section is not included in the menu.  If neither the headers or landmark have items, the menu and its button will not be shown.</td>
+            <td>Query string of items to show in the headings section of the menu.  If no headers are found, that section is not included in the menu.  If neither the headers or landmark have items, the menu and its button will not be shown.  Pass an empty string or false if the header section should not be shown.</td>
         </tr>
         <tr>
             <td>landmarks</td>
-            <td>string</td>
+            <td>string | false</td>
             <td>`main, [role=main], [role=search], nav, [role=navigation], section, [role=region],  form, aside, [role=complementary], body > header, [role=banner], body > footer, [role=contentinfo]`</td>
-            <td>Query string of items to show in the landmarks section of the menu.  If no landmarks are found, that section is not included in the menu.  If neither the headers or landmark have items, the menu and its button will not be shown.</td>
+            <td>Query string of items to show in the landmarks section of the menu.  If no landmarks are found, that section is not included in the menu.  If neither the headers or landmark have items, the menu and its button will not be shown. Pass an empty string or false if the landmarks section should not be shown.</td>
         </tr>
         <tr>
             <td>reloadOnChange</td>

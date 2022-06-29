@@ -106,7 +106,7 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
   skipMenuButton.setAttribute('aria-haspopup', 'true');
 
   skipMenuButton.removeAttribute('aria-expanded');
-  skipMenuButton.setAttribute('aria-controls', config.menuId);
+  skipMenuButton.setAttribute('aria-controls', config.menuContainerId);
   skipMenuButton.classList.add(
     'btn',
     'btn-secondary',

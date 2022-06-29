@@ -34,7 +34,7 @@ export const closeMenu = (
   const menu = document.getElementById(config.menuContainerId);
   if (menu) {
     const button = document.getElementById(config.buttonId);
-    button.setAttribute('aria-expanded', 'false');
+    button.removeAttribute('aria-expanded');
     menu.style.display = 'none';
     if (!keepVisibleOnClose && !config.alwaysShow) {
       document.getElementById(config.id).classList.add('skipMenu-hidden');
@@ -104,7 +104,8 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
   const buttonWrapper = document.createDocumentFragment();
   const skipMenuButton = document.createElement('button');
   skipMenuButton.setAttribute('aria-haspopup', 'true');
-  skipMenuButton.setAttribute('aria-expanded', 'false');
+
+  skipMenuButton.removeAttribute('aria-expanded');
   skipMenuButton.setAttribute('aria-controls', config.menuId);
   skipMenuButton.classList.add(
     'btn',
@@ -130,7 +131,7 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
     });
 
     skipMenuButton.addEventListener('blur', () => {
-      if (skipMenuButton.getAttribute('aria-expanded') === 'false') {
+      if (!skipMenuButton.hasAttribute('aria-expanded')) {
         document.getElementById(config.id).classList.add('skipMenu-hidden');
       }
     });
@@ -142,7 +143,7 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
     const skipMenuToolTip = toolTip(config);
     if (skipMenuToolTip) {
       skipMenuButton.addEventListener('focus', () => {
-        if (skipMenuButton.getAttribute('aria-expanded') === 'false') {
+        if (!skipMenuButton.hasAttribute('aria-expanded')) {
           skipMenuToolTip.style.display = 'block';
         }
       });
@@ -150,7 +151,7 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
         skipMenuToolTip.style.display = 'none';
       });
       skipMenuButton.addEventListener('mouseover', () => {
-        if (skipMenuButton.getAttribute('aria-expanded') === 'false') {
+        if (!skipMenuButton.hasAttribute('aria-expanded')) {
           skipMenuToolTip.style.display = 'block';
         }
       });

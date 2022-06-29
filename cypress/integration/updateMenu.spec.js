@@ -26,7 +26,7 @@ urls.forEach((url) => {
 
       cy.get('#closeMenu').click(); // Close menu
       //cy.get('#skipMenu_menu').should('not.be.visible'); // There is an issue with cyress on auto test
-      cy.get('#skipMenu_button').should('have.attr', 'aria-expanded', 'false');
+      cy.get('#skipMenu_button').should('not.have.attr', 'aria-expanded');
 
       cy.get('#openMenu').click(); // Open menu
       //cy.get('#skipMenu_menu').should('be.visible'); // There is an issue with cyress on auto test

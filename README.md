@@ -2,19 +2,21 @@
 
 ## Description:
 
-Plugin for any webpage to automatically create a menu allowing users to easily navigate to major parts of the page. This allows you automatically add an accessible "skip to content" link(s).
+Plugin for any webpage to automatically create a menu allowing users to easily navigate to major parts of the page. skipMenu will look your page and automatically add links to headings and landmarks in the menu. This menu can replace traditional accessible "skip to content" link(s).
 
 This project was heavily inspired by the [SkipTo Project](https://github.com/paypal/skipto), but includes:
 
 - Separation of typescript and css for easier styling customization
-- Use of Bootstrap and PatternFly classes (but can also be used without Bootstrap or PatternFly)
+- Use of [Bootstrap](https://getbootstrap.com/) and [PatternFly](https://www.patternfly.org/) classes (but can also be used without Bootstrap or PatternFly)
 - Separation of typescript into multiple files for easier development
 - Use of webpack to build and bundle files
 - Linting
 - Unit testing via Cypress
-- Methods to update menu when the page is changed, so your menu can always be up to date
+- Configuration option to automatically update the menu when the page changes. Your skipMenu is always up to date
 
-[See a skipMenu in action](https://mydobie.github.io/skipMenu/)
+[See skipMenu in action](https://mydobie.github.io/skipMenu/)
+
+SkipMenu implements the keyboard support documented in the [W3C ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/) for [Navigation Menu Button](https://www.w3.org/WAI/ARIA/apg/example-index/menu-button/menu-button-links.html). This includes support for the following keys: tab, enter/return, space, arrow, escape, home, and end.
 
 ---
 
@@ -84,7 +86,7 @@ NOTE: All options are optional.
             <td>alwaysShow</td>
             <td>boolean</td>
             <td>true</td>
-            <td>If set to `true`, the menu button will will always show.  If set to false, the menu button will only show if has been tabbed to and while it has focus.  It is not recommended to set this to true.  Having the menu button can help all users.</td>
+            <td>If set to `true`, the menu button will will always show.  If set to false, the menu button will only show if has been tabbed to and while it has focus.  It is not recommended to set this.  Having the menu button always visible can help all users.</td>
         </tr>
         <tr>
             <td>headers</td>
@@ -96,31 +98,31 @@ NOTE: All options are optional.
             <td>headings</td>
             <td>string | false</td>
             <td>`h1, h2, h3, h4, h5, h6, [role=heading]`</td>
-            <td>Query string of items to show in the headings section of the menu.  If no headers are found, that section is not included in the menu.  If neither the headers or landmark have items, the menu and its button will not be shown.  Pass an empty string or false if the header section should not be shown.</td>
+            <td>Query string of items to show in the headings section of the menu.  If no headers are found, the headings section is not included in the menu.  If neither the headers or landmark have items, the menu and its button will not be shown.  Pass an empty string or set to `false` if the header section should not be shown even if there are headings on the page.</td>
         </tr>
         <tr>
             <td>landmarks</td>
             <td>string | false</td>
             <td>`main, [role=main], [role=search], nav, [role=navigation], section, [role=region],  form, aside, [role=complementary], body > header, [role=banner], body > footer, [role=contentinfo]`</td>
-            <td>Query string of items to show in the landmarks section of the menu.  If no landmarks are found, that section is not included in the menu.  If neither the headers or landmark have items, the menu and its button will not be shown. Pass an empty string or false if the landmarks section should not be shown.</td>
+            <td>Query string of items to show in the landmarks section of the menu.  If no landmarks are found, the landmarks section is not included in the menu.  If neither the headers or landmark have items, the menu and its button will not be shown. Pass an empty string or set to `false` if the landmarks section should not be shown even if there are landmarks on the page.</td>
         </tr>
         <tr>
             <td>reloadOnChange</td>
             <td>boolean</td>
             <td>false</td>
-            <td>The menu is automatically rebuild anytime the DOM changes.  This replaces the need to call the update method.</td>
+            <td>The menu is automatically rebuild anytime the DOM changes.  This replaces the need to call the update method.  It is recommended that this is set to true unless the page does not change once it is loaded or there are performance problems.  Note: This will default to `true` in future versions.</td>
        </tr>
         <tr>
             <td>useAccessKey</td>
             <td>boolean</td>
             <td>false</td>
-            <td>If set to true, an accesskey will automatically be added.  In addition, a tooltip will be shown when the button has focus notifying the users how to use the access key.</td>
+            <td>If set to true, an accesskey will automatically be added allowing users to open the menu at any time with a keyboard command.  In addition, a tooltip will be shown when the button has focus notifying the users how to use the access key.  Note that accessible technologies including screen readers can interfere with access keys.  </td>
         </tr>
         <tr>
             <td>accessKey</td>
             <td>number | string</td>
             <td>0</td>
-            <td>If `useAccessKey` is set to true, this will be the accesskey.</td>
+            <td>If `useAccessKey` is set to true, this will be the accesskey. While it doesn't prevent conflicts, it is recommended that a number is used as an access key because most assistive technologies don't use number  based access keys.</td>
         </tr>
         <tr>
             <td>ignoreClass</td>
@@ -132,13 +134,13 @@ NOTE: All options are optional.
             <td>tabIndex</td>
             <td>number</td>
             <td></td>
-            <td>Adds the tabindex to the menu button.</td>
+            <td>Adds the tabindex to the menu button. Normally this isn't needed.</td>
         </tr>
         <tr>
             <td>ensureAbsoluteParent</td>
             <td>boolean</td>
             <td>true</td>
-            <td>If the parent element (attachTo value) of the menu does not have a position of `relative`, `absolute`, `fixed` or `sticky`, the parent's position will be set to `relative` to ensure the menu displays correctly.</td>
+            <td>If the parent element (attachTo value) of the menu does not have a position of `relative`, `absolute`, `fixed` or `sticky`, the parent's position will be set to `relative` to ensure the menu displays correctly.  Normally there isn't a need to set this to `false` - it should only be used if the introduction of the skipMenu is causing other display issues on the page.</td>
         <tr>
             <td>text</td>
             <td>object</td>
@@ -238,7 +240,7 @@ Note: All options are optional.
 
 ## Methods available
 
-The following methods are available on the SkipMenu object.
+The following methods are available on the skipMenu object.
 
 ### init()
 
@@ -266,7 +268,7 @@ skipMenu.close()
 
 ### update()
 
-Updates the menu based on the current DOM. It is recommended calling this method anytime DOM changes impact the headers or landmarks. NOTE: This should not be called if `reloadOnChange` is set to true. Example:
+Updates the menu based on the current DOM. It is recommended calling this method anytime DOM changes impact the headers or landmarks. Normally there isn't a need to call this method if `reloadOnChange` is set to true. Example:
 
 ```
 skipMenu.update()
@@ -288,6 +290,29 @@ Prints out the skipMenu version. Example:
 SkipMenu.version
 ```
 
+## Accessibility
+
+The goal of skipMenu is to increase both accessibility and usability - especially for non-screenreader users who use keyboard navigation. This menu does use ARIA, but only enough to increase accessibility. SkipMenu follows patterns outlined in the [W3C ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/) for [Navigation Menu Button](https://www.w3.org/WAI/ARIA/apg/example-index/menu-button/menu-button-links.html).
+
+The use of skipMenu can help web authors fulfill or impact numerous [W3C Web Content Accessibility Guidelines (WCAG) 2.1](https://www.w3.org/TR/WCAG21/) success criteria including the following.
+
+- 1.3.1 Info and Relationships (Level A)
+- 2.1.1 Keyboard (Level A)
+- 2.4.1 Bypass Blocks (Level AA)
+- 2.4.6 Headings and Labels (Level AA)
+- 2.4.7 Focus Visible (Level AA)
+- 3.2.3 Consistent Navigation (Level AA)
+
+### Is this an overlay?
+
+The short answer is that skipMenu is not an overlay.
+
+An accessibility overlay is a script that runs in the browser that attempts to fix accessibility issues or add accessibility features throughout the page. For example an overlay may change colors through out the page in order to ensure higher color contrast. While this seems like a good idea, in practices overlays have been problematic. Sometimes they don't work. Sometimes the overlay interferes with accessible technologies. The better approach would be to fix the accessibility issues in the page instead of relaying on a script.
+
+SkipMenu does not attempt to fix any accessibility issues. In fact, it can make some accessibility issues, like out of order headers, more apparent so they can be more easily fixed by developers or content providers.
+
+Except for adding a tabindex of -1 on headers and landmarks, skipMenu does not change any of the content or coding for the rest of the page.
+
 ---
 
 ---
@@ -296,16 +321,16 @@ SkipMenu.version
 
 # Developing
 
-If you want to modify how the menu works, the following section describes how to setup the development tools. Pull requests are always welcome.
+If you want to modify how the menu works or build a custom CSS file, the following section describes how to setup the development tools. Pull requests are always welcome.
 
 ## Get me started:
 
 At the root of the project run the following commands in a terminal to verify you can perform all the development tasks:
 
 1.  Verify node is installed => `node -v`. Ensure that it is version listed in the `engines` section of the `package.json` file.
-1.  Install dependencies => `npm run i`
+1.  Install dependencies => `npm i`
 1.  Verify you can check for lint errors => `npm run lint`
-1.  Verify you can run the tests => `npm run cypress` Note: this will open cypress, but the tests will fail. See testing section below.
+1.  Verify you can start Cypress => `npm run cypress` Note: this will open cypress, but the tests will fail. See testing section below.
 1.  Verify you can check for security advisories => `npm run npmAudit`
 1.  Verify you can build the files in watch mode => `npm run build:watch`
 
@@ -324,17 +349,17 @@ The version of the application is done automatically when merging a pull request
 There are special branches that should not be committed to directly.
 
 - `main` - Branch that contains the latest published code. All changes into main should go through a pull request.
-- `gh-pages` - Branch that contains the files for the demo page. Updates to this branch happen automatically when there is a pull request is merged into `main`.
+- `gh-pages` - Branch that contains the files for the demo page. Updates to this branch happen automatically when a pull request is merged into `main`.
 
 ---
 
 ## Node
 
-The only requirement is that your development system has Node.js installed. You can verify you have node installed by running `node -v` in a terminal.
+Your development system needs to have Node.js installed. You can verify you have node installed by running `node -v` in a terminal.
 
 NOTE: The development tools require a node version listed in the `engines` section of the `package.json` file.
 
-If have an different version of node running, first verify if you have NVM installed by running `nvm --version` in a terminal. If you do have NVM running, then see the [NVM website](https://github.com/nvm-sh/nvm) on how to install and use a new version of Node.
+If you have an different version of node running, first verify if you have NVM installed by running `nvm --version` in a terminal. If you do have NVM running, then see the [NVM website](https://github.com/nvm-sh/nvm) on how to install and use a new version of Node.
 
 If you don't have Node nor NVM installed, see the [NodeJS website](https://nodejs.org/en/) on how to install Node.
 
@@ -346,7 +371,7 @@ After installing dependencies, you can check to see what dependencies are out of
 
 ## Check security stats of dependencies
 
-You can check if there is any high or critical security advisories for installed dependencies by running `npm run npmAudit`.
+You can check if there are any high or critical security advisories for installed dependencies by running `npm run npmAudit`. Note that this application does not have any dependencies that are included in the build code, so this command will always pass. By running this command, any security advisories for the build tools will be shown in the terminal window.
 
 ### Run tests
 
@@ -362,7 +387,7 @@ You can check the linting status of your files by running `npm run lint` in a te
 
 To fix known issues, you can run `npm run lint:fix`. NOTE: You may need to run this command multiple times until you get a successful run in order to fix all issues.
 
-If you want linting issues fixed as you save files, run `npm run lint:watch` in a terminal at the root of the project.
+If you want linting issues automatically fixed as you save files, run `npm run lint:watch` in a terminal at the root of the project.
 
 More information on fixing linting errors is available at: [esLint](https://eslint.org/docs/rules/), [Prettier](https://prettier.io/docs/en/install.html), and [airbnb JS style guide](https://github.com/airbnb/javascript)
 
@@ -370,7 +395,7 @@ This application uses [Husky](https://github.com/typicode/husky) and [lint-stage
 
 ### Build dist files
 
-To build the dist files that can be used on a web page run `npm run build`. If you want the files re-built when you save a file, run `npm run build:watch`. The build files will be located in the 'dist' and 'testPages/dist' directories.
+To build the dist files that can be used on a web page run `npm run build`. If you want the files re-built when you save a file, run `npm run build:watch`. The build files will be located in the `dist`, `testPages/dist`, and `demoPage/dist` directories.
 
 ---
 
@@ -386,7 +411,7 @@ All pull requests will have the following tests run:
 
 - Linting
 - Check for high or critical security advisories
-- Unit tests
+- Unit tests (Cypress)
 - Verify that the code can be built
 
 If you want to run these tests against another branch, you can do the following at any time:
@@ -402,7 +427,7 @@ When a pull request is merged into the `main` branch, the following is automatic
 
 - Linting
 - Check for high or critical security advisories
-- Unit tests
+- Unit tests (Cypress)
 - Updates version on package.json (see [CONTRIBUTING for more information](CONTRIBUTING.md))
 - Creates a [release](https://github.com/mydobie/skipMenu/releases)
 - Updates the [demo site](https://mydobie.github.io/skipMenu) on the `gh-pages` branch.

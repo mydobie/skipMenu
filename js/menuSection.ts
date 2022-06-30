@@ -113,7 +113,7 @@ const buildMenuItem = (
   config: SkipMenuConfig
 ) => {
   let listItem = document.createElement('div');
-  let listItemText = getMenuItemText(element, !!depth, config);
+  const listItemText = getMenuItemText(element, !!depth, config);
 
   if (
     !listItemText ||
@@ -123,15 +123,26 @@ const buildMenuItem = (
     return null;
   }
 
-  if (depth) {
-    listItem.className = `skipMenu-menu-header-level-${depth}`;
-    listItemText = `${depth}) ${listItemText}`;
-  }
   const span = document.createElement('span');
   span.classList.add('pf-c-menu__item');
-  const text = document.createTextNode(listItemText);
 
-  span.appendChild(text);
+  if (depth) {
+    listItem.className = `skipMenu-menu-header-level-${depth}`;
+    const depthWrapper = document.createElement('span');
+    depthWrapper.classList.add('menu__item-depth');
+
+    const depthText = document.createTextNode(`${depth}`);
+    depthWrapper.appendChild(depthText);
+    span.appendChild(depthWrapper);
+    span.appendChild(document.createTextNode(') '));
+  }
+
+  const text = document.createTextNode(listItemText);
+  const textWrapper = document.createElement('span');
+  textWrapper.classList.add('menu__item-text');
+  textWrapper.appendChild(text);
+
+  span.appendChild(textWrapper);
   listItem.appendChild(span);
   listItem.setAttribute('role', 'menuitem');
   listItem.classList.add('dropdown-item', 'pf-c-menu__list-item');

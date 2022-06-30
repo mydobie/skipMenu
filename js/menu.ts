@@ -10,15 +10,21 @@ const matchSection = (
 ) => {
   let newIndex: number;
   const firstLetterRegExp = /^([0-9]\) )?([a-zA-Z])/;
+  const firstNumberRegExp = /^([0-9])?/;
   menuItems.forEach((item, i) => {
-    const firstLetter = (item as HTMLElement).innerText
-      ?.match(firstLetterRegExp)[2]
-      ?.toLocaleLowerCase();
+    let firstChar;
+    if (parseInt(key)) {
+      firstChar = (item as HTMLElement).innerText?.match(firstNumberRegExp)[1];
+    } else {
+      firstChar = (item as HTMLElement).innerText
+        ?.match(firstLetterRegExp)[2]
+        ?.toLocaleLowerCase();
+    }
     if (
       i >= startIndex &&
       i <= endIndex &&
       !newIndex &&
-      firstLetter === key.toLowerCase()
+      firstChar === key.toLowerCase()
     ) {
       newIndex = i;
     }
@@ -76,7 +82,7 @@ const menuItemsEvent = (
           (menuItems[menuItems.length - 1] as HTMLElement).focus();
           break;
         default:
-          if (/^[a-zA-Z]$/.test(e.key)) {
+          if (/^[a-zA-Z1-9]$/.test(e.key)) {
             const newIndex = getMatchingElementIndex(e.key, menuItems, index);
             if (newIndex !== undefined) {
               (menuItems[newIndex] as HTMLElement).focus();

@@ -73,4 +73,30 @@ describe('AttachTo tests', () => {
 
     cy.get('#skipMenu_menu').should('be.visible');
   });
+
+  it('When a number is typed, move to heading with that level', () => {
+    cy.get('#skipMenu_button').should('exist').focus();
+    cy.get('#skipMenu_button').type('{downArrow}');
+    cy.focused().should('contain.text', 'Main');
+
+    cy.focused().type('2');
+    cy.focused().should('contain.text', 'Super heading 2');
+
+    cy.focused().type('2');
+    cy.focused().should('contain.text', 'A super heading more');
+
+    cy.focused().type('2');
+    cy.focused().should('contain.text', 'Super heading 2');
+  });
+
+  it('When a number is typed, current item stays focused if no heading with that level', () => {
+    cy.get('#skipMenu_button').should('exist').focus();
+    cy.get('#skipMenu_button').type('{downArrow}');
+    cy.focused().should('contain.text', 'Main');
+
+    cy.focused().type('6');
+    cy.focused().should('contain.text', 'Main');
+
+    cy.get('#skipMenu_menu').should('be.visible');
+  });
 });

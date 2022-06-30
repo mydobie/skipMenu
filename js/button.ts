@@ -115,11 +115,16 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
   skipMenuButton.classList.add(
     'btn',
     'btn-secondary',
+    'dropdown-toggle',
     'pf-c-button',
     'pf-m-tertiary'
   );
   skipMenuButton.id = config.buttonId;
   skipMenuButton.textContent = config.text.buttonLabel;
+
+  const pfDropdownArrow = document.createElement('span');
+  pfDropdownArrow.classList.add('pf-c-dropdown__toggle-icon');
+  skipMenuButton.appendChild(pfDropdownArrow);
   if (config.tabIndex) {
     skipMenuButton.tabIndex = config.tabIndex;
   }

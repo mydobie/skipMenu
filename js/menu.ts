@@ -43,40 +43,45 @@ const menuItemsEvent = (
   menu: HTMLElement,
   config: SkipMenuConfig
 ): HTMLElement => {
-  // const menu = document
   const menuItems = menu.querySelectorAll('[role="menuitem"]');
   menuItems.forEach((item, index) => {
     (item as HTMLElement).tabIndex = -1;
     item.addEventListener('keydown', (e: KeyboardEvent) => {
-      // KKD change this to a switch
-      if (e.key == 'ArrowDown' || e.key == 'ArrowUp') {
-        e.stopPropagation();
-        e.preventDefault();
-        if (e.key === 'ArrowDown') {
+      switch (e.key) {
+        case 'ArrowDown':
+          e.stopImmediatePropagation();
+          e.preventDefault();
           if (menuItems[index + 1]) {
             (menuItems[index + 1] as HTMLElement).focus();
           } else {
             (menuItems[0] as HTMLElement).focus();
           }
-        }
-        if (e.key === 'ArrowUp') {
+          break;
+        case 'ArrowUp':
+          e.stopImmediatePropagation();
+          e.preventDefault();
           if (menuItems[index - 1]) {
             (menuItems[index - 1] as HTMLElement).focus();
           } else {
             (menuItems[menuItems.length - 1] as HTMLElement).focus();
           }
-        }
-      } else if (e.key === 'Escape') {
-        closeMenu(config);
-      } else if (e.key === 'Home') {
-        (menuItems[0] as HTMLElement).focus();
-      } else if (e.key === 'End') {
-        (menuItems[menuItems.length - 1] as HTMLElement).focus();
-      } else if (/^[a-zA-Z]$/.test(e.key)) {
-        const newIndex = getMatchingElementIndex(e.key, menuItems, index);
-        if (newIndex !== undefined) {
-          (menuItems[newIndex] as HTMLElement).focus();
-        }
+          break;
+        case 'Escape':
+          closeMenu(config);
+          break;
+        case 'Home':
+          (menuItems[0] as HTMLElement).focus();
+          break;
+        case 'End':
+          (menuItems[menuItems.length - 1] as HTMLElement).focus();
+          break;
+        default:
+          if (/^[a-zA-Z]$/.test(e.key)) {
+            const newIndex = getMatchingElementIndex(e.key, menuItems, index);
+            if (newIndex !== undefined) {
+              (menuItems[newIndex] as HTMLElement).focus();
+            }
+          }
       }
     });
   });
@@ -88,9 +93,7 @@ export const buildMenu = (config: SkipMenuConfig): HTMLElement => {
   const menu = document.createElement('div');
   menu.setAttribute('aria-live', 'off');
   menu.setAttribute('role', 'menu');
-  // menu.classList.add('dropdown-menu', 'pf-c-menu');
   menu.classList.add('pf-c-menu');
-  //menu.style.display = 'none';
   menu.id = config.menuId;
 
   // attach the sections

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <link href="dist/css/skipMenu-full.css" rel="stylesheet" />
+    <title>SkipMenu test page</title>
+    <style>
+      *:focus {
+        box-shadow: 0 0 5px #f0f;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section aria-label="my section">My section</section>
+      <h1>Super heading 1</h1>
+      <h2>Super heading 2</h2>
+      <h3>Super heading end</h3>
+      <p>
+        This page exists solely to test skipMenu. This page may not contain
+        valid landmarks, headers, or symantec HTML. In addition, this page may
+        not be accessible.
+      </p>
+      <p>
+        Code from this page should not be used as an example on how to properly
+        implement SkipMenu. Please see the README or files in the "demoPage"
+        directory.
+      </p>
+      <p>This page is required to run the corresponding Cypress tests.</p>
+    </main>
+  </body>
+
+  <script src="dist/js/skipMenu.js"></script>
+  <script>
+    const skipMenu = new SkipMenu({});
+    skipMenu.init();
+  </script>
+</html>

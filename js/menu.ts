@@ -66,12 +66,13 @@ const menuItemsEvent = (
             (menuItems[menuItems.length - 1] as HTMLElement).focus();
           }
         }
-      }
-      if (e.key === 'Escape') {
+      } else if (e.key === 'Escape') {
         closeMenu(config);
-      }
-
-      if (/^[a-zA-Z]$/.test(e.key)) {
+      } else if (e.key === 'Home') {
+        (menuItems[0] as HTMLElement).focus();
+      } else if (e.key === 'End') {
+        (menuItems[menuItems.length - 1] as HTMLElement).focus();
+      } else if (/^[a-zA-Z]$/.test(e.key)) {
         const newIndex = getMatchingElementIndex(e.key, menuItems, index);
         if (newIndex !== undefined) {
           (menuItems[newIndex] as HTMLElement).focus();

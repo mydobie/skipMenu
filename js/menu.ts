@@ -2,6 +2,43 @@ import { SkipMenuConfig } from './skipMenu';
 import { buildMenuSection } from './menuSection';
 import { closeMenu } from './button';
 
+const matchSection = (
+  key: string,
+  menuItems: NodeListOf<Element>,
+  startIndex: number,
+  endIndex: number
+) => {
+  let newIndex: number;
+  const firstLetterRegExp = /^([0-9]\) )?([a-zA-Z])/;
+  menuItems.forEach((item, i) => {
+    const firstLetter = (item as HTMLElement).innerText
+      ?.match(firstLetterRegExp)[2]
+      ?.toLocaleLowerCase();
+    if (
+      i >= startIndex &&
+      i <= endIndex &&
+      !newIndex &&
+      firstLetter === key.toLowerCase()
+    ) {
+      newIndex = i;
+    }
+  });
+  return newIndex;
+};
+
+const getMatchingElementIndex = (
+  key: string,
+  menuItems: NodeListOf<Element>,
+  index: number
+) => {
+  let newIndex: number;
+  newIndex = matchSection(key, menuItems, index + 1, menuItems.length - 1);
+  if (!newIndex) {
+    newIndex = matchSection(key, menuItems, 0, index - 1);
+  }
+  return newIndex;
+};
+
 const menuItemsEvent = (
   menu: HTMLElement,
   config: SkipMenuConfig
@@ -11,6 +48,7 @@ const menuItemsEvent = (
   menuItems.forEach((item, index) => {
     (item as HTMLElement).tabIndex = -1;
     item.addEventListener('keydown', (e: KeyboardEvent) => {
+      // KKD change this to a switch
       if (e.key == 'ArrowDown' || e.key == 'ArrowUp') {
         e.stopPropagation();
         e.preventDefault();
@@ -31,6 +69,13 @@ const menuItemsEvent = (
       }
       if (e.key === 'Escape') {
         closeMenu(config);
+      }
+
+      if (/^[a-zA-Z]$/.test(e.key)) {
+        const newIndex = getMatchingElementIndex(e.key, menuItems, index);
+        if (newIndex !== undefined) {
+          (menuItems[newIndex] as HTMLElement).focus();
+        }
       }
     });
   });

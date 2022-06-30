@@ -16,14 +16,19 @@ export const toggleMenu = (
   }
 };
 
-export const openMenu = (config: SkipMenuConfig) => {
+export const openMenu = (config: SkipMenuConfig, lastItem = false) => {
   const menu = document.getElementById(config.menuContainerId);
   if (menu) {
     const button = document.getElementById(config.buttonId);
     menu.style.display = 'block';
     button.setAttribute('aria-expanded', 'true');
-    const firstItem = menu.querySelector('[role="menuitem"]');
-    (firstItem as HTMLElement).focus();
+
+    const items = menu.querySelectorAll('[role="menuitem"]');
+    if (lastItem) {
+      (items[items.length - 1] as HTMLElement).focus();
+    } else {
+      (items[0] as HTMLElement).focus();
+    }
   }
 };
 
@@ -123,6 +128,18 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
     e.stopPropagation();
     e.preventDefault();
     toggleMenu(config, true);
+  });
+
+  skipMenuButton.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key == 'ArrowDown' || e.key == 'ArrowUp') {
+      e.stopPropagation();
+      e.preventDefault();
+      if (e.key == 'ArrowDown') {
+        openMenu(config);
+      } else {
+        openMenu(config, true);
+      }
+    }
   });
 
   if (!config.alwaysShow) {

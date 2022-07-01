@@ -57,4 +57,16 @@
     overflow: scroll;
     box-shadow: 3px 3px 10px #ccc;
   }
+
+  .pf-c-menu__item {
+    display: block;
+
+    span {
+      display: inline-block;
+    }
+
+    span::first-letter {
+      text-decoration: underline;
+    }
+  }
 }

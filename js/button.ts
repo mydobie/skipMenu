@@ -16,14 +16,19 @@ export const toggleMenu = (
   }
 };
 
-export const openMenu = (config: SkipMenuConfig) => {
+export const openMenu = (config: SkipMenuConfig, lastItem = false) => {
   const menu = document.getElementById(config.menuContainerId);
   if (menu) {
     const button = document.getElementById(config.buttonId);
     menu.style.display = 'block';
     button.setAttribute('aria-expanded', 'true');
-    const firstItem = menu.querySelector('[role="menuitem"]');
-    (firstItem as HTMLElement).focus();
+
+    const items = menu.querySelectorAll('[role="menuitem"]');
+    if (lastItem) {
+      (items[items.length - 1] as HTMLElement).focus();
+    } else {
+      (items[0] as HTMLElement).focus();
+    }
   }
 };
 
@@ -34,7 +39,7 @@ export const closeMenu = (
   const menu = document.getElementById(config.menuContainerId);
   if (menu) {
     const button = document.getElementById(config.buttonId);
-    button.setAttribute('aria-expanded', 'false');
+    button.removeAttribute('aria-expanded');
     menu.style.display = 'none';
     if (!keepVisibleOnClose && !config.alwaysShow) {
       document.getElementById(config.id).classList.add('skipMenu-hidden');
@@ -104,16 +109,22 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
   const buttonWrapper = document.createDocumentFragment();
   const skipMenuButton = document.createElement('button');
   skipMenuButton.setAttribute('aria-haspopup', 'true');
-  skipMenuButton.setAttribute('aria-expanded', 'false');
-  skipMenuButton.setAttribute('aria-controls', config.menuId);
+
+  skipMenuButton.removeAttribute('aria-expanded');
+  skipMenuButton.setAttribute('aria-controls', config.menuContainerId);
   skipMenuButton.classList.add(
     'btn',
     'btn-secondary',
+    'dropdown-toggle',
     'pf-c-button',
     'pf-m-tertiary'
   );
   skipMenuButton.id = config.buttonId;
   skipMenuButton.textContent = config.text.buttonLabel;
+
+  const pfDropdownArrow = document.createElement('span');
+  pfDropdownArrow.classList.add('pf-c-dropdown__toggle-icon');
+  skipMenuButton.appendChild(pfDropdownArrow);
   if (config.tabIndex) {
     skipMenuButton.tabIndex = config.tabIndex;
   }
@@ -124,13 +135,25 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
     toggleMenu(config, true);
   });
 
+  skipMenuButton.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key == 'ArrowDown' || e.key == 'ArrowUp') {
+      e.stopPropagation();
+      e.preventDefault();
+      if (e.key == 'ArrowDown') {
+        openMenu(config);
+      } else {
+        openMenu(config, true);
+      }
+    }
+  });
+
   if (!config.alwaysShow) {
     skipMenuButton.addEventListener('focus', () => {
       document.getElementById(config.id).classList.remove('skipMenu-hidden');
     });
 
     skipMenuButton.addEventListener('blur', () => {
-      if (skipMenuButton.getAttribute('aria-expanded') === 'false') {
+      if (!skipMenuButton.hasAttribute('aria-expanded')) {
         document.getElementById(config.id).classList.add('skipMenu-hidden');
       }
     });
@@ -142,7 +165,7 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
     const skipMenuToolTip = toolTip(config);
     if (skipMenuToolTip) {
       skipMenuButton.addEventListener('focus', () => {
-        if (skipMenuButton.getAttribute('aria-expanded') === 'false') {
+        if (!skipMenuButton.hasAttribute('aria-expanded')) {
           skipMenuToolTip.style.display = 'block';
         }
       });
@@ -150,7 +173,7 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
         skipMenuToolTip.style.display = 'none';
       });
       skipMenuButton.addEventListener('mouseover', () => {
-        if (skipMenuButton.getAttribute('aria-expanded') === 'false') {
+        if (!skipMenuButton.hasAttribute('aria-expanded')) {
           skipMenuToolTip.style.display = 'block';
         }
       });

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
     <link href="dist/css/skipMenu-full.css" rel="stylesheet" />
     <title>SkipMenu test page</title>
     <style>
@@ -14,9 +15,11 @@
   </head>
   <body>
     <main>
-      <h1>Heading 1</h1>
-      <div id="autoHeadings"></div>
-      <h2>Heading 2</h2>
+      <section aria-label="my section">My section</section>
+      <h1>Super heading 1</h1>
+      <h2>Super heading 2</h2>
+      <h2>A super heading more</h2>
+      <h3>Super heading end</h3>
       <p>
         This page exists solely to test skipMenu. This page may not contain
         valid landmarks, headers, or symantec HTML. In addition, this page may
@@ -33,15 +36,7 @@
 
   <script src="dist/js/skipMenu.js"></script>
   <script>
-    const skipMenu = new SkipMenu({
-      attachTo: document.getElementsByTagName('main')[0],
-      reloadOnChange: true,
-    });
+    const skipMenu = new SkipMenu({});
     skipMenu.init();
-    setTimeout(() => {
-      const newHeading = document.createElement('h2');
-      newHeading.appendChild(document.createTextNode('New Heading 3'));
-      document.getElementById('autoHeadings').appendChild(newHeading);
-    }, 750);
   </script>
 </html>

@@ -9,7 +9,7 @@ const matchSection = (
   endIndex: number
 ) => {
   let newIndex: number;
-  const firstLetterRegExp = /^([0-9]\) )?([a-zA-Z])/;
+  const firstLetterRegExp = /^([0-9]\) )?\s*([\S])/;
   const firstNumberRegExp = /^([0-9])?/;
   menuItems.forEach((item, i) => {
     let firstChar;

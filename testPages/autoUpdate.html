@@ -34,12 +34,12 @@
   <script src="dist/js/skipMenu.js"></script>
   <script>
     const skipMenu = new SkipMenu({
-      ignoreClass: 'ignoreMe',
+      attachTo: document.getElementsByTagName('main')[0],
       reloadOnChange: true,
     });
     skipMenu.init();
     setTimeout(() => {
-      const newHeading = document.createElement('h3');
+      const newHeading = document.createElement('h2');
       newHeading.appendChild(document.createTextNode('New Heading 3'));
       document.getElementById('autoHeadings').appendChild(newHeading);
     }, 750);

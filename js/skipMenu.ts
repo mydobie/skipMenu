@@ -2,129 +2,13 @@
 import { createskipMenuButton, closeMenu, openMenu } from './button';
 import { buildMenu } from './menu';
 import { addCloseMenuOnClick, addDomChangeListener } from './eventListeners';
+import {
+  SkipMenuConfig,
+  SkipMenuConfigFull,
+  defaultConfig,
+} from './skipMenuTypes';
 
-export type SkipMenuConfig = {
-  id?: string;
-  attachTo?: HTMLElement;
-  alwaysShow?: boolean; // This need to be changed to alwaysShow
-  buttonId?: string;
-  menuId?: string;
-  menuContainerId?: string;
-  headers?: string | false;
-  headings?: string | false;
-  tooltipId?: string;
-  landmarks?: string | false;
-  reloadOnChange?: boolean;
-  useAccessKey?: boolean;
-  accessKey?: string;
-  tabIndex?: number | null;
-  isRemoved?: boolean; // This is used internally and should not be called directly
-  ignoreClass?: string;
-  text?: {
-    buttonLabel?: string;
-    headingsLabel?: string;
-    landmarksLabel?: string;
-    tooltipLabel?: string;
-    controlKeyLabel?: string;
-    optionKeyLabel?: string;
-    altKeyLabel?: string;
-    shiftKeyLabel?: string;
-    mainLabel?: string;
-    searchLabel?: string;
-    navigationLabel?: string;
-    regionLabel?: string;
-    complementaryLabel?: string;
-    bannerLabel?: string;
-    footerLabel?: string;
-    sectionLabel?: string;
-    formLabel?: string;
-  };
-  ensureAbsoluteParent?: boolean;
-  theme?: 'bootstrap' | 'patternfly' | 'full' | undefined;
-};
-
-export type SkipMenuConfigFull = {
-  id: string;
-  attachTo: HTMLElement;
-  alwaysShow: boolean; // This need to be changed to alwaysShow
-  buttonId: string;
-  menuId: string;
-  menuContainerId: string;
-  mutationObserver: MutationObserver | null;
-  headers: string | false;
-  headings: string | false;
-  tooltipId: string;
-  landmarks: string | false;
-  reloadOnChange: boolean;
-  useAccessKey: boolean;
-  accessKey: string;
-  tabIndex: number | null;
-  isRemoved: boolean; // This is used internally and should not be called directly
-  ignoreClass: string;
-  text: {
-    buttonLabel: string;
-    headingsLabel: string;
-    landmarksLabel: string;
-    tooltipLabel: string;
-    controlKeyLabel: string;
-    optionKeyLabel: string;
-    altKeyLabel: string;
-    shiftKeyLabel: string;
-    mainLabel: string;
-    searchLabel: string;
-    navigationLabel: string;
-    regionLabel: string;
-    complementaryLabel: string;
-    bannerLabel: string;
-    footerLabel: string;
-    sectionLabel: string;
-    formLabel: string;
-  };
-  ensureAbsoluteParent?: boolean;
-};
-
-const defaultConfig: SkipMenuConfigFull = {
-  id: 'skipMenu',
-  attachTo: document.getElementsByTagName('body')[0],
-  alwaysShow: true,
-  // headers: 'h1, h2, h3, h4, h5, h6, [role=heading]',
-  headings: 'h1, h2, h3, h4, h5, h6, [role=heading]',
-  landmarks:
-    'main, [role=main], [role=search], nav, [role=navigation], section, [role=region],  form, aside, [role=complementary], body > header, [role=banner], body > footer, [role=contentinfo]',
-  reloadOnChange: false,
-  useAccessKey: false,
-  accessKey: '0',
-  tabIndex: null,
-  isRemoved: false,
-  ignoreClass: 'skipMenu-ignore',
-  text: {
-    buttonLabel: 'Skip to content',
-    headingsLabel: 'Headings',
-    landmarksLabel: 'Landmarks',
-    tooltipLabel: 'Shortcut: ',
-    controlKeyLabel: 'Control',
-    optionKeyLabel: 'Option',
-    altKeyLabel: 'Alt',
-    shiftKeyLabel: 'Shift',
-    mainLabel: 'Main',
-    searchLabel: 'Search',
-    navigationLabel: 'Navigation',
-    regionLabel: 'Region',
-    complementaryLabel: 'Complementary',
-    bannerLabel: 'Banner',
-    footerLabel: 'Footer',
-    sectionLabel: 'Section',
-    formLabel: 'Form',
-  },
-  ensureAbsoluteParent: true,
-  buttonId: '',
-  menuId: '',
-  menuContainerId: '',
-  headers: '',
-  tooltipId: '',
-  mutationObserver: null,
-};
-
+export type { SkipMenuConfigFull, SkipMenuConfig } from './skipMenuTypes';
 export class SkipMenu {
   config: SkipMenuConfigFull;
 
@@ -149,7 +33,7 @@ export class SkipMenu {
     this.getConfig = this.getConfig.bind(this);
   }
 
-  static version = 'VERSION CANNOT BE DETERMINED'; // Note - this is replaced on build
+  static version = 'v1.3.0'; // Note - this is replaced on build
 
   getConfig() {
     return this.config;

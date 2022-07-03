@@ -1,13 +1,13 @@
 import { isElementVisible, focusNextElement, isFocusable } from './utilities';
 import { closeMenu } from './button';
-import { SkipMenuConfig } from './skipMenu';
+import { SkipMenuConfigFull } from './skipMenu';
 
 /* ********************************** */
 
 const addMenuItemEvents = (
   listItem: HTMLDivElement,
   targetElement: HTMLElement,
-  config: SkipMenuConfig
+  config: SkipMenuConfigFull
 ) => {
   const buttonId = config.buttonId;
   listItem.addEventListener('click', (event) => {
@@ -27,7 +27,7 @@ const addMenuItemEvents = (
     if (e.key === 'Tab') {
       closeMenu(config);
       if (e.shiftKey) {
-        document.getElementById(buttonId).focus();
+        document.getElementById(buttonId)?.focus();
       } else {
         focusNextElement(buttonId);
       }
@@ -38,7 +38,7 @@ const addMenuItemEvents = (
 
 // *****************************************************************************
 
-const landMarkType = (element: HTMLElement, config: SkipMenuConfig) => {
+const landMarkType = (element: HTMLElement, config: SkipMenuConfigFull) => {
   const tag = element.tagName;
   const role = element.getAttribute('role');
 
@@ -80,16 +80,15 @@ const landMarkType = (element: HTMLElement, config: SkipMenuConfig) => {
 const getMenuItemText = (
   element: HTMLElement,
   isHeader: boolean,
-  config: SkipMenuConfig
+  config: SkipMenuConfigFull
 ) => {
   const landmark = landMarkType(element, config);
-  let text = '';
+  let text: string | null = '';
   if (element.hasAttribute('aria-label')) {
     text = element.getAttribute('aria-label');
   } else if (element.hasAttribute('aria-labelledby')) {
-    text = document
-      .getElementById(element.getAttribute('aria-labelledby'))
-      .innerText.trim();
+    const elementId = element.getAttribute('aria-labelledby') || '';
+    text = document.getElementById(elementId)?.innerText.trim() || '';
   } else if (element.hasAttribute('title')) {
     text = element.getAttribute('title');
   }
@@ -98,7 +97,7 @@ const getMenuItemText = (
     return text ? `${landmark}: ${text}` : landmark;
   } else if (isHeader) {
     const headerText = text || element.innerText;
-    return headerText.trim();
+    return headerText?.trim();
   } else {
     // unsure what this is, return tagname
     return element.tagName.toLocaleLowerCase();
@@ -110,7 +109,7 @@ const getMenuItemText = (
 const buildMenuItem = (
   element: HTMLElement,
   depth: number,
-  config: SkipMenuConfig
+  config: SkipMenuConfigFull
 ) => {
   let listItem = document.createElement('div');
   const listItemText = getMenuItemText(element, !!depth, config);
@@ -159,7 +158,7 @@ export const buildMenuSection = (
   elements: NodeListOf<Element>,
   sectionTitle: string,
   sectionId: string,
-  config: SkipMenuConfig
+  config: SkipMenuConfigFull
 ) => {
   if (elements.length === 0) {
     return null;
@@ -179,7 +178,7 @@ export const buildMenuSection = (
     if (isElementVisible(element as HTMLElement)) {
       let depth = parseInt(element.tagName.substring(1));
       if (element.getAttribute('aria-level')) {
-        depth = parseInt(element.getAttribute('aria-level'));
+        depth = parseInt(element.getAttribute('aria-level') || '');
       }
 
       if (!isFocusable(element as HTMLElement)) {
@@ -187,9 +186,7 @@ export const buildMenuSection = (
       }
       const menuItem = buildMenuItem(element as HTMLElement, depth, config);
       if (menuItem) {
-        container.appendChild(
-          buildMenuItem(element as HTMLElement, depth, config)
-        );
+        container.appendChild(menuItem);
       }
     }
   });

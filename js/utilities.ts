@@ -30,7 +30,7 @@ export const focusNextElement = (menuButtonId = 'skipMenu_button'): void => {
   const buttonIndex = Array.from(focusableElements).findIndex((el) =>
     el.isEqualNode(document.getElementById(menuButtonId))
   );
-  const buttonTabIndex = document.getElementById(menuButtonId).tabIndex || 0;
+  const buttonTabIndex = document.getElementById(menuButtonId)?.tabIndex || 0;
 
   let nextElement;
   if (buttonTabIndex === 0) {
@@ -72,7 +72,7 @@ export const focusNextElement = (menuButtonId = 'skipMenu_button'): void => {
   if (nextElement) {
     (nextElement as HTMLElement).focus();
   } else {
-    document.getElementById(menuButtonId).focus();
+    document.getElementById(menuButtonId)?.focus();
   }
 };
 
@@ -87,7 +87,7 @@ export const isFocusable = (element: HTMLElement): boolean => {
   if (
     element.getAttribute('href') !== null ||
     (element.hasAttribute('contentEditable') &&
-      element.getAttribute('contentEditable').toLowerCase() !== 'false') ||
+      element.getAttribute('contentEditable')?.toLowerCase() !== 'false') ||
     element.getAttribute('tabindex') !== null
   ) {
     return true;

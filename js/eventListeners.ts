@@ -1,7 +1,7 @@
-import { SkipMenuConfig } from './skipMenu';
+import { SkipMenuConfigFull } from './skipMenu';
 import { closeMenu } from './button';
 
-export const addCloseMenuOnClick = (config: SkipMenuConfig) => {
+export const addCloseMenuOnClick = (config: SkipMenuConfigFull) => {
   document.addEventListener('click', (e) => {
     const menu = document.getElementById(config.menuContainerId);
     if (menu) {
@@ -14,8 +14,9 @@ export const addCloseMenuOnClick = (config: SkipMenuConfig) => {
 };
 
 export const addDomChangeListener = (
-  config: SkipMenuConfig,
-  update: () => void
+  config: SkipMenuConfigFull,
+  update: () => void,
+  setMutationObserver: (mutationObserver: MutationObserver) => void
 ) => {
   if (config.reloadOnChange) {
     const obv = new MutationObserver((mutations) => {
@@ -39,6 +40,8 @@ export const addDomChangeListener = (
         }
       });
     });
+    setMutationObserver(obv);
+
     obv.observe(document, {
       attributes: true,
       subtree: true,

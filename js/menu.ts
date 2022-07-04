@@ -1,4 +1,4 @@
-import { SkipMenuConfig } from './skipMenu';
+import { SkipMenuConfigFull } from './skipMenu';
 import { buildMenuSection } from './menuSection';
 import { closeMenu } from './button';
 
@@ -8,17 +8,17 @@ const matchSection = (
   startIndex: number,
   endIndex: number
 ) => {
-  let newIndex: number;
+  let newIndex: number | undefined;
   const firstLetterRegExp = /^([0-9]\) )?\s*([\S])/;
   const firstNumberRegExp = /^([0-9])?/;
   menuItems.forEach((item, i) => {
     let firstChar;
     if (parseInt(key)) {
-      firstChar = (item as HTMLElement).innerText?.match(firstNumberRegExp)[1];
+      const matches = (item as HTMLElement).innerText?.match(firstNumberRegExp);
+      firstChar = matches?.[1];
     } else {
-      firstChar = (item as HTMLElement).innerText
-        ?.match(firstLetterRegExp)[2]
-        ?.toLocaleLowerCase();
+      const matches = (item as HTMLElement).innerText?.match(firstLetterRegExp);
+      firstChar = matches?.[2]?.toLocaleLowerCase();
     }
     if (
       i >= startIndex &&
@@ -37,7 +37,7 @@ const getMatchingElementIndex = (
   menuItems: NodeListOf<Element>,
   index: number
 ) => {
-  let newIndex: number;
+  let newIndex: number | undefined;
   newIndex = matchSection(key, menuItems, index + 1, menuItems.length - 1);
   if (!newIndex) {
     newIndex = matchSection(key, menuItems, 0, index - 1);
@@ -47,11 +47,13 @@ const getMatchingElementIndex = (
 
 const menuItemsEvent = (
   menu: HTMLElement,
-  config: SkipMenuConfig
+  config: SkipMenuConfigFull
 ): HTMLElement => {
   const menuItems = menu.querySelectorAll('[role="menuitem"]');
   menuItems.forEach((item, index) => {
     (item as HTMLElement).tabIndex = -1;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     item.addEventListener('keydown', (e: KeyboardEvent) => {
       switch (e.key) {
         case 'ArrowDown':
@@ -94,7 +96,7 @@ const menuItemsEvent = (
   return menu;
 };
 
-export const buildMenu = (config: SkipMenuConfig): HTMLElement => {
+export const buildMenu = (config: SkipMenuConfigFull): HTMLElement | null => {
   // build the actual menu
   const menu = document.createElement('div');
   menu.setAttribute('aria-live', 'off');

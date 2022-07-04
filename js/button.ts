@@ -1,8 +1,40 @@
-import { SkipMenuConfig } from './skipMenu';
+import { SkipMenuConfigFull } from './skipMenu';
 import { isTouchEnabled } from './utilities';
 
+export const openMenu = (config: SkipMenuConfigFull, lastItem = false) => {
+  const menu = document.getElementById(config.menuContainerId);
+  if (menu) {
+    const button = document.getElementById(config.buttonId);
+    menu.style.display = 'block';
+    button?.setAttribute('aria-expanded', 'true');
+
+    const items = menu.querySelectorAll('[role="menuitem"]');
+    if (lastItem) {
+      (items[items.length - 1] as HTMLElement).focus();
+    } else {
+      (items[0] as HTMLElement).focus();
+    }
+  }
+};
+
+export const closeMenu = (
+  config: SkipMenuConfigFull,
+  keepVisibleOnClose = false
+) => {
+  const menu = document.getElementById(config.menuContainerId);
+  if (menu) {
+    const button = document.getElementById(config.buttonId);
+    button?.removeAttribute('aria-expanded');
+    menu.style.display = 'none';
+    if (!keepVisibleOnClose && !config.alwaysShow) {
+      document.getElementById(config.id)?.classList.add('skipMenu-hidden');
+    }
+    button?.focus();
+  }
+};
+
 export const toggleMenu = (
-  config: SkipMenuConfig,
+  config: SkipMenuConfigFull,
   keepVisibleOnClose = false
 ) => {
   const menu = document.getElementById(config.menuContainerId);
@@ -16,39 +48,7 @@ export const toggleMenu = (
   }
 };
 
-export const openMenu = (config: SkipMenuConfig, lastItem = false) => {
-  const menu = document.getElementById(config.menuContainerId);
-  if (menu) {
-    const button = document.getElementById(config.buttonId);
-    menu.style.display = 'block';
-    button.setAttribute('aria-expanded', 'true');
-
-    const items = menu.querySelectorAll('[role="menuitem"]');
-    if (lastItem) {
-      (items[items.length - 1] as HTMLElement).focus();
-    } else {
-      (items[0] as HTMLElement).focus();
-    }
-  }
-};
-
-export const closeMenu = (
-  config: SkipMenuConfig,
-  keepVisibleOnClose = false
-) => {
-  const menu = document.getElementById(config.menuContainerId);
-  if (menu) {
-    const button = document.getElementById(config.buttonId);
-    button.removeAttribute('aria-expanded');
-    menu.style.display = 'none';
-    if (!keepVisibleOnClose && !config.alwaysShow) {
-      document.getElementById(config.id).classList.add('skipMenu-hidden');
-    }
-    button.focus();
-  }
-};
-
-const toolTipText = (accessKey: string, startText: string): string => {
+const toolTipText = (accessKey: string, startText: string): string | null => {
   if (isTouchEnabled()) {
     return null;
   }
@@ -75,7 +75,7 @@ const toolTipText = (accessKey: string, startText: string): string => {
   return text;
 };
 
-const toolTip = (config: SkipMenuConfig): HTMLElement | null => {
+const toolTip = (config: SkipMenuConfigFull): HTMLElement | null => {
   const toolTipTextString = toolTipText(
     config.accessKey,
     config.text.tooltipLabel
@@ -105,7 +105,7 @@ const toolTip = (config: SkipMenuConfig): HTMLElement | null => {
   return tooltip;
 };
 
-export const createskipMenuButton = (config: SkipMenuConfig) => {
+export const createskipMenuButton = (config: SkipMenuConfigFull) => {
   const buttonWrapper = document.createDocumentFragment();
   const skipMenuButton = document.createElement('button');
   skipMenuButton.setAttribute('aria-haspopup', 'true');
@@ -149,12 +149,12 @@ export const createskipMenuButton = (config: SkipMenuConfig) => {
 
   if (!config.alwaysShow) {
     skipMenuButton.addEventListener('focus', () => {
-      document.getElementById(config.id).classList.remove('skipMenu-hidden');
+      document.getElementById(config.id)?.classList.remove('skipMenu-hidden');
     });
 
     skipMenuButton.addEventListener('blur', () => {
       if (!skipMenuButton.hasAttribute('aria-expanded')) {
-        document.getElementById(config.id).classList.add('skipMenu-hidden');
+        document.getElementById(config.id)?.classList.add('skipMenu-hidden');
       }
     });
   }

@@ -20,6 +20,15 @@ SkipMenu implements the keyboard support documented in the [W3C ARIA Authoring P
 
 ---
 
+## React
+
+Want to use SkipMenu in a React application? See
+<a href="https://github.com/mydobie/SkipMenuReact" 
+          >SkipMenu React</a
+        >
+
+---
+
 ### Download files
 
 Both the JavaScript and CSS files are available for download for each release on [releases page](https://github.com/mydobie/skipMenu/releases).

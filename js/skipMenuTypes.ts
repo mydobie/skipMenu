@@ -11,7 +11,7 @@ If adding/removing properties, be sure to add/remove from each the the three typ
 
 export type SkipMenuConfig = {
   id?: string;
-  attachTo?: HTMLElement;
+  attachTo?: HTMLElement | null;
   alwaysShow?: boolean; // This need to be changed to alwaysShow
   buttonId?: string;
   menuId?: string;

@@ -1,4 +1,4 @@
-/*! skipMenu - v1.4.0 - 2022-07-31 - Commit e8d7a9f
+/*! skipMenu - v1.3.2 - 2022-07-31 - Commit c858992
  https://github.com/mydobie/skipMenu
 
 Copyright (c) 2022 Kim Doberstein and myDobie. All rights reserved.
@@ -8,6 +8,6 @@ For a copy, see <https://opensource.org/licenses/MIT>.
 
 */
 /* ********************* */
-[data-skip-menu]{position:absolute;left:50%;transform:translate(-50%);z-index:9999;top:0}[data-skip-menu].skipMenu-hidden{top:-1000px;width:1px;height:1px;overflow:hidden}[data-skip-menu] .tooltip{position:absolute;opacity:1;display:none}[data-skip-menu] .tooltip .tooltip-arrow{left:1.5rem}[data-skip-menu] [role=separator]{padding:.25rem .5rem;border-bottom:1px solid #757575;font-weight:bold}[data-skip-menu] [role=menuitem]{cursor:pointer}[data-skip-menu] [role=menuitem].skipMenu-menu-header-level-2{padding-left:2em}[data-skip-menu] [role=menuitem].skipMenu-menu-header-level-3{padding-left:3em}[data-skip-menu] [role=menuitem].skipMenu-menu-header-level-4{padding-left:4em}[data-skip-menu] [role=menuitem].skipMenu-menu-header-level-5{padding-left:5em}[data-skip-menu] [role=menuitem].skipMenu-menu-header-level-6{padding-left:6em}[data-skip-menu] .dropdown-menu{max-height:calc(85vh - 30px);overflow:scroll;box-shadow:3px 3px 10px #ccc}[data-skip-menu] .pf-c-menu__item{display:block}[data-skip-menu] .pf-c-menu__item span{display:inline-block}[data-skip-menu] .pf-c-menu__item span::first-letter{text-decoration:underline}
+[data-skip-menu]{position:absolute;left:50%;transform:translate(-50%);z-index:9999;top:0}[data-skip-menu].skipMenu-hidden{top:-1000px;width:1px;height:1px;overflow:hidden}[data-skip-menu] .tooltip{position:absolute;opacity:1;display:none}[data-skip-menu] .tooltip .tooltip-arrow{left:1.5rem;position:absolute}[data-skip-menu] [role=separator]{padding:.25rem .5rem;border-bottom:1px solid #757575;font-weight:bold}[data-skip-menu] [role=menuitem]{cursor:pointer}[data-skip-menu] [role=menuitem].skipMenu-menu-header-level-2{padding-left:2em}[data-skip-menu] [role=menuitem].skipMenu-menu-header-level-3{padding-left:3em}[data-skip-menu] [role=menuitem].skipMenu-menu-header-level-4{padding-left:4em}[data-skip-menu] [role=menuitem].skipMenu-menu-header-level-5{padding-left:5em}[data-skip-menu] [role=menuitem].skipMenu-menu-header-level-6{padding-left:6em}[data-skip-menu] .dropdown-menu{max-height:calc(85vh - 30px);overflow:scroll;box-shadow:3px 3px 10px #ccc}[data-skip-menu] .pf-c-menu__item{display:block}[data-skip-menu] .pf-c-menu__item span{display:inline-block}[data-skip-menu] .pf-c-menu__item span::first-letter{text-decoration:underline}
 
 /*# sourceMappingURL=skipMenu-bootstrap.css.map*/
